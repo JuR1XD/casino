@@ -4,15 +4,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
 
-public class SearchController
+public class AccountController
 {
-	@RequestMapping("/search")
+	@RequestMapping("/account")
 	public String list(Model model)
 	{
-		return "search";
+		return "account";
 	}
-
 }

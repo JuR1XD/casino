@@ -1,6 +1,6 @@
 package com.packt.casino.domain;
 
-public abstract class Game
+public class Game
 {
 	private String gameId;
 	private String name;

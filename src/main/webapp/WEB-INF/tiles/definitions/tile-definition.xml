@@ -14,17 +14,24 @@
     </definition>
 
     <definition name="welcome" extends="baseLayout">
+        <put-attribute name="title" value="Herzlich Willkommen"/>
+        <put-attribute name="heading" value="Herzlich Willkommen im Online Casino!"/>
+        <put-attribute name="tagline" value="Hier können sie aus drei verschiedenen Spielen entscheiden. Erstellen sie nur einen Account und dann kann es auch schon losgehen."/>
+        <put-attribute name="content" value="/WEB-INF/views/welcome.jsp"/>
+    </definition>
+
+    <definition name="games" extends="baseLayout">
         <put-attribute name="title" value="Herzlich Willkomen" />
         <put-attribute name="heading" value="Spiele" />
         <put-attribute name="tagline" value="Wählen sie aus drei verschiedenen Spielen und versuchen sie ihr Glück!!" />
         <put-attribute name="content" value="/WEB-INF/views/games.jsp" />
     </definition>
 
-    <definition name="myAccount" extends="baseLayout">
+    <definition name="account" extends="baseLayout">
         <put-attribute name="title" value="Mein Account"/>
         <put-attribute name="heading" value="Mein Account"/>
         <put-attribute name="tagline" value="Hier haben sie zugriff auf ihren Account und können ihre persönlichen Sachen ändern"/>
-        <put-attribute name="content" value="/WEB-INF/views/myAccount.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/views/account.jsp"/>
     </definition>
 
     <definition name="game" extends="baseLayout">
@@ -33,11 +40,11 @@
         <put-attribute name="tagline" value="Das ist eine Vorlage Für eine Spätere Aktualisierte Version des Apache Tiles Templates"/>
         <put-attribute name="content" value="/WEB-INF/views/game.jsp"/>
     </definition>
-    <definition name="searchIndex" extends="baseLayout">
+    <definition name="search" extends="baseLayout">
         <put-attribute name="title" value="Suche"/>
         <put-attribute name="heading" value="Suche"/>
-        <put-attribute name="tagline" value="Ihre Suchergebnisse:"/>
-        <put-attribute name="content" value="/WEB-INF/views/searchIndex.jsp"/>
+        <put-attribute name="tagline" value="Suchen sie hier nach bestimmten Sachen"/>
+        <put-attribute name="content" value="/WEB-INF/views/search.jsp"/>
     </definition>
 
 </tiles-definitions>

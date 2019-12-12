@@ -8,7 +8,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-    <title>Welcome</title>
 </head>
 <body>
 <div class="container">
@@ -20,7 +19,6 @@
                     <div class="caption">
                         <h3>${game.name}</h3>
                         <p>${game.description}</p>
-                        <p>${game.unitPrice} USD</p>
                         <p>
                             <a href=" <spring:url value="/games/game?id=${game.gameId}" />" class="btn btn-primary">
                                 <span class="glyphicon-info-sign glyphicon"></span> Details

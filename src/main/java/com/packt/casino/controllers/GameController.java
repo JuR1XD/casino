@@ -12,6 +12,7 @@ public class GameController
 	@RequestMapping("/games")
 	public String list(Model model)
 	{
+		//model.addAttribute()
 		return "games";
 	}
 }
