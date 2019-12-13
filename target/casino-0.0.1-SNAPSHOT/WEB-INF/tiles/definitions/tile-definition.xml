@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
-        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 
 <tiles-definitions>
 
@@ -15,35 +15,72 @@
 
     <definition name="welcome" extends="baseLayout">
         <put-attribute name="title" value="Herzlich Willkommen"/>
-        <put-attribute name="heading" value="Herzlich Willkommen im Online Casino!"/>
-        <put-attribute name="tagline" value="Hier können sie aus drei verschiedenen Spielen entscheiden. Erstellen sie nur einen Account und dann kann es auch schon losgehen."/>
+        <put-attribute name="heading" value="casino.welcome.title"/>
+        <put-attribute name="tagline" value="casino.welcome.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/welcome.jsp"/>
     </definition>
 
-    <definition name="games" extends="baseLayout">
+    <definition name="baseLayoutGames" template="/WEB-INF/tiles/template/baseLayoutGames.jsp">
+        <put-attribute name="title" value="Sample Title" />
+        <put-attribute name="heading" value="" />
+        <put-attribute name="tagline" value="" />
+        <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
+    </definition>
+
+    <definition name="games" extends="baseLayoutGames">
         <put-attribute name="title" value="Herzlich Willkomen" />
-        <put-attribute name="heading" value="Spiele" />
-        <put-attribute name="tagline" value="Wählen sie aus drei verschiedenen Spielen und versuchen sie ihr Glück!!" />
+        <put-attribute name="heading" value="casino.games.title" />
+        <put-attribute name="tagline" value="casino.games.tagline" />
         <put-attribute name="content" value="/WEB-INF/views/games.jsp" />
     </definition>
 
-    <definition name="account" extends="baseLayout">
+    <definition name="baseLayoutAccount" template="/WEB-INF/tiles/template/baseLayoutAccount.jsp">
+        <put-attribute name="title" value="Sample Title" />
+        <put-attribute name="heading" value="" />
+        <put-attribute name="tagline" value="" />
+        <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
+    </definition>
+
+    <definition name="account" extends="baseLayoutAccount">
         <put-attribute name="title" value="Mein Account"/>
-        <put-attribute name="heading" value="Mein Account"/>
-        <put-attribute name="tagline" value="Hier haben sie zugriff auf ihren Account und können ihre persönlichen Sachen ändern"/>
+        <put-attribute name="heading" value="casino.account.title"/>
+        <put-attribute name="tagline" value="casino.account.title"/>
         <put-attribute name="content" value="/WEB-INF/views/account.jsp"/>
     </definition>
 
-    <definition name="game" extends="baseLayout">
+    <definition name="baseLayoutGame" template="/WEB-INF/tiles/template/baseLayoutGame.jsp">
+        <put-attribute name="title" value="Sample Title" />
+        <put-attribute name="heading" value="" />
+        <put-attribute name="tagline" value="" />
+        <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
+    </definition>
+
+    <definition name="game" extends="baseLayoutGame">
         <put-attribute name="title" value="Spiel"/>
-        <put-attribute name="heading" value="Spiel"/>
-        <put-attribute name="tagline" value="Das ist eine Vorlage Für eine Spätere Aktualisierte Version des Apache Tiles Templates"/>
+        <put-attribute name="heading" value="casino.game.title"/>
+        <put-attribute name="tagline" value="casino.game.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/game.jsp"/>
     </definition>
-    <definition name="search" extends="baseLayout">
+
+    <definition name="baseLayoutSearch" template="/WEB-INF/tiles/template/baseLayoutSearch.jsp">
+        <put-attribute name="title" value="Sample Title" />
+        <put-attribute name="heading" value="" />
+        <put-attribute name="tagline" value="" />
+        <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
+    </definition>
+
+    <definition name="search" extends="baseLayoutSearch">
         <put-attribute name="title" value="Suche"/>
-        <put-attribute name="heading" value="Suche"/>
-        <put-attribute name="tagline" value="Suchen sie hier nach bestimmten Sachen"/>
+        <put-attribute name="heading" value="casino.search.title"/>
+        <put-attribute name="tagline" value="casino.search.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/search.jsp"/>
     </definition>
 

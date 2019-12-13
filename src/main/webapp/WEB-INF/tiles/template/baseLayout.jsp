@@ -17,17 +17,19 @@
         <ul class="nav nav-pills pull-right">
             <tiles:insertAttribute name="navigation"/>
         </ul>
-        <h3 class="text-muted">Online Kasino</h3>
+        <h3 class="text-muted"><spring:message code="casino"/></h3>
     </div>
 
     <div class="jumbotron">
         <h1>
-            <%--<tiles:useAttribute name="heading"/>
-            <bean:message key="<%=(String) heading%>"/>--%>
-            <tiles:insertAttribute name="heading"/>
+            <tiles:useAttribute name="heading"/>
+            <bean:message key="casino.welcome.title"/>
+            <%--<tiles:insertAttribute name="heading"/>--%>
         </h1>
         <p>
-            <tiles:insertAttribute name="tagline"/>
+            <tiles:useAttribute name="tagline"/>
+            <bean:message key="casino.welcome.tagline"/>
+            <%--<tiles:insertAttribute name="tagline"/>--%>
         </p>
     </div>
 

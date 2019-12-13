@@ -23,12 +23,12 @@
     <div class="jumbotron">
         <h1>
             <tiles:useAttribute name="heading"/>
-            <bean:message key="casino.welcome.title"/>
+            <bean:message key="casino.account.title"/>
             <%--<tiles:insertAttribute name="heading"/>--%>
         </h1>
         <p>
             <tiles:useAttribute name="tagline"/>
-            <bean:message key="casino.welcome.tagline"/>
+            <bean:message key="casino.account.tagline"/>
             <%--<tiles:insertAttribute name="tagline"/>--%>
         </p>
     </div>

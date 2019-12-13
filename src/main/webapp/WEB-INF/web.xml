@@ -18,7 +18,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<error-page>
+	<!--<error-page>
 		<location>/WEB-INF/views/general-error.jsp</location>
 	</error-page>
 
@@ -30,6 +30,6 @@
 	<error-page>
 		<error-code>403</error-code>
 		<location>/WEB-INF/views/general-error_403.jsp</location>
-	</error-page>
+	</error-page>-->
 
 </web-app>
