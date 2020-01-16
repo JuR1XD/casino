@@ -1,1 +1,0 @@
-<p>&copy; Some Casino Company</p>

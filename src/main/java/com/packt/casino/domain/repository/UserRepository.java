@@ -1,11 +1,11 @@
 package com.packt.casino.domain.repository;
 
-import com.packt.casino.domain.Game;
+import com.packt.casino.domain.User;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface GamesRepository extends CrudRepository<Game, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
 }

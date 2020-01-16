@@ -2,6 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="bean" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -22,12 +23,12 @@
 
     <div class="jumbotron">
         <h1>
-            <tiles:useAttribute name="heading"/>
+            <tilesx:useAttribute name="heading"/>
             <bean:message key="casino.games.title"/>
             <%--<tiles:insertAttribute name="heading"/>--%>
         </h1>
         <p>
-            <tiles:useAttribute name="tagline"/>
+            <tilesx:useAttribute name="tagline"/>
             <bean:message key="casino.games.tagline"/>
             <%--<tiles:insertAttribute name="tagline"/>--%>
         </p>

@@ -8,7 +8,7 @@
   	<dependency>
   		<groupId>org.springframework</groupId>
   		<artifactId>spring-webmvc</artifactId>
-  		<version>4.0.3.RELEASE</version>
+  		<version>5.1.9.RELEASE</version>
   	</dependency>
   	<dependency>
   		<groupId>javax.servlet</groupId>
@@ -24,7 +24,12 @@
 	  <dependency>
 		  <groupId>org.apache.tiles</groupId>
 		  <artifactId>tiles-extras</artifactId>
-		  <version>2.2.2</version>
+		  <version>3.0.8</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>org.apache.tiles</groupId>
+		  <artifactId>tiles-api</artifactId>
+		  <version>3.0.8</version>
 	  </dependency>
 	  <dependency>
 		  <groupId>org.slf4j</groupId>
@@ -37,28 +42,50 @@
 		  <version>8.0.17</version>
 		  <scope>runtime</scope>
 	  </dependency>
+	  <dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-data-jpa</artifactId>
+		  <version>2.1.8.RELEASE</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-web</artifactId>
+	  </dependency>
+	  <dependency>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-web</artifactId>
+		  <version>5.1.9.RELEASE</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>commons-configuration</groupId>
+		  <artifactId>commons-configuration</artifactId>
+		  <version>1.6</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>commons-dbcp</groupId>
+		  <artifactId>commons-dbcp</artifactId>
+		  <version>1.4</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>log4j</groupId>
+		  <artifactId>log4j</artifactId>
+		  <version>1.2.12</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-context-support</artifactId>
+		  <version>5.1.9.RELEASE</version>
+	  </dependency>
+	  <dependency>
+	  <groupId>org.springframework.boot</groupId>
+	  <artifactId>spring-boot-starter-test</artifactId>
+		  <version>2.1.8.RELEASE</version>
+		  <scope>test</scope>
+  </dependency>
   </dependencies>
   <properties>
-  	<maven.compiler.source>1.7</maven.compiler.source>
-  	<maven.compiler.target>1.7</maven.compiler.target>
+  	<maven.compiler.source>1.8</maven.compiler.source>
+  	<maven.compiler.target>1.8</maven.compiler.target>
   </properties>
-	<!--<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-dependency-plugin</artifactId>
-		<executions>
-			<execution>
-				<id>copy-dependencies</id>
-				<phase>prepare-package</phase>
-				<goals>
-					<goal>copy-dependencies</goal>
-				</goals>
-				<configuration>
-					<outputDirectory>${project.build.directory}/casino/WEB-INF/lib</outputDirectory>
-					<overWriteReleases>false</overWriteReleases>
-					<overWriteSnapshots>false</overWriteSnapshots>
-					<overWriteIfNewer>true</overWriteIfNewer>
-				</configuration>
-			</execution>
-		</executions>
-	</plugin>-->
 </project>
