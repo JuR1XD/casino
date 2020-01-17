@@ -84,4 +84,6 @@
         <put-attribute name="content" value="/WEB-INF/views/search.jsp"/>
     </definition>
 
+    <definition name="registration" extends="baseLayoutRegistration"
+
 </tiles-definitions>

@@ -1,9 +1,13 @@
 package com.packt.casino.domain;
 
+import javax.annotation.MatchesPattern;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 
 @Entity
@@ -11,28 +15,42 @@ public class User
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	private Long userid;
-
+	@NotEmpty(message = "")
+	@NotNull
 	private String name;
-
+	@NotEmpty(message = "")
+	@NotNull
 	private String surname;
-
+	@NotEmpty
+	@NotNull
+	@Pattern(regexp = "[\\w]+@[\\w]+.[\\w]+", message = "{casino.registration.email.error}")
 	private String email;
-
+	@NotEmpty(message = "")
+	@NotNull
+	@Pattern(regexp = "[0-9][0-9].[0-1][0-9].[0-9][0-9][0-9][0-9]", message = "")
 	private String birthday;
-
+	@NotEmpty(message = "")
+	@NotNull
 	private String street;
-
+	@NotEmpty(message = "")
+	@NotNull
 	private String streetnr;
-
+	@NotEmpty(message = "")
+	@NotNull
 	private String postalcode;
-
+	@NotEmpty(message = "")
+	@NotNull
 	private String city;
-
+	@NotEmpty
+	@NotNull
 	private double credit;
-
+	@NotEmpty
+	@NotNull
 	private boolean admin;
-
+	@NotEmpty
+	@NotNull
 	private boolean isactivated;
 
 	@Override

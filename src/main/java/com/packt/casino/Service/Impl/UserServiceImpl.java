@@ -5,6 +5,7 @@ import com.packt.casino.domain.User;
 import com.packt.casino.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -17,20 +18,20 @@ public class UserServiceImpl implements UserService
 	User user = new User();
 
 	@Override
-	public  void add(User user)
+	public  void add(User user, @RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String birthday, @RequestParam String street, @RequestParam String streetNr, @RequestParam String postalCode, @RequestParam String city)
 	{
-		user.setUserid(17L);
-		user.setName("Maximillian");
-		user.setSurname("Mustermann");
-		user.setEmail("max.mustermann@bespiel.de");
-		user.setBirthday("01.01.2000");
-		user.setStreet("beispiel Straße");
-		user.setStreetnr("1a");
-		user.setPostalcode("12345");
-		user.setCity("Musterhausen");
+		//user.setUserid(17L);
+		user.setName(name);
+		user.setSurname(surname);
+		user.setEmail(email);
+		user.setBirthday(birthday);
+		user.setStreet(street);
+		user.setStreetnr(streetNr);
+		user.setPostalcode(postalCode);
+		user.setCity(city);
 		user.setCredit(0);
 		user.setAdmin(false);
-		user.setIsactivated(true);
+		user.setIsactivated(false);
 		userRepository.save(user);
 	}
 
@@ -69,4 +70,6 @@ public class UserServiceImpl implements UserService
 	{
 		return userRepository.findAll();
 	}
+
+
 }

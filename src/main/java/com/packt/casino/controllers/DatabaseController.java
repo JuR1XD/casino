@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 
@@ -39,15 +40,24 @@ class DatabaseController
 
 	@RequestMapping(path = "/addUser") // Map ONLY POST Requests
 	public
-	String addNewUser()
+	String addNewUser(User user, @RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String birthday, @RequestParam String street, @RequestParam String streetNr, @RequestParam String postalCode, @RequestParam String city, Model model)
 	{
 		// @ means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 
+		model.addAttribute("name", name);
+		model.addAttribute("surname", surname);
+		model.addAttribute("email", email);
+		model.addAttribute("birthday", birthday);
+		model.addAttribute("street", street);
+		model.addAttribute("streetNr", streetNr);
+		model.addAttribute("postalCode", postalCode);
+		model.addAttribute("city", city);
 
-		userService.add(user);
 
-		return "Saved";
+		userService.add(user, name, surname, email, birthday, street, streetNr, postalCode, city);
+
+		return "registration";
 	}
 	@RequestMapping(path = "/addGame") // Map ONLY POST Requests
 	public
