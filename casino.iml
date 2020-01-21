@@ -6,6 +6,7 @@
         <fileset id="fileset" name="DispatcherServlet Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/webcontext/DispatcherServlet-context.xml</file>
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/webcontext/security-config.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spring/webcontext/security-context.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -29,7 +30,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="Entities" />
-          <factory-entry name="entityManagerFactory" />
+          <factory-entry name="entityManagerFactory" value="e1182110-08df-4d74-808b-9ddee4ab0641" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

@@ -22,14 +22,15 @@
     </div>
 
     <div class="jumbotron">
+        <a href="<c:url value="/login" />" class="btn btn-plain btn-mini pull-right"><bean:message key="casino.login.btn"/></a>
         <h1>
             <tilesx:useAttribute name="heading"/>
-            <bean:message key="casino.welcome.title"/>
+            <bean:message key="casino.account.signIn.title"/>
             <%--<tiles:insertAttribute name="heading"/>--%>
         </h1>
         <p>
             <tilesx:useAttribute name="tagline"/>
-            <bean:message key="casino.welcome.tagline"/>
+            <bean:message key="casino.account.signIn.tagline"/>
             <%--<tiles:insertAttribute name="tagline"/>--%>
         </p>
     </div>

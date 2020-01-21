@@ -28,7 +28,7 @@
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
             </props>
         </property>
-        <property name="packagesToScan" value="com.packt.casino" />
+        <property name="packagesToScan" value="com.packt.casino.domain" />
     </bean>
 
     <!-- Configure the transaction manager bean -->

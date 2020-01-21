@@ -1,20 +1,35 @@
 package com.packt.casino.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
+@Table(name = "game")
 public class Game
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@NotNull
+	@NotEmpty
+	@Column(name = "gameId", table = "game")
 	private Long gameId;
+	@NotNull
+	@NotEmpty
+	@Column(name = "name", table = "game")
 	private String name;
+	@NotNull
+	@NotEmpty
+	@Column(name = "min", table = "game")
 	private double min;
+	@NotNull
+	@NotEmpty
+	@Column(name = "description", table = "game")
 	private String description;
+	@NotNull
+	@NotEmpty
+	@Column(name = "isActivated", table = "game")
 	private boolean isActivated;
 
 	@Override

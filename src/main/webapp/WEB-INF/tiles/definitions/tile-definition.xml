@@ -78,12 +78,26 @@
     </definition>
 
     <definition name="search" extends="baseLayoutSearch">
-        <put-attribute name="title" value="Suche"/>
+        <put-attribute name="title" value="casino.search.title"/>
         <put-attribute name="heading" value="casino.search.title"/>
         <put-attribute name="tagline" value="casino.search.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/search.jsp"/>
     </definition>
 
-    <definition name="registration" extends="baseLayoutRegistration"
+    <definition name="baseLayoutSignIn" template="/WEB-INF/tiles/template/baseLayoutSignIn.jsp">
+        <put-attribute name="title" value="Sample Title"/>
+        <put-attribute name="heading" value=""/>
+        <put-attribute name="tagline" value=""/>
+        <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp"/>
+    </definition>
+
+    <definition name="signIn" extends="baseLayoutSignIn">
+        <put-attribute name="title" value="Sign In"/>
+        <put-attribute name="heading" value="casino.signIn.title"/>
+        <put-attribute name="tagline" value="casino.signIn.tagline"/>
+        <put-attribute name="content" value="/WEB-INF/views/signIn.jsp"/>
+    </definition>
 
 </tiles-definitions>

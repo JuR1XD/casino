@@ -5,7 +5,6 @@ import com.packt.casino.domain.User;
 import com.packt.casino.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -15,54 +14,59 @@ public class UserServiceImpl implements UserService
 {
 	@Autowired
 	private UserRepository userRepository;
+
+
 	User user = new User();
 
+
 	@Override
-	public  void add(User user, @RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String birthday, @RequestParam String street, @RequestParam String streetNr, @RequestParam String postalCode, @RequestParam String city)
+	public  void add(String name, String surname,  String email,  String birthday, String password, String street, String streetNr, String postalCode, String city)
 	{
-		//user.setUserid(17L);
+		User user = new User();
 		user.setName(name);
 		user.setSurname(surname);
 		user.setEmail(email);
 		user.setBirthday(birthday);
 		user.setStreet(street);
-		user.setStreetnr(streetNr);
-		user.setPostalcode(postalCode);
+		user.setStreetNr(streetNr);
+		user.setPostalCode(postalCode);
 		user.setCity(city);
 		user.setCredit(0);
 		user.setAdmin(false);
-		user.setIsactivated(false);
+		user.setIsActivated(true);
+		user.setPassword(password);
 		userRepository.save(user);
 	}
 
 	@Override
-	public void remove()
+	public void remove(Long userId)
 	{
-		userRepository.deleteById(21L);
+		userRepository.deleteById(userId);
 	}
 
 	@Override
-	public void update(User user)
+	public void update(Long userId, String name, String surname,  String email,  String birthday, double credit, boolean admin, boolean isActivated, String password, String street, String streetNr, String postalCode, String city)
 	{
-		user.setUserid(17L);
-		user.setName("André");
-		user.setSurname("Vilgis");
-		user.setEmail("andre.vilgis@bespiel.de");
-		user.setBirthday("01.01.20001");
-		user.setStreet("beispiel Straße");
-		user.setStreetnr("22");
-		user.setPostalcode("12345");
-		user.setCity("Hofheim");
-		user.setCredit(200);
-		user.setAdmin(true);
-		user.setIsactivated(true);
+
+		user.setName(name);
+		user.setSurname(surname);
+		user.setEmail(email);
+		user.setBirthday(birthday);
+		user.setStreet(street);
+		user.setStreetNr(streetNr);
+		user.setPostalCode(postalCode);
+		user.setCity(city);
+		user.setCredit(credit);
+		user.setAdmin(admin);
+		user.setIsActivated(isActivated);
+		user.setPassword(password);
 		userRepository.save(user);
 	}
 
 	@Override
-	public Optional<User> findById()
+	public Optional<User> findById(Long userId)
 	{
-		return userRepository.findById(17L);
+		return userRepository.findById(userId);
 	}
 
 	@Override
@@ -70,6 +74,4 @@ public class UserServiceImpl implements UserService
 	{
 		return userRepository.findAll();
 	}
-
-
 }

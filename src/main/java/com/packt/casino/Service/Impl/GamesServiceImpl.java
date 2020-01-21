@@ -17,25 +17,29 @@ public class GamesServiceImpl implements GamesService
 
 
 	@Override
-	public void add(Game game)
+	public void add(Long gameId, String name, double min, String description, boolean isActivated)
 	{
-		game.setGameId(16L);
-		game.setName("Einarmiger Bandit");
-		game.setMin(0);
-		game.setDescription("Dies ist eine TestBezeichnung");
-		game.setActivated(true);
+		Game game = new Game();
+
+		game.setGameId(gameId);
+		game.setName(name);
+		game.setMin(min);
+		game.setDescription(description);
+		game.setActivated(isActivated);
 		gamesRepository.save(game);
 	}
 
 	@Override
-	public void remove()
+	public void remove(Long gameId)
 	{
-		gamesRepository.deleteById(16L);
+		gamesRepository.deleteById(gameId);
 	}
 
 	@Override
-	public void update(Game game)
+	public void update(Long gameId, String name, double min, String description, boolean isActivated)
 	{
+		Game game = new Game();
+
 		game.setGameId(16L);
 		game.setName("Roulette");
 		game.setMin(15.00);
@@ -45,9 +49,9 @@ public class GamesServiceImpl implements GamesService
 	}
 
 	@Override
-	public Optional<Game> findById()
+	public Optional<Game> findById(Long gameId)
 	{
-		return gamesRepository.findById(18L);
+		return gamesRepository.findById(gameId);
 	}
 
 	@Override

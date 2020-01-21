@@ -1,73 +1,93 @@
 package com.packt.casino.domain;
 
-import javax.annotation.MatchesPattern;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 
+
 @Entity
+@Table(name = "user")
+@SecondaryTable(name = "address")
 public class User
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-
-	private Long userid;
-	@NotEmpty(message = "")
+	@Column(table = "user")
+	private Long userId;
+	@NotEmpty(message = "{casino.registrate.notEmpty}")
 	@NotNull
+	@Column(table = "user")
 	private String name;
-	@NotEmpty(message = "")
+	@NotEmpty(message = "{casino.registrate.notEmpty}")
 	@NotNull
+	@Column(table = "user")
 	private String surname;
 	@NotEmpty
 	@NotNull
-	@Pattern(regexp = "[\\w]+@[\\w]+.[\\w]+", message = "{casino.registration.email.error}")
+	@Pattern(regexp = "[\\w]+@[\\w]+.[\\w]+", message = "{{casino.registration.email.error}")
+	@Column(table = "user")
 	private String email;
-	@NotEmpty(message = "")
+	@NotEmpty(message = "{casino.registrate.notEmpty}")
 	@NotNull
-	@Pattern(regexp = "[0-9][0-9].[0-1][0-9].[0-9][0-9][0-9][0-9]", message = "")
+	@Pattern(regexp = "[0-9][0-9]-[0-1][0-9]-[0-9][0-9][0-9][0-9]", message = "{{casino.registrate.birthday.error}")
+	@Column(table = "user")
 	private String birthday;
-	@NotEmpty(message = "")
-	@NotNull
-	private String street;
-	@NotEmpty(message = "")
-	@NotNull
-	private String streetnr;
-	@NotEmpty(message = "")
-	@NotNull
-	private String postalcode;
-	@NotEmpty(message = "")
-	@NotNull
-	private String city;
 	@NotEmpty
 	@NotNull
+	@Column(table = "user")
 	private double credit;
 	@NotEmpty
 	@NotNull
+	@Column(table = "user")
 	private boolean admin;
 	@NotEmpty
 	@NotNull
-	private boolean isactivated;
+	@Column(table = "user")
+	private boolean isActivated;
+	@NotNull
+	@NotEmpty
+	@Column(table = "address")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long addressId;
+	@NotEmpty
+	@NotNull
+	@Column(table = "user")
+	private String password;
+	@NotEmpty(message = "{casino.registrate.notEmpty}")
+	@NotNull
+	@Column(table = "address")
+	private String street;
+	@NotEmpty(message = "{casino.registrate.notEmpty}")
+	@NotNull
+	@Column(table = "address")
+	private String streetNr;
+	@NotEmpty(message = "{casino.registrate.notEmpty}")
+	@NotNull
+	@Column(table = "address")
+	private String postalCode;
+	@NotEmpty(message = "{casino.registrate.notEmpty}")
+	@NotNull
+	@Column(table = "address")
+	private String city;
+
 
 	@Override
 	public String toString() {
 		return String.format(
-				"User[idUser=%d, name='%s', surname='%s', email='%s', birthday='%s', street='%s', streetNr='%s', postalCode='%s', city='%s', credit='%s', admin='%s', isActivated='%s']",
-				userid, name, surname, email, birthday, street, streetnr, postalcode, city, credit, admin, isactivated);
+				"User[idUser=%d, name='%s',\nsurname='%s', email='%s',\nbirthday='%s', street='%s',\nstreetNr='%s', postalCode='%s', \ncity='%s']",
+				userId, name, surname, email, birthday, street, streetNr, postalCode, city);
 	}
 
-	public Long getUserid()
+	public Long getUserId()
 	{
-		return userid;
+		return userId;
 	}
 
-	public void setUserid(Long idUser)
+	public void setUserId(Long idUser)
 	{
-		this.userid = idUser;
+		this.userId = idUser;
 	}
 
 	public String getName()
@@ -110,46 +130,6 @@ public class User
 		this.birthday = birthday;
 	}
 
-	public String getStreet()
-	{
-		return street;
-	}
-
-	public void setStreet(String street)
-	{
-		this.street = street;
-	}
-
-	public String getStreetnr()
-	{
-		return streetnr;
-	}
-
-	public void setStreetnr(String streetNr)
-	{
-		this.streetnr = streetNr;
-	}
-
-	public String getPostalcode()
-	{
-		return postalcode;
-	}
-
-	public void setPostalcode(String postalCode)
-	{
-		this.postalcode = postalCode;
-	}
-
-	public String getCity()
-	{
-		return city;
-	}
-
-	public void setCity(String city)
-	{
-		this.city = city;
-	}
-
 	public double getCredit()
 	{
 		return credit;
@@ -170,13 +150,75 @@ public class User
 		this.admin = admin;
 	}
 
-	public boolean isIsactivated()
+	public boolean isIsActivated()
 	{
-		return isactivated;
+		return isActivated;
 	}
 
-	public void setIsactivated(boolean isactivated)
+	public void setIsActivated(boolean isactivated)
 	{
-		this.isactivated = isactivated;
+		this.isActivated = isactivated;
 	}
+
+
+	public String getPassword()
+	{
+		return password;
+	}
+
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
+	public String getStreet()
+	{
+		return street;
+	}
+
+	public void setStreet(String street)
+	{
+		this.street = street;
+	}
+
+	public String getStreetNr()
+	{
+		return streetNr;
+	}
+
+	public void setStreetNr(String streetNr)
+	{
+		this.streetNr = streetNr;
+	}
+
+	public String getPostalCode()
+	{
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode)
+	{
+		this.postalCode = postalCode;
+	}
+
+	public String getCity()
+	{
+		return city;
+	}
+
+	public void setCity(String city)
+	{
+		this.city = city;
+	}
+
+	public Long getAddressId()
+	{
+		return addressId;
+	}
+
+	public void setAddressId(Long addressId)
+	{
+		this.addressId = addressId;
+	}
+
 }
