@@ -5,7 +5,7 @@
 <tiles-definitions>
 
     <definition name="baseLayout" template="/WEB-INF/tiles/template/baseLayout.jsp">
-        <put-attribute name="title" value="Sample Title" />
+        <!--<put-attribute name="title" value="Sample Title" />-->
         <put-attribute name="heading" value="" />
         <put-attribute name="tagline" value="" />
         <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
@@ -14,14 +14,14 @@
     </definition>
 
     <definition name="welcome" extends="baseLayout">
-        <put-attribute name="title" value="Herzlich Willkommen"/>
+        <!--<put-attribute name="title" value="Herzlich Willkommen"/>-->
         <put-attribute name="heading" value="casino.welcome.title"/>
         <put-attribute name="tagline" value="casino.welcome.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/welcome.jsp"/>
     </definition>
 
     <definition name="baseLayoutGames" template="/WEB-INF/tiles/template/baseLayoutGames.jsp">
-        <put-attribute name="title" value="Sample Title" />
+        <!--<put-attribute name="title" value="Sample Title" />-->
         <put-attribute name="heading" value="" />
         <put-attribute name="tagline" value="" />
         <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
@@ -30,14 +30,14 @@
     </definition>
 
     <definition name="games" extends="baseLayoutGames">
-        <put-attribute name="title" value="Herzlich Willkomen" />
+        <!--<put-attribute name="title" value="Herzlich Willkomen" />-->
         <put-attribute name="heading" value="casino.games.title" />
         <put-attribute name="tagline" value="casino.games.tagline" />
         <put-attribute name="content" value="/WEB-INF/views/games.jsp" />
     </definition>
 
     <definition name="baseLayoutAccount" template="/WEB-INF/tiles/template/baseLayoutAccount.jsp">
-        <put-attribute name="title" value="Sample Title" />
+        <!--<put-attribute name="title" value="Sample Title" />-->
         <put-attribute name="heading" value="" />
         <put-attribute name="tagline" value="" />
         <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
@@ -46,14 +46,14 @@
     </definition>
 
     <definition name="account" extends="baseLayoutAccount">
-        <put-attribute name="title" value="Mein Account"/>
+        <!--<put-attribute name="title" value="Mein Account"/>-->
         <put-attribute name="heading" value="casino.account.title"/>
         <put-attribute name="tagline" value="casino.account.title"/>
         <put-attribute name="content" value="/WEB-INF/views/account.jsp"/>
     </definition>
 
     <definition name="baseLayoutGame" template="/WEB-INF/tiles/template/baseLayoutGame.jsp">
-        <put-attribute name="title" value="Sample Title" />
+        <!--<put-attribute name="title" value="Sample Title" />-->
         <put-attribute name="heading" value="" />
         <put-attribute name="tagline" value="" />
         <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
@@ -62,14 +62,14 @@
     </definition>
 
     <definition name="game" extends="baseLayoutGame">
-        <put-attribute name="title" value="Spiel"/>
+        <!--<put-attribute name="title" value="Spiel"/>-->
         <put-attribute name="heading" value="casino.game.title"/>
         <put-attribute name="tagline" value="casino.game.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/game.jsp"/>
     </definition>
 
     <definition name="baseLayoutSearch" template="/WEB-INF/tiles/template/baseLayoutSearch.jsp">
-        <put-attribute name="title" value="Sample Title" />
+        <!--<put-attribute name="title" value="Sample Title" />-->
         <put-attribute name="heading" value="" />
         <put-attribute name="tagline" value="" />
         <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
@@ -78,14 +78,14 @@
     </definition>
 
     <definition name="search" extends="baseLayoutSearch">
-        <put-attribute name="title" value="casino.search.title"/>
+        <!--<put-attribute name="title" value="casino.search.title"/>-->
         <put-attribute name="heading" value="casino.search.title"/>
         <put-attribute name="tagline" value="casino.search.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/search.jsp"/>
     </definition>
 
     <definition name="baseLayoutSignIn" template="/WEB-INF/tiles/template/baseLayoutSignIn.jsp">
-        <put-attribute name="title" value="Sample Title"/>
+        <!--<put-attribute name="title" value="Sample Title"/>-->
         <put-attribute name="heading" value=""/>
         <put-attribute name="tagline" value=""/>
         <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp"/>
@@ -94,10 +94,26 @@
     </definition>
 
     <definition name="signIn" extends="baseLayoutSignIn">
-        <put-attribute name="title" value="Sign In"/>
+        <!--<put-attribute name="title" value="Sign In"/>-->
         <put-attribute name="heading" value="casino.signIn.title"/>
         <put-attribute name="tagline" value="casino.signIn.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/signIn.jsp"/>
+    </definition>
+
+    <definition name="baseLayoutSuccessfulSignIn" template="/WEB-INF/tiles/template/baseLayoutSuccessfulSignIn.jsp">
+        <!--<put-attribute name="title" value="Sample Title"/>-->
+        <put-attribute name="heading" value=""/>
+        <put-attribute name="tagline" value=""/>
+        <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp"/>
+    </definition>
+
+    <definition name="successfulSignIn" extends="baseLayoutSuccessfulSignIn">
+        <!--<put-attribute name="title" value="Sign In successful"/>-->
+        <put-attribute name="heading" value="casino.signIn.successful.title"/>
+        <put-attribute name="tagline" value="casino.signIn.successful.tagline"/>
+        <put-attribute name="content" value="/WEB-INF/views/successfulSignIn.jsp"/>
     </definition>
 
 </tiles-definitions>

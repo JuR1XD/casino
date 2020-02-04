@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven  enable-matrix-variables="true" validator="validator"/>
 	<context:component-scan base-package="com.packt.casino" />
 	<jpa:repositories base-package="com.packt.casino.domain.repository"/>
 	<mvc:interceptors>
@@ -42,6 +42,10 @@
 
 	<bean id= "messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="messages"/>
+	</bean>
+
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource"/>
 	</bean>
 
 </beans>

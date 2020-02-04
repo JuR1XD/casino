@@ -5,10 +5,10 @@
 <%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="ISO-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, inital-scale=1.0">
-    <title><tiles:insertAttribute name="title"/> </title>
+    <title><spring:message code="casino.title.welcome"/></title>
     <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.css">
     <link rel="stylesheet" href="http://getbootstrap.com/examples/jumbotron/jumbotron.css">
 </head>

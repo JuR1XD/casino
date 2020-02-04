@@ -1,5 +1,8 @@
 package com.packt.casino.domain;
 
+import com.packt.casino.validator.PasswordMatches;
+import com.packt.casino.validator.ValidEmail;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -16,59 +19,45 @@ public class User
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(table = "user")
 	private Long userId;
-	@NotEmpty(message = "{casino.registrate.notEmpty}")
-	@NotNull
+	@NotEmpty(message = "{casino.signIn.notNull}")
+	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "user")
 	private String name;
-	@NotEmpty(message = "{casino.registrate.notEmpty}")
-	@NotNull
+	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "user")
 	private String surname;
-	@NotEmpty
-	@NotNull
-	@Pattern(regexp = "[\\w]+@[\\w]+.[\\w]+", message = "{{casino.registration.email.error}")
+	@NotNull(message = "{casino.signIn.notNull}")
+	@ValidEmail
 	@Column(table = "user")
 	private String email;
-	@NotEmpty(message = "{casino.registrate.notEmpty}")
-	@NotNull
-	@Pattern(regexp = "[0-9][0-9]-[0-1][0-9]-[0-9][0-9][0-9][0-9]", message = "{{casino.registrate.birthday.error}")
+	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "user")
 	private String birthday;
-	@NotEmpty
-	@NotNull
+	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "user")
 	private double credit;
-	@NotEmpty
-	@NotNull
+	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "user")
 	private boolean admin;
-	@NotEmpty
-	@NotNull
+	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "user")
 	private boolean isActivated;
-	@NotNull
-	@NotEmpty
 	@Column(table = "address")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long addressId;
-	@NotEmpty
-	@NotNull
+	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "user")
 	private String password;
-	@NotEmpty(message = "{casino.registrate.notEmpty}")
-	@NotNull
+	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "address")
 	private String street;
-	@NotEmpty(message = "{casino.registrate.notEmpty}")
-	@NotNull
+	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "address")
 	private String streetNr;
-	@NotEmpty(message = "{casino.registrate.notEmpty}")
-	@NotNull
+	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "address")
 	private String postalCode;
-	@NotEmpty(message = "{casino.registrate.notEmpty}")
-	@NotNull
+	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "address")
 	private String city;
 
@@ -76,8 +65,8 @@ public class User
 	@Override
 	public String toString() {
 		return String.format(
-				"User[idUser=%d, name='%s',\nsurname='%s', email='%s',\nbirthday='%s', street='%s',\nstreetNr='%s', postalCode='%s', \ncity='%s']",
-				userId, name, surname, email, birthday, street, streetNr, postalCode, city);
+				"Name='%s'\nsurname='%s'\nemail='%s'\nbirthday='%s'\nstreet='%s'\nstreetNr='%s'\npostalCode='%s'\ncity='%s'",
+				name, surname, email, birthday, street, streetNr, postalCode, city);
 	}
 
 	public Long getUserId()
@@ -221,4 +210,13 @@ public class User
 		this.addressId = addressId;
 	}
 
+	public boolean isActivated()
+	{
+		return isActivated;
+	}
+
+	public void setActivated(boolean activated)
+	{
+		isActivated = activated;
+	}
 }

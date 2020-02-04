@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 
 <html>
@@ -11,9 +12,8 @@
 <section>
     <div class="jumbotron">
         <div class="container">
-            <h1><b>500</b> Oops, something bad happened</h1>
-            <p>Looks like we did a big oopsie.</p>
-            <p>Just return back to our home page <b><a href="http://localhost:8080/casino/" style="color: black;">here</a></b></p>
+            <h1><b>500</b> <spring:message code="casino.generalError500.title"/></h1>
+            <p><spring:message code="casino.generalError500.tagline"/> <b><a href="<spring:url value="/"/>" style="color: black;"><spring:message code="casino.generalError500.tagline.link"/></a></b></p>
         </div>
     </div>
 </section>

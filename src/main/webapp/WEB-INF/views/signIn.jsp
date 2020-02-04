@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="string" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -13,16 +12,19 @@
 </head>
 <body>
 <section class="container">
-    <form:form modelAttribute="signIn" class="form-horizontal" enctype="multipart/form-data">
+    <form:form modelAttribute="user" class="form-horizontal">
     <fieldset>
         <legend>Sign In</legend>
 
-        <!--<form:errors path="*" cssClass="alert alert-danger" element="div"/>-->
+        <form:errors path="email" cssClass="alert alert-danger" element="div"/>
+        <form:errors path="birthday" cssClass="alert alert-danger" element="div"/>
+        <form:errors path="password" cssClass="alert alert-danger" element="div"/>
+        <form:errors path="matchingPassword" cssClass="alert alert-danger" element="div"/>
         <div class="form-group">
             <label class="control-label col-lg-2 col-lg-2" for="name"><spring:message
                     code="casino.signIn.name"/></label>
             <div class="col-lg-10">
-                <form:input id="name" path="name" type="text" class="form:input-large"/>
+                <form:input id="name" path="name" type="text" class="form:input-large" />
                 <form:errors path="name" cssClass="text-danger"/>
             </div>
         </div>
@@ -41,7 +43,7 @@
                     code="casino.signIn.birthday"/></label>
             <div class="col-lg-10">
                 <div class="form:input-prepend">
-                    <form:input id="birthday" path="birthday" type="text" class="form:input-large"/>
+                    <form:input id="birthday" path="birthday" type="date" class="form:input-large"/>
                     <form:errors path="birthday" cssClass="text-danger"/>
                 </div>
             </div>
@@ -50,13 +52,11 @@
         <div class="form-group">
             <label class="control-label col-lg-2" for="email"><spring:message
                     code="casino.signIn.email"/></label>
-            <div class="form:input-prepend">
+            <div class="col-lg-10">
                 <form:input id="email" path="email" type="text" class="form:input-large"/>
                 <form:errors path="email" cssClass="text-danger"/>
             </div>
         </div>
-        </form:form>
-        <from:form modelAttribute="signInA" class="form-horizontal" enctype="multipart/form-data">
         <div class="form-group">
             <label class="control-label col-lg-2" for="street"><spring:message
                     code="casino.signIn.street"/></label>
@@ -92,6 +92,24 @@
                 <form:errors path="city" cssClass="text-danger"/>
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="control-label col-lg-2" for="password"><spring:message
+                    code="casino.signIn.password"/></label>
+            <div class="col-lg-10">
+                <form:input id="password" path="password" type="password" class="form:input-large"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-lg-2" for="matchingPassword"><spring:message
+                    code="casino.signIn.matchingPassword"/></label>
+            <div class="col-lg-10">
+                <form:input id="matchingPassword" path="matchingPassword" type="password" class="form:input-large"/>
+                <form:errors path="matchingPassword" cssClass="text-danger"/>
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
                 <input type="submit" id="btnAdd" class="btn btn-primary" value="Add"/>
@@ -99,7 +117,8 @@
         </div>
 
     </fieldset>
-    </from:form>
+    </form:form>
+
 
 </section>
 </body>

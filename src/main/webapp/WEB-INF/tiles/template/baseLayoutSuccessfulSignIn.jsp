@@ -8,7 +8,7 @@
     <meta charset="ISO-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, inital-scale=1.0">
-    <title><spring:message code="casino.title.search"/></title>
+    <title><spring:message code="casino.title.successfulSignIn"/></title>
     <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.css">
     <link rel="stylesheet" href="http://getbootstrap.com/examples/jumbotron/jumbotron.css">
 </head>
@@ -24,12 +24,12 @@
     <div class="jumbotron">
         <h1>
             <tilesx:useAttribute name="heading"/>
-            <bean:message key="casino.search.title"/>
+            <bean:message key="casino.signIn.successful.title"/>
             <%--<tiles:insertAttribute name="heading"/>--%>
         </h1>
         <p>
             <tilesx:useAttribute name="tagline"/>
-            <bean:message key="casino.search.tagline"/>
+            <bean:message key="casino.signIn.successful.tagline"/>
             <%--<tiles:insertAttribute name="tagline"/>--%>
         </p>
     </div>

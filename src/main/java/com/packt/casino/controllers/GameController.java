@@ -13,7 +13,6 @@ import javax.annotation.Resource;
 
 
 @Controller
-@RequestMapping("/game")
 public class GameController
 {
 
