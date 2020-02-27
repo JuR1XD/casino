@@ -22,39 +22,35 @@ import javax.validation.Valid;
 @Controller
 public class RegistrationController
 {
-@Autowired
+	@Autowired
 	private UserService userService;
 
-	@RequestMapping(path = "/user/signIn", method = RequestMethod.POST)
-	public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDataTransfer accountUser, BindingResult result, WebRequest request, Errors errors)
+	@RequestMapping(path = "/signIn", method = RequestMethod.POST)
+	public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDataTransfer accountUser,
+			BindingResult result, WebRequest request, Errors errors)
 	{
-		if(!accountUser.getPassword().equals(accountUser.getMatchingPassword()))
+		if (!accountUser.getPassword().equals(accountUser.getMatchingPassword()))
 		{
 			result.rejectValue("matchingPassword", "casino.signIn.passwordMatch.error");
 		}
-
-
-/*		if(!result.hasErrors())
+		/*if(!result.hasErrors())
 		{
 
-		}*/
-	/*	if(registered == null)
+		}
+		if(registered == null)
 		{
 			result.rejectValue("email", "casino.signIn.emailMatch.error");
-		}	*/
-
-
-//
-//		{
-//			return new ModelAndView("signIn", "user", accountUser);
-//		}
-//		else
-		if(!result.hasErrors())
+		}
+		{
+				return new ModelAndView("signIn", "user", accountUser);
+		}
+		else*/
+		if (!result.hasErrors())
 		{
 			createUserAccount(accountUser, result);
 		}
 
-		if(result.hasErrors())
+		if (result.hasErrors())
 		{
 			return new ModelAndView("signIn", "user", accountUser);
 		}
@@ -63,7 +59,7 @@ public class RegistrationController
 
 	}
 
-	@RequestMapping(value = "/user/signIn", method = RequestMethod.GET)
+	@RequestMapping(value = "/signIn", method = RequestMethod.GET)
 	public String showRegistrationForm(Model model, WebRequest request)
 	{
 		final UserDataTransfer user = new UserDataTransfer();
@@ -92,5 +88,6 @@ public class RegistrationController
 	{
 		return "successfulSignIn";
 	}
+
 
 }

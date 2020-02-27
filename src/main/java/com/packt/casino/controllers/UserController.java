@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/userTest")
 public class UserController
 {
 

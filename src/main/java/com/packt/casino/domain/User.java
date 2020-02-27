@@ -2,14 +2,22 @@ package com.packt.casino.domain;
 
 import com.packt.casino.validator.PasswordMatches;
 import com.packt.casino.validator.ValidEmail;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Set;
 
 
-
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "user")
 @SecondaryTable(name = "address")
@@ -17,7 +25,7 @@ public class User
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(table = "user")
+	@Column(table = "user", name = "userId")
 	private Long userId;
 	@NotEmpty(message = "{casino.signIn.notNull}")
 	@NotNull(message = "{casino.signIn.notNull}")
@@ -28,7 +36,7 @@ public class User
 	private String surname;
 	@NotNull(message = "{casino.signIn.notNull}")
 	@ValidEmail
-	@Column(table = "user")
+	@Column(table = "user", name = "email")
 	private String email;
 	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "user")
@@ -38,15 +46,12 @@ public class User
 	private double credit;
 	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "user")
-	private boolean admin;
-	@NotNull(message = "{casino.signIn.notNull}")
-	@Column(table = "user")
 	private boolean isActivated;
 	@Column(table = "address")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long addressId;
 	@NotNull(message = "{casino.signIn.notNull}")
-	@Column(table = "user")
+	@Column(table = "user", name = "password")
 	private String password;
 	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "address")
@@ -61,6 +66,11 @@ public class User
 	@Column(table = "address")
 	private String city;
 
+
+
+	@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
+	private Set<Authority> authorities;
 
 	@Override
 	public String toString() {
@@ -127,16 +137,6 @@ public class User
 	public void setCredit(double credit)
 	{
 		this.credit = credit;
-	}
-
-	public boolean isAdmin()
-	{
-		return admin;
-	}
-
-	public void setAdmin(boolean admin)
-	{
-		this.admin = admin;
 	}
 
 	public boolean isIsActivated()
@@ -218,5 +218,15 @@ public class User
 	public void setActivated(boolean activated)
 	{
 		isActivated = activated;
+	}
+
+	public Set<Authority> getAuthorities()
+	{
+		return authorities;
+	}
+
+	public void setAuthorities(Set<Authority> authorities)
+	{
+		this.authorities = authorities;
 	}
 }

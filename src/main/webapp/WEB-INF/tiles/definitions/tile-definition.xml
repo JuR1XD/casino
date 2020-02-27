@@ -116,4 +116,20 @@
         <put-attribute name="content" value="/WEB-INF/views/successfulSignIn.jsp"/>
     </definition>
 
+    <definition name="baseLayoutLogin" template="/WEB-INF/tiles/template/baseLayoutLogin.jsp">
+        <!--<put-attribute name="title" value="Sample Title"/>-->
+        <put-attribute name="heading" value=""/>
+        <put-attribute name="tagline" value=""/>
+        <put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp"/>
+    </definition>
+
+    <definition name="login" extends="baseLayoutLogin">
+        <!--<put-attribute name="title" value="Login"/>-->
+        <put-attribute name="heading" value="casino.account.login.title"/>
+        <put-attribute name="tagline" value="casino.account.login.tagline"/>
+        <put-attribute name="content" value="/WEB-INF/views/login.jsp"/>
+    </definition>
+
 </tiles-definitions>

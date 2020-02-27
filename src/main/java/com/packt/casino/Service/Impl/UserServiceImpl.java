@@ -1,29 +1,68 @@
 package com.packt.casino.Service.Impl;
 
 import com.packt.casino.Service.UserService;
+import com.packt.casino.domain.Authority;
 import com.packt.casino.domain.User;
 import com.packt.casino.domain.UserDataTransfer;
+import com.packt.casino.domain.repository.AuthorityRepository;
 import com.packt.casino.domain.repository.UserRepository;
 import com.packt.casino.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
 
 
 @Service("UserService")
 public class UserServiceImpl implements UserService
 {
-	@Autowired
+
 	private UserRepository userRepository;
+
+	private AuthorityRepository authorityRepository;
+
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@Autowired
+	public UserServiceImpl(UserRepository userRepository, AuthorityRepository authorityRepository,
+			BCryptPasswordEncoder bCryptPasswordEncoder)
+	{
+		this.userRepository = userRepository;
+		this.authorityRepository = authorityRepository;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
+
+	@Override
+	public User findUserByEmail(String email)
+	{
+		return userRepository.findByEmail(email);
+	}
+
+	@Override
+	public User findUserByName(String name)
+	{
+		return userRepository.findByName(name);
+	}
+
+	@Override
+	public User findUserBySurname(String surname)
+	{
+		return userRepository.findBySurname(surname);
+	}
+
 
 
 	User user = new User();
 
 
 	@Override
-	public void add(String name, String surname, String email, String birthday, String password, String street, String streetNr, String postalCode, String city)
+	public void add(String name, String surname, String email, String birthday, String password,
+			String street, String streetNr, String postalCode, String city)
 	{
 		User user = new User();
 		user.setName(name);
@@ -35,7 +74,7 @@ public class UserServiceImpl implements UserService
 		user.setPostalCode(postalCode);
 		user.setCity(city);
 		user.setCredit(0);
-		user.setAdmin(false);
+		//user.setAdmin(false);
 		user.setIsActivated(true);
 		user.setPassword(password);
 		userRepository.save(user);
@@ -49,7 +88,8 @@ public class UserServiceImpl implements UserService
 
 	@Override
 	public void update(Long userId, String name, String surname, String email, String birthday, double credit,
-			boolean admin, boolean isActivated, String password, String street, String streetNr, String postalCode, String city)
+			boolean admin, boolean isActivated, String password, String street, String streetNr,
+			String postalCode, String city)
 	{
 
 		user.setName(name);
@@ -61,7 +101,7 @@ public class UserServiceImpl implements UserService
 		user.setPostalCode(postalCode);
 		user.setCity(city);
 		user.setCredit(credit);
-		user.setAdmin(admin);
+		//user.setAdmin(admin);
 		user.setIsActivated(isActivated);
 		user.setPassword(password);
 		userRepository.save(user);
@@ -97,7 +137,11 @@ public class UserServiceImpl implements UserService
 		user.setStreetNr(accountUser.getStreetNr());
 		user.setPostalCode(accountUser.getPostalCode());
 		user.setCity(accountUser.getCity());
-		user.setPassword(accountUser.getPassword());
+		user.setPassword(bCryptPasswordEncoder.encode(accountUser.getPassword()));
+		Authority userAuthority = authorityRepository.findAuthorityByName("ROLE_USER");
+		user.setAuthorities(new HashSet<Authority>(Arrays.asList(userAuthority)));
+		user.setActivated(true);
+		user.setCredit(0.00);
 		return userRepository.save(user);
 	}
 
