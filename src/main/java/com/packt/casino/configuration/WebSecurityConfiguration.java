@@ -19,6 +19,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 {
 
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
 	@Autowired
@@ -29,7 +31,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 	{
 		auth
 				.userDetailsService(userDetailsService)
-				.passwordEncoder(bCryptPasswordEncoder());
+				.passwordEncoder(bCryptPasswordEncoder);
 	}
 
 	@Override
@@ -51,8 +53,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 				.defaultSuccessUrl("/")
 				.usernameParameter("email")
 				.passwordParameter("password")
-				.and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher(logoutpage))
+				.and().logout()/*
+				.logoutRequestMatcher(new AntPathRequestMatcher(logoutpage))*/
 				.logoutSuccessUrl(loginpage).and().exceptionHandling()
 				.accessDeniedPage("/home");
 	}
@@ -63,14 +65,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 		web.
 				ignoring()
 				.antMatchers("/userTest/**");
-	}
-
-
-
-
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder()
-	{
-		return new BCryptPasswordEncoder();
 	}
 }

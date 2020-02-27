@@ -12,9 +12,8 @@
 </head>
 <body>
 <div class="container">
-    <div class="jumbotron">
         <h1>${username}</h1>
-    </div>
+    <p>${userData}</p>
 </div>
 </body>
 </html>

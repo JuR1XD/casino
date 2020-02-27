@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="bean" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
@@ -23,10 +23,11 @@
 
     <div class="jumbotron">
         <h1>
-            <form <c:url value="/logout"/> method="get">
+            <%--<form <c:url value="/logout"/> method="get">
                 <button class="btn btn-danger btn-mini pull-right" name="registration"
                         type="Submit">Logout
-                </button>
+                </button>--%>
+            <a href="<c:url value="/logout"/>" class="btn btn-danger btn-mini pull-right"><spring:message code="casino.login.logout"/></a>
             <tilesx:useAttribute name="heading"/>
             <bean:message key="casino.account.title"/>
             <%--<tiles:insertAttribute name="heading"/>--%>

@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 
@@ -70,7 +71,7 @@ public class User
 
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
-	private Set<Authority> authorities;
+	private Set<Authority> authorities = new LinkedHashSet<Authority>();
 
 	@Override
 	public String toString() {

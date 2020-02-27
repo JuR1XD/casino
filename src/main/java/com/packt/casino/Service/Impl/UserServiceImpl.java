@@ -44,6 +44,12 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
+	public User findUserByAddress(Long address)
+	{
+		return userRepository.findByAddressId(address);
+	}
+
+	@Override
 	public User findUserByName(String name)
 	{
 		return userRepository.findByName(name);

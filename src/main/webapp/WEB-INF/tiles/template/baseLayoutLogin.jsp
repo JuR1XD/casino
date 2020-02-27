@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="bean" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
@@ -24,11 +24,16 @@
     </div>
 
     <div class="jumbotron">
-        <a href="<c:url value="/signIn" />" class="btn btn-plain btn-mini pull-right"><bean:message key="casino.login.registration"/></a><form <c:url value="/logout"/> method="get">
-        <button class="btn btn-danger btn-mini pull-right" name="registration"
-                type="Submit">Logout
-        </button>
-    </form>
+        <a href="<c:url value="/signIn" />" class="btn btn-plain btn-mini pull-right"><bean:message
+                key="casino.login.registration"/></a>
+        <%--
+                <form <c:url value="/logout"/> method="get">
+                    <button class="btn btn-danger btn-mini pull-right" value="Logout" name="registration"
+                            type="Submit">Logout
+                    </button>
+                </form>
+        --%>
+        <a href="<c:url value="/logout"/>" class="btn btn-danger btn-mini pull-right"><spring:message code="casino.login.logout"/></a>
         <h1>
             <tilesx:useAttribute name="heading"/>
             <bean:message key="casino.account.login.title"/>

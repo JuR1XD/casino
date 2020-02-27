@@ -17,6 +17,7 @@ public interface UserService
 	User registerNewUserAccount(UserDataTransfer user) throws EmailExistsException;
 	Iterable<User> findAll();
 	User findUserByEmail(String email);
+	User findUserByAddress(Long address);
 	User findUserByName(String name);
 	User findUserBySurname(String surname);
 }

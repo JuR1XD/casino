@@ -12,23 +12,23 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController
 {
 
-	@RequestMapping(value="/login", method = RequestMethod.GET)
+/*	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
+	}*/
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login()
+	{
+		return "login";
 	}
 
 	@RequestMapping(value = "/login?error=true", method = RequestMethod.GET)
 	public String loginerror(Model model)
 	{
 		model.addAttribute("error", "true");
-		return "login";
-	}
-
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(Model model)
-	{
 		return "login";
 	}
 
