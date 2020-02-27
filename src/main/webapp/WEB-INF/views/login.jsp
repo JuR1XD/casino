@@ -21,14 +21,11 @@
                 <h3 class="panel-title "><spring:message code="casino.account.login.title"/></h3>
             </div>
 
-                <%--<h3 class="form-signin-heading" th:text="Welcome"></h3>--%>
-                <br/>
             <c:if test="${not empty error}">
                 <div class="alert alert-danger">
                     <spring:message code="casino.login.wrongUserCredentials"/>
-                    <br/>
                 </div>
-            </c:if>
+                </c:if>
             <form action="<c:url value="/login"/>" method="POST" class="form-signin">
                 <input type="text" id="email" name="email"
                        placeholder="<spring:message code="casino.signIn.email"/>"
