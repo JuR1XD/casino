@@ -4,8 +4,7 @@
 <%@ taglib prefix="bean" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="ISO-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +24,7 @@
     </div>
 
     <div class="jumbotron">
-        <a href="<c:url value="/signIn" />" class="btn btn-plain btn-mini pull-right"><bean:message key="casino.login.registration"/></a><form th:action="@{/logout}" method="get">
+        <a href="<c:url value="/signIn" />" class="btn btn-plain btn-mini pull-right"><bean:message key="casino.login.registration"/></a><form <c:url value="/logout"/> method="get">
         <button class="btn btn-danger btn-mini pull-right" name="registration"
                 type="Submit">Logout
         </button>

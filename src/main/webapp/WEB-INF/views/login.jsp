@@ -1,8 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
     <title>Spring Security Tutorial</title>
@@ -21,12 +20,17 @@
             <div class="panel-heading">
                 <h3 class="panel-title "><spring:message code="casino.account.login.title"/></h3>
             </div>
-            <form th:action="@{/login}" method="POST" class="form-signin">
-                <h3 class="form-signin-heading" th:text="Welcome"></h3>
-                <br/>
-                <div class="alert alert-danger" th:if="${param.error}">
-                    <p><spring:message code="casino.login.wrongUserCredentials"/></p>
-                </div>
+
+            <h3 class="form-signin-heading" th:text="Welcome"></h3>
+            <br/>
+
+            <form action="<c:url value="/login"/>" method="POST" class="form-signin">
+                <c:if test="${not empty error}">
+                    <div class="alert alert-danger">
+                        <spring:message code="casino.login.wrongUserCredentials"/>
+                        <br/>
+                    </div>
+                </c:if>
                 <input type="text" id="email" name="email"
                        placeholder="<spring:message code="casino.signIn.email"/>"
                        class="form-control"/> <br/>

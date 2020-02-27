@@ -23,7 +23,7 @@ public class AccountController
 	{
 		ModelAndView mav = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByName(auth.getName());
+		User user = userService.findUserByEmail(auth.getName());
 		mav.addObject("username", "Welcome " + user.getName() + " " + user.getSurname());
 		mav.setViewName("account");
 
