@@ -12,8 +12,15 @@
 </head>
 <body>
 <div class="container">
-        <h1>${username}</h1>
-    <p>${userData}</p>
+        <h1>${userName}</h1>
+    <h2>Your Personal Data</h2>
+    <ul>
+        <li>${userNamePt2}</li>
+        <li>${userEmail}</li>
+        <li>${userAddress}</li>
+        <li>${userNamePt2}</li>
+        <li>${userAddressPt3}</li>
+    </ul>
 </div>
 </body>
 </html>

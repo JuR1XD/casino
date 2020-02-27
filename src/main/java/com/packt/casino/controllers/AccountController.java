@@ -24,8 +24,12 @@ public class AccountController
 		ModelAndView mav = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		mav.addObject("username", "Welcome " + user.getName() + " " + user.getSurname());
-		mav.addObject("userData", "Name: " + user.getName() + " " + user.getSurname() + "\n" + "Email: " + user.getEmail() + "\n" + "Street: " + user.getStreet() + " " + user.getStreetNr() + "\n" + "City: " + user.getCity());
+		mav.addObject("userName", "Welcome " + user.getName() + " " + user.getSurname());
+		mav.addObject("userNamePt2", "Name: " + user.getName() + " " + user.getSurname());
+		mav.addObject("userEmail", "Email: " + user.getEmail());
+		mav.addObject("userAddress", "Address: " + user.getStreet() + " " + user.getStreetNr());
+		mav.addObject("userAddressPt2", "Postal Code: " + user.getPostalCode());
+		mav.addObject("userAddressPt3", "City: " + user.getCity());
 		mav.setViewName("account");
 
 		return mav;
