@@ -37,6 +37,9 @@ public class UserDataTransfer
 	private String password;
 	@NotEmpty(message = "{casino.signIn.notNull}")
 	private String matchingPassword;
+
+	@NotEmpty
+	private String oldPassword;
 	
 	@NotNull(message = "{casino.signIn.notNull}")
 	@NotEmpty(message = "{casino.signIn.notNull}")

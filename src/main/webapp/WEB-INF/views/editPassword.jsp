@@ -1,0 +1,59 @@
+<%@ taglib prefix="string" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html; charset=ISO-8859-1" %>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<section class="container">
+    <form:form modelAttribute="user" class="form-horizontal">
+        <fieldset>
+            <legend>Sign In</legend>
+            <form:errors path="oldPassword" cssClass="alert alert-danger" element="div"/>
+            <form:errors path="password" cssClass="alert alert-danger" element="div"/>
+            <form:errors path="matchingPassword" cssClass="alert alert-danger" element="div"/>
+
+            <div class="form-group">
+                <label class="control-label col-lg-2" for="password"><spring:message
+                        code="casino.signIn.password"/></label>
+                <div class="col-lg-10">
+                    <form:input id="password" path="oldpassword" type="password" class="form:input-large"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-lg-2" for="password"><spring:message
+                        code="casino.signIn.password"/></label>
+                <div class="col-lg-10">
+                    <form:input id="password" path="password" type="password" class="form:input-large"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-lg-2" for="matchingPassword"><spring:message
+                        code="casino.signIn.matchingPassword"/></label>
+                <div class="col-lg-10">
+                    <form:input id="matchingPassword" path="matchingPassword" type="password" class="form:input-large"/>
+                    <form:errors path="matchingPassword" cssClass="text-danger"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <input type="submit" id="btnAdd" class="btn btn-primary" value="Add"/>
+                </div>
+            </div>
+
+        </fieldset>
+    </form:form>
+
+
+</section>
+</body>
+</html>

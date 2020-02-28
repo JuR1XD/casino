@@ -13,14 +13,17 @@
 <body>
 <div class="container">
         <h1>${userName}</h1>
-    <h2>Your Personal Data</h2>
+    <p class="pull-right"><spring:message code="casino.account.data.credit"/>${currentMoney}&nbsp<spring:message code="casino.currency.europe"/> </p>
+    <h2><spring:message code="casino.account.personalData"/> </h2>
     <ul>
-        <li>${userNamePt2}</li>
-        <li>${userEmail}</li>
-        <li>${userAddress}</li>
-        <li>${userNamePt2}</li>
-        <li>${userAddressPt3}</li>
+        <li><spring:message code="casino.account.data.name"/> ${userNamePt2}</li>
+        <li><spring:message code="casino.account.data.email"/>${userEmail}</li>
+        <li><spring:message code="casino.account.data.address"/>${userAddress}</li>
+        <li><spring:message code="casino.account.data.postalcode"/>${userAddressPt2}</li>
+        <li><spring:message code="casino.account.data.city"/>${userAddressPt3}</li>
     </ul>
+    <p><a href="<spring:url value="/account/editUser"/>" class="btn btn-default">Edit User</a></p>
+    <p><a href="<spring:url value="/account/editPassword"/>" class="btn btn-default">Edit Password</a></p>
 </div>
 </body>
 </html>

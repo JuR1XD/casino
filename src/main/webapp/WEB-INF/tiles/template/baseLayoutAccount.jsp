@@ -27,7 +27,7 @@
                 <button class="btn btn-danger btn-mini pull-right" name="registration"
                         type="Submit">Logout
                 </button>--%>
-            <a href="<c:url value="/logout"/>" class="btn btn-danger btn-mini pull-right"><spring:message code="casino.login.logout"/></a>
+            <a href="<c:url value="/logout"/>" class="btn btn-danger btn-mini pull-right"><spring:message code="casino.account.btn.logout"/></a>
             <tilesx:useAttribute name="heading"/>
             <bean:message key="casino.account.title"/>
             <%--<tiles:insertAttribute name="heading"/>--%>
