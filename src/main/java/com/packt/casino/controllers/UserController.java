@@ -26,8 +26,10 @@ public class UserController
 	private GamesService gamesService;
 
 	@RequestMapping(path = "/addUser", method = RequestMethod.GET) // Map ONLY POST Requests
-	public String addNewUser(User user, @RequestParam String name, @RequestParam String surname,  @RequestParam String email,  @RequestParam String birthday, @RequestParam String street,  @RequestParam String streetNr,
-			@RequestParam String postalCode,  @RequestParam String city, @RequestParam String password)
+	public String addNewUser(User user, @RequestParam String name, @RequestParam String surname,
+			@RequestParam String email, @RequestParam String birthday, @RequestParam String street,
+			@RequestParam String streetNr, @RequestParam String postalCode, @RequestParam String city,
+			@RequestParam String password)
 	{
 		// @ means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
@@ -43,9 +45,9 @@ public class UserController
 
 		return "";
 	}
+
 	@GetMapping(path = "/getAllUsers")
-	public
-	String getAllUsers(Model model)
+	public String getAllUsers(Model model)
 	{
 		model.addAttribute("findAllUsers", userService.findAll());
 		return "seeAllUsers";
@@ -62,22 +64,29 @@ public class UserController
 	}
 
 	@RequestMapping(path = "/deleteUser")
-	public @ResponseBody String deleteUser(Long userId)
+	public @ResponseBody
+	String deleteUser(Long userId)
 	{
 		userService.remove(userId);
 		return "deleted";
 	}
 
 	@RequestMapping(path = "/updateUser")
-	public @ResponseBody String updateUser(@RequestParam Long userId, @RequestParam String name, @RequestParam String surname,  @RequestParam String email,  @RequestParam String birthday,
-			@RequestParam boolean isActivated, @RequestParam boolean admin, @RequestParam int credit, @RequestParam String password, @RequestParam String street, @RequestParam String streetNr, @RequestParam String postalCode, @RequestParam String city)
+	public @ResponseBody
+	String updateUser(@RequestParam Long userId, @RequestParam String name, @RequestParam String surname,
+			@RequestParam String email, @RequestParam String birthday, @RequestParam boolean isActivated,
+			@RequestParam boolean admin, @RequestParam int credit, @RequestParam String password,
+			@RequestParam String street, @RequestParam String streetNr, @RequestParam String postalCode,
+			@RequestParam String city)
 	{
-		userService.update(userId,name,surname, email, birthday, credit, admin, isActivated, password, street, streetNr, postalCode, city);
+		userService
+				.update(userId, name, surname, email, birthday, credit, admin, isActivated, password, street,
+						streetNr, postalCode, city);
 		return "updated";
 	}
 
 	@RequestMapping(path = "/findUserById")
-	public  String findUserById(Long userId, Model model)
+	public String findUserById(Long userId, Model model)
 	{
 		model.addAttribute("findUserById", userService.findById(userId));
 		return "findUser";

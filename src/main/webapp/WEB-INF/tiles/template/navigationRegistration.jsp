@@ -4,10 +4,9 @@
 
 <li><a href="<spring:url value="/"/>"><spring:message code="navigation.home"/></a></li>
 <li><a href="<spring:url value="/games"/>"><spring:message code="navigation.games"/></a></li>
-<li><a href="<spring:url value="/account"/>"><spring:message code="navigation.myAccount"/></a></li>
 <li><a href="<spring:url value="/search"/>"><spring:message code="navigation.search"/></a></li>
 <li><a href="<spring:url value="/signIn"/>"><spring:message code="navigation.registration"/></a></li>
 <li><a href="<spring:url value="/login"/>"><spring:message code="navigation.signIn"/></a></li>
 <li><a style="color: black;"><spring:message code="navigation.language"/> </a></li>
 <li><a href="?language=de"><spring:message code="language.german"/> </a>
-<li><a href="?language=en"><spring:message code="language.english"/> </a></li>
+<li><a href="?language=en"><spring:message code="language.english"/></a></li>

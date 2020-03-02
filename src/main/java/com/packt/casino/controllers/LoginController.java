@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-public class LoginController
+public class LoginController extends AbstractController
 {
 
 	/*	@RequestMapping(value="/login", method = RequestMethod.GET)
@@ -25,6 +25,7 @@ public class LoginController
 	public ModelAndView login(Model model, @RequestParam(value = "error", required = false) String error,
 			@Value("${casino.login.wrongUserCredentials}") String message)
 	{
+		super.populateUser(model);
 
 		ModelAndView mav = new ModelAndView();
 		//Initially when you hit on login url then error and logout both null

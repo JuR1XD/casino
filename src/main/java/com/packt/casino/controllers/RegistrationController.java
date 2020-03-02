@@ -26,25 +26,14 @@ public class RegistrationController
 	private UserService userService;
 
 	@RequestMapping(path = "/signIn", method = RequestMethod.POST)
-	public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDataTransfer accountUser,
+	public ModelAndView registerUserAccount(Model model, @ModelAttribute("user") @Valid UserDataTransfer accountUser,
 			BindingResult result, WebRequest request, Errors errors)
 	{
+
 		if (!accountUser.getPassword().equals(accountUser.getMatchingPassword()))
 		{
 			result.rejectValue("matchingPassword", "casino.signIn.passwordMatch.error");
 		}
-		/*if(!result.hasErrors())
-		{
-
-		}
-		if(registered == null)
-		{
-			result.rejectValue("email", "casino.signIn.emailMatch.error");
-		}
-		{
-				return new ModelAndView("signIn", "user", accountUser);
-		}
-		else*/
 		if (!result.hasErrors())
 		{
 			createUserAccount(accountUser, result);
@@ -62,6 +51,7 @@ public class RegistrationController
 	@RequestMapping(value = "/signIn", method = RequestMethod.GET)
 	public String showRegistrationForm(Model model, WebRequest request)
 	{
+
 		final UserDataTransfer user = new UserDataTransfer();
 		model.addAttribute("user", new UserDataTransfer());
 		return "signIn";

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/account")
-public class AccountController
+public class AccountController extends AbstractController
 {
 	JdbcTemplate jdbcTemplate;
 
@@ -24,6 +24,7 @@ public class AccountController
 	@RequestMapping
 	public ModelAndView list(Model model)
 	{
+		super.populateUser(model);
 		ModelAndView mav = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());

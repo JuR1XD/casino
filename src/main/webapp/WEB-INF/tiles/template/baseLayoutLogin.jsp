@@ -33,7 +33,6 @@
                     </button>
                 </form>
         --%>
-        <a href="<c:url value="/logout"/>" class="btn btn-danger btn-mini pull-right"><spring:message code="casino.login.logout"/></a>
         <h1>
             <tilesx:useAttribute name="heading"/>
             <bean:message key="casino.account.login.title"/>
