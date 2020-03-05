@@ -12,7 +12,7 @@
 </head>
 <body>
 <section class="container">
-    <form:form modelAttribute="user" class="form-horizontal">
+    <form:form modelAttribute="userEdit" action="editUser" class="form-horizontal" method="post">
         <fieldset>
             <legend>Sign In</legend>
 
@@ -93,7 +93,7 @@
 
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
-                    <input type="submit" id="btnAdd" class="btn btn-primary" value="Add"/>
+                    <input type="submit" id="btnAdd" class="btn btn-primary" value="Edit"/>
                 </div>
             </div>
 

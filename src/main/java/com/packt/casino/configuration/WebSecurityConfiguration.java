@@ -1,16 +1,12 @@
 package com.packt.casino.configuration;
 
-import com.packt.casino.Service.Impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -41,6 +37,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 	{
 		String loginpage = "/login";
 		String logoutpage = "/logout";
+		String admin = "ROLE_ADMIN";
+		String user = "ROLE_USER";
 
 		http
 				.authorizeRequests()
@@ -48,12 +46,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 				.antMatchers(loginpage).permitAll()
 				.antMatchers("/games").permitAll()
 				.antMatchers("/search").permitAll()
-				.antMatchers("/signIn").anonymous()
 				.antMatchers("/username").permitAll()
-				.antMatchers("/successfulSignIn").permitAll()
+				.antMatchers("/success").anonymous()
+				.antMatchers("/addGame").hasAuthority(admin)
+				.antMatchers("/signIn").anonymous()
 				.antMatchers("/login").anonymous()
-				.antMatchers("/account/**").hasAuthority("ROLE_USER")
-				.antMatchers("/admin/account/**").hasAuthority("ROLE_ADMIN").anyRequest()
+				.antMatchers("/account/**").hasAnyAuthority(user, admin)
+				.antMatchers("/account/admin/**").hasAuthority(admin).anyRequest()
 				.authenticated().and().csrf().disable().formLogin()
 				.loginPage(loginpage).failureUrl("/login?error=true")
 				.defaultSuccessUrl("/account")
@@ -61,8 +60,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 				.passwordParameter("password")
 				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher(logoutpage))
-				.logoutSuccessUrl(loginpage).and().exceptionHandling()
-				.accessDeniedPage("/home");
+				.logoutSuccessUrl(loginpage).and().exceptionHandling();
+				//.accessDeniedPage("/");
 	}
 
 	@Override

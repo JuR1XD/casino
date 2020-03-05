@@ -1,14 +1,11 @@
 package com.packt.casino.domain;
 
-import com.packt.casino.validator.PasswordMatches;
-import com.packt.casino.validator.ValidEmail;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-@PasswordMatches
-public class UserDataTransfer
+
+public class UserDataTransferEdit
 {
 
 	@NotEmpty(message = "{casino.signIn.notNull}")
@@ -17,7 +14,6 @@ public class UserDataTransfer
 	@NotEmpty(message = "{casino.signIn.notNull}")
 	private String surname;
 
-	@ValidEmail
 	private String email;
 
 	@Pattern(regexp = "^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$", message = "{casino.signIn.birthday.error}")
@@ -32,12 +28,6 @@ public class UserDataTransfer
 	@NotNull(message = "{casino.signIn.notNull}")
 	private boolean isActivated;
 
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "{casino.signIn.password.validPassword}")
-	@NotEmpty(message = "{casino.signIn.notNull}")
-	private String password;
-	@NotEmpty(message = "{casino.signIn.notNull}")
-	private String matchingPassword;
-	
 	@NotNull(message = "{casino.signIn.notNull}")
 	@NotEmpty(message = "{casino.signIn.notNull}")
 	private String street;
@@ -120,26 +110,6 @@ public class UserDataTransfer
 	public void setActivated(boolean activated)
 	{
 		isActivated = activated;
-	}
-
-	public String getPassword()
-	{
-		return password;
-	}
-
-	public void setPassword(String password)
-	{
-		this.password = password;
-	}
-
-	public String getMatchingPassword()
-	{
-		return matchingPassword;
-	}
-
-	public void setMatchingPassword(String matchingPassword)
-	{
-		this.matchingPassword = matchingPassword;
 	}
 
 	public String getStreet()

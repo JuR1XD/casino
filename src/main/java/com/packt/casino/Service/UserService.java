@@ -2,10 +2,12 @@ package com.packt.casino.Service;
 
 import com.packt.casino.domain.User;
 import com.packt.casino.domain.UserDataTransfer;
+import com.packt.casino.domain.UserDataTransferEdit;
 import com.packt.casino.domain.repository.UserRepository;
 import com.packt.casino.exceptions.EmailExistsException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService
@@ -15,9 +17,13 @@ public interface UserService
 	void update(Long userId, String name, String surname,  String email,  String birthday, double credit, boolean admin, boolean isActivated, String Password, String street, String streetNr, String postalCode, String city);
 	Optional<User> findById(Long userId);
 	User registerNewUserAccount(UserDataTransfer user) throws EmailExistsException;
-	Iterable<User> findAll();
+	User editUserAccount(UserDataTransferEdit accountUser) throws EmailExistsException;
+	List getAllUsers();
 	User findUserByEmail(String email);
 	User findUserByAddress(Long address);
 	User findUserByName(String name);
 	User findUserBySurname(String surname);
+	public User getUserById(Long id);
+	public boolean saveUser(User user);
+	public boolean deleteUserById(Long id);
 }
