@@ -1,13 +1,11 @@
 package com.packt.casino.Service.Impl;
 
 import com.packt.casino.Service.UserService;
-import com.packt.casino.domain.Authority;
-import com.packt.casino.domain.User;
-import com.packt.casino.domain.UserDataTransfer;
-import com.packt.casino.domain.UserDataTransferEdit;
+import com.packt.casino.domain.*;
 import com.packt.casino.domain.repository.AuthorityRepository;
 import com.packt.casino.domain.repository.UserRepository;
 import com.packt.casino.exceptions.EmailExistsException;
+import com.packt.casino.validator.PasswordMatches;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
@@ -37,6 +35,7 @@ public class UserServiceImpl implements UserService
 		this.authorityRepository = authorityRepository;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
+
 
 	@Override
 	public User findUserByEmail(String email)
@@ -221,6 +220,24 @@ public class UserServiceImpl implements UserService
 
 	}
 
+	public User editPassword(UserDataTransferEditPw accountUser) throws Exception
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByEmail(auth.getName());
+
+		if(checkPassword(accountUser))
+		{
+			user.setPassword(bCryptPasswordEncoder.encode(accountUser.getPassword()));
+		}
+		else
+		{
+			throw new Exception(
+					"The Passwords don't match");
+		}
+		return userRepository.save(user);
+
+	}
+
 
 
 	private boolean emailExist(String email)
@@ -231,6 +248,22 @@ public class UserServiceImpl implements UserService
 			return true;
 		}
 		return false;
+	}
+
+	public boolean checkPassword(UserDataTransferEditPw userDataTransferEditPw)
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByEmail(auth.getName());
+
+		if (bCryptPasswordEncoder.matches(userDataTransferEditPw.getOldPassword(), user.getPassword()))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
 	}
 
 }

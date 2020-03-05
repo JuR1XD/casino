@@ -37,3 +37,7 @@ Möglichkeiten zu umsetzung:
 
 - Mithilfe des CrudRepository (https://www.javaspringclub.com/spring-mvc-hibernate-mysql-example/)
 
+Passwort ändern:
+
+Login vorgang bei seite. Abfangen des Passwortes und anschließendes ändern des Passwortes mithilfe des BCryptEncoders.
+

@@ -51,6 +51,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 				.antMatchers("/addGame").hasAuthority(admin)
 				.antMatchers("/signIn").anonymous()
 				.antMatchers("/login").anonymous()
+				.antMatchers("/editUser").hasAnyAuthority(user, admin)
+				.antMatchers("/editPassword").hasAnyAuthority(user, admin)
 				.antMatchers("/account/**").hasAnyAuthority(user, admin)
 				.antMatchers("/account/admin/**").hasAuthority(admin).anyRequest()
 				.authenticated().and().csrf().disable().formLogin()

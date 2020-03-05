@@ -6,11 +6,11 @@
 
     <definition name="baseLayout" template="/WEB-INF/tiles/template/baseLayout.jsp">
         <!--<put-attribute name="title" value="Sample Title" />-->
-        <put-attribute name="heading" value="" />
-        <put-attribute name="tagline" value="" />
-        <put-attribute name="navigation" value="/WEB-INF/views/navigation.jsp" />
-        <put-attribute name="content" value="" />
-        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
+        <put-attribute name="heading" value=""/>
+        <put-attribute name="tagline" value=""/>
+        <put-attribute name="navigation" value="/WEB-INF/views/navigation.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp"/>
     </definition>
 
     <definition name="welcome" extends="baseLayout">
@@ -22,27 +22,27 @@
 
     <definition name="baseLayoutGames" template="/WEB-INF/tiles/template/baseLayoutGames.jsp">
         <!--<put-attribute name="title" value="Sample Title" />-->
-        <put-attribute name="heading" value="" />
-        <put-attribute name="tagline" value="" />
-        <put-attribute name="navigation" value="/WEB-INF/views/navigation.jsp" />
-        <put-attribute name="content" value="" />
-        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
+        <put-attribute name="heading" value=""/>
+        <put-attribute name="tagline" value=""/>
+        <put-attribute name="navigation" value="/WEB-INF/views/navigation.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp"/>
     </definition>
 
     <definition name="games" extends="baseLayoutGames">
         <!--<put-attribute name="title" value="Herzlich Willkomen" />-->
-        <put-attribute name="heading" value="casino.games.title" />
-        <put-attribute name="tagline" value="casino.games.tagline" />
-        <put-attribute name="content" value="/WEB-INF/views/games.jsp" />
+        <put-attribute name="heading" value="casino.games.title"/>
+        <put-attribute name="tagline" value="casino.games.tagline"/>
+        <put-attribute name="content" value="/WEB-INF/views/games.jsp"/>
     </definition>
 
     <definition name="baseLayoutAccount" template="/WEB-INF/tiles/template/baseLayoutAccount.jsp">
         <!--<put-attribute name="title" value="Sample Title" />-->
-        <put-attribute name="heading" value="" />
-        <put-attribute name="tagline" value="" />
-        <put-attribute name="navigation" value="/WEB-INF/views/navigation.jsp" />
-        <put-attribute name="content" value="" />
-        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
+        <put-attribute name="heading" value=""/>
+        <put-attribute name="tagline" value=""/>
+        <put-attribute name="navigation" value="/WEB-INF/views/navigation.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp"/>
     </definition>
 
     <definition name="account" extends="baseLayoutAccount">
@@ -54,11 +54,11 @@
 
     <definition name="baseLayoutGame" template="/WEB-INF/tiles/template/baseLayoutGame.jsp">
         <!--<put-attribute name="title" value="Sample Title" />-->
-        <put-attribute name="heading" value="" />
-        <put-attribute name="tagline" value="" />
-        <put-attribute name="navigation" value="/WEB-INF/views/navigation.jsp" />
-        <put-attribute name="content" value="" />
-        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
+        <put-attribute name="heading" value=""/>
+        <put-attribute name="tagline" value=""/>
+        <put-attribute name="navigation" value="/WEB-INF/views/navigation.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp"/>
     </definition>
 
     <definition name="game" extends="baseLayoutGame">
@@ -70,11 +70,11 @@
 
     <definition name="baseLayoutSearch" template="/WEB-INF/tiles/template/baseLayoutSearch.jsp">
         <!--<put-attribute name="title" value="Sample Title" />-->
-        <put-attribute name="heading" value="" />
-        <put-attribute name="tagline" value="" />
-        <put-attribute name="navigation" value="/WEB-INF/views/navigation.jsp" />
-        <put-attribute name="content" value="" />
-        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
+        <put-attribute name="heading" value=""/>
+        <put-attribute name="tagline" value=""/>
+        <put-attribute name="navigation" value="/WEB-INF/views/navigation.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp"/>
     </definition>
 
     <definition name="search" extends="baseLayoutSearch">
@@ -100,7 +100,8 @@
         <put-attribute name="content" value="/WEB-INF/views/signIn.jsp"/>
     </definition>
 
-    <definition name="baseLayoutSuccessfulSignIn" template="/WEB-INF/tiles/template/baseLayoutSuccessfulSignIn.jsp">
+    <definition name="baseLayoutSuccessfulSignIn"
+                template="/WEB-INF/tiles/template/baseLayoutSuccessfulSignIn.jsp">
         <!--<put-attribute name="title" value="Sample Title"/>-->
         <put-attribute name="heading" value=""/>
         <put-attribute name="tagline" value=""/>
@@ -146,6 +147,13 @@
         <put-attribute name="heading" value="casino.account.login.title"/>
         <put-attribute name="tagline" value="casino.account.login.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/editUser.jsp"/>
+    </definition>
+
+    <definition name="editPassword" extends="baseLayoutEdit">
+        <!--<put-attribute name="title" value="Login"/>-->
+        <put-attribute name="heading" value="casino.account.login.title"/>
+        <put-attribute name="tagline" value="casino.account.login.tagline"/>
+        <put-attribute name="content" value="/WEB-INF/views/editPassword.jsp"/>
     </definition>
 
 </tiles-definitions>

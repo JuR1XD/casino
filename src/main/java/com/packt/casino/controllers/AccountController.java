@@ -3,19 +3,16 @@ package com.packt.casino.controllers;
 import com.packt.casino.Service.UserService;
 import com.packt.casino.domain.User;
 import com.packt.casino.domain.UserDataTransferEdit;
+import com.packt.casino.domain.UserDataTransferEditPw;
 import com.packt.casino.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,8 +23,6 @@ import javax.validation.Valid;
 @RequestMapping("/account")
 public class AccountController extends AbstractController
 {
-	JdbcTemplate jdbcTemplate;
-
 	@Autowired
 	UserService userService;
 
@@ -51,8 +46,9 @@ public class AccountController extends AbstractController
 	}
 
 	@RequestMapping(path = "/editUser", method = RequestMethod.POST)
-	public ModelAndView updateUserAccount(Model model, @ModelAttribute("userEdit") @Valid UserDataTransferEdit accountUser,
-			BindingResult result, WebRequest request, Errors errors)
+	public ModelAndView updateUserAccount(Model model,
+			@ModelAttribute("userEdit") @Valid UserDataTransferEdit accountUser, BindingResult result,
+			WebRequest request, Errors errors)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
@@ -68,7 +64,7 @@ public class AccountController extends AbstractController
 			return new ModelAndView("editUser", "userEdit", accountUser);
 		}
 
-		if(accountUser.getEmail().contains(user.getEmail()))
+		if (accountUser.getEmail().contains(user.getEmail()))
 		{
 			return new ModelAndView("redirect:/account", "userEdit", accountUser);
 		}
@@ -79,7 +75,7 @@ public class AccountController extends AbstractController
 	}
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
-	public String showRegistrationForm(Model model, WebRequest request)
+	public String showEditForm(Model model, WebRequest request)
 	{
 		super.populateUser(model);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -106,9 +102,55 @@ public class AccountController extends AbstractController
 		return registered;
 	}
 
-	@RequestMapping(value = "/editPassword")
-	public String editPassword(Model model)
+	@RequestMapping(value = "/editPassword", method = RequestMethod.GET)
+	public String updatePassword(Model model, WebRequest request,
+			@ModelAttribute("passwordEdit") @Valid UserDataTransferEditPw userDataTransferEditPW,
+			BindingResult result, Errors errors,
+			@RequestParam(value = "error", required = false) String error)
 	{
+		super.populateUser(model);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user1 = userService.findUserByEmail(auth.getName());
+		final UserDataTransferEdit user = new UserDataTransferEdit();
+		model.addAttribute("userGet", user1);
+		model.addAttribute("passwordEdit", new UserDataTransferEditPw());
+
 		return "editPassword";
+	}
+
+	@RequestMapping(path = "/editPassword", method = RequestMethod.POST)
+	public ModelAndView updateUserAccountPassword(Model model,
+			@ModelAttribute("passwordEdit") @Valid UserDataTransferEditPw accountUser, BindingResult result,
+			WebRequest request, Errors errors)
+	{
+		super.populateUser(model);
+
+		if (!result.hasErrors())
+		{
+			editUserAccountPassword(accountUser, result);
+		}
+
+		if (result.hasErrors())
+		{
+			return new ModelAndView("editPassword", "passwordEdit", accountUser);
+		}
+
+		return new ModelAndView("redirect:/logout", "passwordEdit", accountUser);
+	}
+
+	private User editUserAccountPassword(UserDataTransferEditPw account, BindingResult result)
+	{
+		User registered;
+
+		try
+		{
+			registered = userService.editPassword(account);
+		}
+		catch (Exception e)
+		{
+			result.rejectValue("password", "Password is not correct");
+			return null;
+		}
+		return registered;
 	}
 }
