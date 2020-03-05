@@ -8,11 +8,11 @@ Was muss auf der MyAccount seite möglich sein:
 
 - Daten ändern
 
-- E-Mail Adresse
+- E-Mail Adresse  ✔
 
-- Vorname / Nachname
+- Vorname / Nachname ✔
 
-- Straße/Hausnummer/PLZ/Ort
+- Straße/Hausnummer/PLZ/Ort ✔
 
 - Passwort
 
@@ -27,6 +27,8 @@ Was muss auf der MyAccount seite möglich sein:
 - Auszahlung + Aufladen des Kontos
 
 - E-Mail an Benutzer: Ihr Konto wurde aufgeladen mit X € ODER Wir haben X € ausbezahlt
+
+- Ein- und Auszahlung
 
 - Mailtrap: https://mailtrap.io/ (Testing)
 

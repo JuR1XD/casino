@@ -13,6 +13,7 @@
 <body>
 <section class="container">
     <form:form modelAttribute="userEdit" action="editUser" class="form-horizontal" method="post">
+        <form:form modelAttribute="userGet" action="editUser" class="form-horizontal" method="post">
         <fieldset>
             <legend>Sign In</legend>
 
@@ -98,6 +99,7 @@
             </div>
 
         </fieldset>
+        </form:form>
     </form:form>
 
 

@@ -54,6 +54,9 @@ public class AccountController extends AbstractController
 	public ModelAndView updateUserAccount(Model model, @ModelAttribute("userEdit") @Valid UserDataTransferEdit accountUser,
 			BindingResult result, WebRequest request, Errors errors)
 	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		super.populateUser(model);
 
 		if (!result.hasErrors())
 		{
@@ -65,15 +68,24 @@ public class AccountController extends AbstractController
 			return new ModelAndView("editUser", "userEdit", accountUser);
 		}
 
-		return new ModelAndView("redirect:/account", "userEdit", accountUser);
-
+		if(accountUser.getEmail().contains(user.getEmail()))
+		{
+			return new ModelAndView("redirect:/account", "userEdit", accountUser);
+		}
+		else
+		{
+			return new ModelAndView("redirect:/logout", "userEdit", accountUser);
+		}
 	}
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
 	public String showRegistrationForm(Model model, WebRequest request)
 	{
-
+		super.populateUser(model);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user1 = userService.findUserByEmail(auth.getName());
 		final UserDataTransferEdit user = new UserDataTransferEdit();
+		model.addAttribute("userGet", user1);
 		model.addAttribute("userEdit", new UserDataTransferEdit());
 		return "editUser";
 	}
@@ -98,12 +110,5 @@ public class AccountController extends AbstractController
 	public String editPassword(Model model)
 	{
 		return "editPassword";
-	}
-
-	public void update(User user)
-	{
-		jdbcTemplate.update(
-				"UPDATE current_user SET name=?, surname=?, street=?, streetNr=?, postalCode=?, city=? WHERE identity=?", user.getName(), user.getSurname(), user.getStreet(), user.getStreetNr(), user.getPostalCode(), user.getCity(), user.getUserId()
-		);
 	}
 }
