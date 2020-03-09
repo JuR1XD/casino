@@ -265,5 +265,44 @@ public class UserServiceImpl implements UserService
 		}
 
 	}
+	@Override
+	public User addCredit(UserDataTransferEditCredit accountUser) throws Exception
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByEmail(auth.getName());
+
+		if(accountUser.getCredit() != null)
+		{
+			user.setCredit(accountUser.getCredit() + user.getCredit());
+		}
+		else
+		{
+			throw new Exception(
+
+			);
+		}
+		return userRepository.save(user);
+
+	}
+
+	@Override
+	public User withCredit(UserDataTransferEditCredit accountUser) throws Exception
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByEmail(auth.getName());
+
+		if(accountUser.getCredit() != null && accountUser.getCredit() <= user.getCredit())
+		{
+			user.setCredit(user.getCredit() - accountUser.getCredit());
+		}
+		else
+		{
+			throw new Exception(
+
+			);
+		}
+		return userRepository.save(user);
+
+	}
 
 }

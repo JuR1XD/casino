@@ -1,8 +1,6 @@
 package com.packt.casino.domain;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 
 public class UserDataTransferEdit
@@ -20,6 +18,9 @@ public class UserDataTransferEdit
 	private String birthday;
 	
 	@NotNull(message = "{casino.signIn.notNull}")
+	@NotEmpty(message = "{casino.signIn.notNull}")
+	@Min(value = 0, message = "{casino.edit.min}")
+	//@Pattern(regexp = "[0-100]", message = "You can only deposit 100 Credits at a time")
 	private double credit;
 	
 	@NotNull(message = "{casino.signIn.notNull}")

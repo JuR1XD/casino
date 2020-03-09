@@ -12,9 +12,15 @@
 </head>
 <body>
 <div class="container">
-        <h1>${userName}</h1>
-    <p class="pull-right"><spring:message code="casino.account.data.credit"/>${currentMoney}&nbsp<spring:message code="casino.currency.europe"/> </p>
-    <h2><spring:message code="casino.account.personalData"/> </h2>
+    <h1>${userName}</h1>
+    <p class="pull-right"><a class="btn btn-default"
+                             href="<spring:url value="/account/withCredit"/>"><spring:message
+            code="casino.edit.credit.withdraw"/></a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default"
+                                                                               href="<spring:url value="/account/addCredit"/>"><spring:message
+            code="casino.edit.credit.add"/> </a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <spring:message code="casino.account.data.credit"/>${currentMoney}&nbsp<spring:message
+                code="casino.currency.europe"/></p>
+    <h2><spring:message code="casino.account.personalData"/></h2>
     <ul>
         <li><spring:message code="casino.account.data.name"/> ${userNamePt2}</li>
         <li><spring:message code="casino.account.data.email"/>${userEmail}</li>

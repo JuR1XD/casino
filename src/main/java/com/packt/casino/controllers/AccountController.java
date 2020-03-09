@@ -3,6 +3,7 @@ package com.packt.casino.controllers;
 import com.packt.casino.Service.UserService;
 import com.packt.casino.domain.User;
 import com.packt.casino.domain.UserDataTransferEdit;
+import com.packt.casino.domain.UserDataTransferEditCredit;
 import com.packt.casino.domain.UserDataTransferEditPw;
 import com.packt.casino.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,4 +154,101 @@ public class AccountController extends AbstractController
 		}
 		return registered;
 	}
+
+	@RequestMapping(path = "/addCredit", method = RequestMethod.POST)
+	public ModelAndView updateUserCredit(Model model,
+			@ModelAttribute("userCredit") @Valid UserDataTransferEditCredit accountUser, BindingResult result,
+			WebRequest request, Errors errors)
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		super.populateUser(model);
+
+		if (!result.hasErrors())
+		{
+			editUserCredit(accountUser, result);
+		}
+
+		if (result.hasErrors())
+		{
+			return new ModelAndView("addCredit", "userCredit", accountUser);
+		}
+			return new ModelAndView("redirect:/account", "userCredit", accountUser);
+	}
+
+	@RequestMapping(value = "/addCredit", method = RequestMethod.GET)
+	public String showCreditForm(Model model, WebRequest request)
+	{
+		super.populateUser(model);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user1 = userService.findUserByEmail(auth.getName());
+		final UserDataTransferEdit user = new UserDataTransferEdit();
+		model.addAttribute("userGet", user1);
+		model.addAttribute("userCredit", new UserDataTransferEditCredit());
+		return "addCredit";
+	}
+
+	private User editUserCredit(UserDataTransferEditCredit account, BindingResult result)
+	{
+		User registered;
+
+		try
+		{
+			registered = userService.addCredit(account);
+		}
+		catch (Exception e)
+		{
+			result.rejectValue("credit", "casino.edit.notNull.credit");
+			return null;
+		}
+		return registered;
+	}@RequestMapping(path = "/withCredit", method = RequestMethod.POST)
+	public ModelAndView updateUserCreditWith(Model model,
+			@ModelAttribute("userWithCredit") @Valid UserDataTransferEditCredit accountUser, BindingResult result,
+			WebRequest request, Errors errors)
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		super.populateUser(model);
+
+		if (!result.hasErrors())
+		{
+			editUserCreditWith(accountUser, result);
+		}
+
+		if (result.hasErrors())
+		{
+			return new ModelAndView("withCredit", "userWithCredit", accountUser);
+		}
+			return new ModelAndView("redirect:/account", "userWithCredit", accountUser);
+	}
+
+	@RequestMapping(value = "/withCredit", method = RequestMethod.GET)
+	public String showCreditFormWith(Model model, WebRequest request)
+	{
+		super.populateUser(model);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user1 = userService.findUserByEmail(auth.getName());
+		final UserDataTransferEdit user = new UserDataTransferEdit();
+		model.addAttribute("userGet", user1);
+		model.addAttribute("userWithCredit", new UserDataTransferEditCredit());
+		return "withCredit";
+	}
+
+	private User editUserCreditWith(UserDataTransferEditCredit account, BindingResult result)
+	{
+		User registered;
+
+		try
+		{
+			registered = userService.withCredit(account);
+		}
+		catch (Exception e)
+		{
+			result.rejectValue("credit", "casino.edit.notNull.credit");
+			return null;
+		}
+		return registered;
+	}
+
 }

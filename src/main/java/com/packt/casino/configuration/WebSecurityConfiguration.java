@@ -48,6 +48,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 				.antMatchers("/search").permitAll()
 				.antMatchers("/username").permitAll()
 				.antMatchers("/success").anonymous()
+				.antMatchers("/sendEmail").hasAnyAuthority(admin, user)
 				.antMatchers("/addGame").hasAuthority(admin)
 				.antMatchers("/signIn").anonymous()
 				.antMatchers("/login").anonymous()

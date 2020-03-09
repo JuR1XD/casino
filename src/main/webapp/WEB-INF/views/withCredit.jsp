@@ -3,7 +3,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 
 <html>
@@ -13,25 +12,24 @@
 </head>
 <body>
 <section class="container">
-        <form:form modelAttribute="userCredit" class="form-horizontal">
+    <form:form modelAttribute="userWithCredit" class="form-horizontal">
         <fieldset>
-            <legend>Add Credit</legend>
+            <legend>Edit</legend>
             <div class="form-group">
                 <label class="control-label col-lg-2" for="credit"><spring:message
-                        code="casino.edit.credit.add"/></label>
+                        code="casino.edit.credit.withdraw"/></label>
                 <div class="col-lg-10">
-                    <form:input id="credit" path="credit" type="number" min="1" maxlength="10"
-                                class="form:input-large" readonly="false"/>
+                    <form:input id="credit" path="credit" type="number" maxlength="10" min="1" class="form:input-large" readonly="false"/>
                     <form:errors path="credit" cssClass="text-danger"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
-                    <input type="submit" id="btnAdd" class="btn btn-primary"
-                           value="<spring:message code="casino.edit.credit.add"/>"/>
+                    <input type="submit" id="btnAdd" class="btn btn-primary" value="<spring:message code="casino.edit.credit.withdraw"/>"/>
                 </div>
             </div>
+
         </fieldset>
     </form:form>
 

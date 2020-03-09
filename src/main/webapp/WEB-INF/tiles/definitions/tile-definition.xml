@@ -156,4 +156,16 @@
         <put-attribute name="content" value="/WEB-INF/views/editPassword.jsp"/>
     </definition>
 
+    <definition name="addCredit" extends="baseLayoutEdit">
+        <put-attribute name="heading" value="casino,account.login.title"/>
+        <put-attribute name="tagline" value="casino.account.login.tagline"/>
+        <put-attribute name="content" value="/WEB-INF/views/addCredit.jsp"/>
+    </definition>
+
+    <definition name="withCredit" extends="baseLayoutEdit">
+        <put-attribute name="heading" value="casino,account.login.title"/>
+        <put-attribute name="tagline" value="casino.account.login.tagline"/>
+        <put-attribute name="content" value="/WEB-INF/views/withCredit.jsp"/>
+    </definition>
+
 </tiles-definitions>

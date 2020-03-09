@@ -43,7 +43,7 @@
                     code="casino.signIn.birthday"/></label>
             <div class="col-lg-10">
                 <div class="form:input-prepend">
-                    <form:input id="birthday" path="birthday" type="date" class="form:input-large"/>
+                    <form:input id="birthday" path="birthday" type="date"  class="form:input-large"/>
                     <form:errors path="birthday" cssClass="text-danger"/>
                 </div>
             </div>

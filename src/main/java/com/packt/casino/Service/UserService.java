@@ -1,9 +1,6 @@
 package com.packt.casino.Service;
 
-import com.packt.casino.domain.User;
-import com.packt.casino.domain.UserDataTransfer;
-import com.packt.casino.domain.UserDataTransferEdit;
-import com.packt.casino.domain.UserDataTransferEditPw;
+import com.packt.casino.domain.*;
 import com.packt.casino.domain.repository.UserRepository;
 import com.packt.casino.exceptions.EmailExistsException;
 import org.springframework.stereotype.Service;
@@ -29,4 +26,6 @@ public interface UserService
 	public boolean deleteUserById(Long id);
 	public User editPassword(UserDataTransferEditPw accountUser) throws Exception;
 	public boolean checkPassword(UserDataTransferEditPw userDataTransferEditPw);
+	public User addCredit(UserDataTransferEditCredit accountUser) throws Exception;
+	public User withCredit(UserDataTransferEditCredit accountUser) throws Exception;
 }
