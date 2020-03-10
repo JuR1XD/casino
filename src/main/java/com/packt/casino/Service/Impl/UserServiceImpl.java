@@ -271,14 +271,14 @@ public class UserServiceImpl implements UserService
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepository.findByEmail(auth.getName());
 
-		if(accountUser.getCredit() != null)
+		if(accountUser != null)
 		{
 			user.setCredit(accountUser.getCredit() + user.getCredit());
 		}
 		else
 		{
 			throw new Exception(
-
+					"Please enter some data"
 			);
 		}
 		return userRepository.save(user);
@@ -291,14 +291,14 @@ public class UserServiceImpl implements UserService
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepository.findByEmail(auth.getName());
 
-		if(accountUser.getCredit() != null && accountUser.getCredit() <= user.getCredit())
+		if(accountUser != null && accountUser.getCredit() <= user.getCredit())
 		{
 			user.setCredit(user.getCredit() - accountUser.getCredit());
 		}
 		else
 		{
 			throw new Exception(
-
+					"Please enter some data"
 			);
 		}
 		return userRepository.save(user);

@@ -1,5 +1,6 @@
 package com.packt.casino.controllers;
 
+import com.packt.casino.Service.MailService;
 import com.packt.casino.Service.UserService;
 import com.packt.casino.domain.User;
 import com.packt.casino.domain.UserDataTransferEdit;
@@ -26,6 +27,9 @@ public class AccountController extends AbstractController
 {
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	MailService mailService;
 
 	@RequestMapping
 	public ModelAndView list(Model model)
@@ -167,6 +171,7 @@ public class AccountController extends AbstractController
 		if (!result.hasErrors())
 		{
 			editUserCredit(accountUser, result);
+			mailService.sendMail();
 		}
 
 		if (result.hasErrors())
@@ -214,6 +219,7 @@ public class AccountController extends AbstractController
 		if (!result.hasErrors())
 		{
 			editUserCreditWith(accountUser, result);
+			mailService.sendMail();
 		}
 
 		if (result.hasErrors())
