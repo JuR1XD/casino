@@ -1,5 +1,7 @@
 package com.packt.casino.domain;
 
+import com.packt.casino.validator.ValidEmail;
+
 import javax.validation.constraints.*;
 
 
@@ -11,14 +13,14 @@ public class UserDataTransferEdit
 
 	@NotEmpty(message = "{casino.signIn.notNull}")
 	private String surname;
-
+	@ValidEmail
 	private String email;
 
 	@Pattern(regexp = "^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$", message = "{casino.signIn.birthday.error}")
 	private String birthday;
 	
 	@NotNull(message = "{casino.signIn.notNull}")
-	@NotEmpty(message = "{casino.signIn.notNull}")
+	//@NotEmpty(message = "{casino.signIn.notNull}")
 	@Min(value = 0, message = "{casino.edit.min}")
 	//@Pattern(regexp = "[0-100]", message = "You can only deposit 100 Credits at a time")
 	private double credit;

@@ -24,6 +24,7 @@
     <ul>
         <li><spring:message code="casino.account.data.name"/> ${userNamePt2}</li>
         <li><spring:message code="casino.account.data.email"/>${userEmail}</li>
+        <li><spring:message code="casino.account.data.birthday"/>${userBirthday}</li>
         <li><spring:message code="casino.account.data.address"/>${userAddress}</li>
         <li><spring:message code="casino.account.data.postalcode"/>${userAddressPt2}</li>
         <li><spring:message code="casino.account.data.city"/>${userAddressPt3}</li>

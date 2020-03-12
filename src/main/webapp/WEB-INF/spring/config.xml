@@ -46,6 +46,7 @@
         <property name="port" value="${spring.mail.port}" />
         <property name="username" value="${spring.mail.username}" />
         <property name="password" value="${spring.mail.password}" />
+        <property name="defaultEncoding" value="${spring.mail.default-encoding}"/>
 
         <property name="javaMailProperties">
             <props>

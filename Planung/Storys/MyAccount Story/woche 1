@@ -14,30 +14,28 @@ Was muss auf der MyAccount seite möglich sein:
 
 - Straße/Hausnummer/PLZ/Ort ✔
 
-- Passwort
+- Passwort ✔
 
-- mindestens 8 Zeichen
+- mindestens 8 Zeichen ✔
 
-- mindestens 1 Sonderzeichen
+- mindestens 1 Sonderzeichen ✔
 
-- mindestens 1 Zahl
+- mindestens 1 Zahl ✔
 
-- Übersicht Konto
+- Übersicht Konto ✔
 
-- Auszahlung + Aufladen des Kontos
+- Auszahlung + Aufladen des Kontos ✔
 
-- E-Mail an Benutzer: Ihr Konto wurde aufgeladen mit X € ODER Wir haben X € ausbezahlt
+- E-Mail an Benutzer: Ihr Konto wurde aufgeladen mit X € ODER Wir haben X € ausbezahlt ✔
 
-- Ein- und Auszahlung
+- Ein- und Auszahlung ✔
 
 - Mailtrap: https://mailtrap.io/ (Testing)
 
 
-Möglichkeiten zu umsetzung:
+Einfälle:
 
 - Mithilfe des CrudRepository (https://www.javaspringclub.com/spring-mvc-hibernate-mysql-example/)
 
-Passwort ändern:
-
-Login vorgang bei seite. Abfangen des Passwortes und anschließendes ändern des Passwortes mithilfe des BCryptEncoders.
+- Eine annotation für die message.properties finden und diese in den Java Klassen benutzen
 

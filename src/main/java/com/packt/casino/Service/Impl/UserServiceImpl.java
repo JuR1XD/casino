@@ -121,7 +121,7 @@ public class UserServiceImpl implements UserService
 		user.setStreetNr(streetNr);
 		user.setPostalCode(postalCode);
 		user.setCity(city);
-		user.setCredit(0);
+		user.setCredit(0.00);
 		//user.setAdmin(false);
 		user.setIsActivated(true);
 		user.setPassword(password);

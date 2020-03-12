@@ -19,7 +19,7 @@
                 <label class="control-label col-lg-2" for="credit"><spring:message
                         code="casino.edit.credit.withdraw"/></label>
                 <div class="col-lg-10">
-                    <form:input id="credit" path="credit" type="number" maxlength="10" min="1" class="form:input-large" readonly="false"/>
+                    <form:input id="credit" path="credit" type="number" maxlength="10" step="0.01" min="1" class="form:input-large" readonly="false"/>
                     <form:errors path="credit" cssClass="text-danger"/>
                 </div>
             </div>

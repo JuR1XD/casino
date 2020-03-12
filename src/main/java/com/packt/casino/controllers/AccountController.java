@@ -8,13 +8,19 @@ import com.packt.casino.domain.UserDataTransferEditCredit;
 import com.packt.casino.domain.UserDataTransferEditPw;
 import com.packt.casino.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,6 +37,9 @@ public class AccountController extends AbstractController
 	@Autowired
 	MailService mailService;
 
+	@Autowired
+	private MessageSource messageSource;
+
 	@RequestMapping
 	public ModelAndView list(Model model)
 	{
@@ -41,6 +50,7 @@ public class AccountController extends AbstractController
 		mav.addObject("userName", user.getName() + " " + user.getSurname());
 		mav.addObject("userNamePt2", user.getName() + " " + user.getSurname());
 		mav.addObject("userEmail", user.getEmail());
+		mav.addObject("userBirthday", user.getBirthday());
 		mav.addObject("userAddress", user.getStreet() + " " + user.getStreetNr());
 		mav.addObject("userAddressPt2", user.getPostalCode());
 		mav.addObject("userAddressPt3", user.getCity());
@@ -126,15 +136,30 @@ public class AccountController extends AbstractController
 	@RequestMapping(path = "/editPassword", method = RequestMethod.POST)
 	public ModelAndView updateUserAccountPassword(Model model,
 			@ModelAttribute("passwordEdit") @Valid UserDataTransferEditPw accountUser, BindingResult result,
-			WebRequest request, Errors errors)
+			WebRequest request, Errors errors, @RequestParam(value = "error", required = false) String error,
+			@Value("${casino.signIn.passwordMatch.error}") String message)
 	{
 		super.populateUser(model);
 
+
+		if (!accountUser.getPassword().equals(accountUser.getMatchingPassword()) && !accountUser
+				.getMatchingPassword().equals(accountUser.getPassword()))
+		{
+			ModelAndView mav = new ModelAndView("editPassword", "passwordEdit", accountUser);
+			mav.addObject("error", message);
+			return mav;
+		}
+		if (!accountUser.getPassword().equals(accountUser.getMatchingPassword()) || !accountUser
+				.getMatchingPassword().equals(accountUser.getPassword()))
+		{
+			ModelAndView mav = new ModelAndView("editPassword", "passwordEdit", accountUser);
+			mav.addObject("error", message);
+			return mav;
+		}
 		if (!result.hasErrors())
 		{
 			editUserAccountPassword(accountUser, result);
 		}
-
 		if (result.hasErrors())
 		{
 			return new ModelAndView("editPassword", "passwordEdit", accountUser);
@@ -153,7 +178,7 @@ public class AccountController extends AbstractController
 		}
 		catch (Exception e)
 		{
-			result.rejectValue("password", "Password is not correct");
+			result.rejectValue("oldPassword", "casino.edit.password.wrongOldPassword");
 			return null;
 		}
 		return registered;
@@ -162,7 +187,7 @@ public class AccountController extends AbstractController
 	@RequestMapping(path = "/addCredit", method = RequestMethod.POST)
 	public ModelAndView updateUserCredit(Model model,
 			@ModelAttribute("userCredit") @Valid UserDataTransferEditCredit accountUser, BindingResult result,
-			WebRequest request, Errors errors)
+			WebRequest request, Errors errors, @Value("${casino.deposit.subject}") String subject, @Value("${casino.deposit.message}")String template)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
@@ -170,15 +195,14 @@ public class AccountController extends AbstractController
 
 		if (!result.hasErrors())
 		{
-			editUserCredit(accountUser, result);
-			mailService.sendMail();
+			editUserCredit(accountUser, result, subject, template);
 		}
 
 		if (result.hasErrors())
 		{
 			return new ModelAndView("addCredit", "userCredit", accountUser);
 		}
-			return new ModelAndView("redirect:/account", "userCredit", accountUser);
+		return new ModelAndView("redirect:/account", "userCredit", accountUser);
 	}
 
 	@RequestMapping(value = "/addCredit", method = RequestMethod.GET)
@@ -193,13 +217,16 @@ public class AccountController extends AbstractController
 		return "addCredit";
 	}
 
-	private User editUserCredit(UserDataTransferEditCredit account, BindingResult result)
+	private User editUserCredit(UserDataTransferEditCredit account, BindingResult result, @Value("${casino.deposit.subject}") String subject, @Value("${casino.deposit.message}")String template)
 	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
 		User registered;
 
 		try
 		{
 			registered = userService.addCredit(account);
+			mailService.sendMailAdd(account, user, subject, template);
 		}
 		catch (Exception e)
 		{
@@ -207,10 +234,12 @@ public class AccountController extends AbstractController
 			return null;
 		}
 		return registered;
-	}@RequestMapping(path = "/withCredit", method = RequestMethod.POST)
+	}
+
+	@RequestMapping(path = "/withCredit", method = RequestMethod.POST)
 	public ModelAndView updateUserCreditWith(Model model,
-			@ModelAttribute("userWithCredit") @Valid UserDataTransferEditCredit accountUser, BindingResult result,
-			WebRequest request, Errors errors)
+			@ModelAttribute("userWithCredit") @Valid UserDataTransferEditCredit accountUser,
+			BindingResult result, WebRequest request, Errors errors, @Value("${casino.withdraw.subject}") String subject, @Value("${casino.withdraw.message}") String template)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
@@ -218,15 +247,14 @@ public class AccountController extends AbstractController
 
 		if (!result.hasErrors())
 		{
-			editUserCreditWith(accountUser, result);
-			mailService.sendMail();
+			editUserCreditWith(accountUser, result, subject, template);
 		}
 
 		if (result.hasErrors())
 		{
 			return new ModelAndView("withCredit", "userWithCredit", accountUser);
 		}
-			return new ModelAndView("redirect:/account", "userWithCredit", accountUser);
+		return new ModelAndView("redirect:/account", "userWithCredit", accountUser);
 	}
 
 	@RequestMapping(value = "/withCredit", method = RequestMethod.GET)
@@ -241,13 +269,16 @@ public class AccountController extends AbstractController
 		return "withCredit";
 	}
 
-	private User editUserCreditWith(UserDataTransferEditCredit account, BindingResult result)
+	private User editUserCreditWith(UserDataTransferEditCredit account, BindingResult result, @Value("${casino.withdraw.subject}") String subject, @Value("${casino.withdraw.message}") String template)
 	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
 		User registered;
 
 		try
 		{
 			registered = userService.withCredit(account);
+			mailService.sendMailWith(account, user, subject, template);
 		}
 		catch (Exception e)
 		{

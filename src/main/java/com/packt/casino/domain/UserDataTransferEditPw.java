@@ -1,14 +1,11 @@
 package com.packt.casino.domain;
 
 import com.packt.casino.validator.PasswordMatches;
-import com.packt.casino.validator.ValidEmail;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 
-@PasswordMatches
 public class UserDataTransferEditPw
 {
 
