@@ -10,9 +10,9 @@ import java.util.Locale;
 
 public class DepositMessageFactory extends EmailMessageFactory
 {
-	public DepositMessageFactory(@Value("${casino.deposit.subject}") String subject, @Value("${casino.deposit.message}")String template)
+	public DepositMessageFactory()
 	{
-		setTemplate(template);
-		setSubject(subject);
+		setTemplate("Hallo %s %s,\n\nSie haben %.02f € auf ihr Konto eingezahlt.\nMit Freundlichen Grüßen\n\nDas Valantic Kasino");
+		setSubject("Auf ihr Konto wurde Geld eingezahlt");
 	}
 }

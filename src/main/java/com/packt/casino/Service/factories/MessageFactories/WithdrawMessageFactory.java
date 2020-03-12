@@ -4,9 +4,9 @@ import com.packt.casino.Service.factories.EmailMessageFactory;
 
 public class WithdrawMessageFactory extends EmailMessageFactory
 {
-	public WithdrawMessageFactory(String subject, String template)
+	public WithdrawMessageFactory()
 	{
-		setTemplate(template);
-		setSubject(subject);
+		setTemplate("Hallo %s %s,\n\nSie haben %.02f € auf von ihrem Konto abgehoben.\nMit Freundlichen Grüßen\n\nDas Valantic Kasino");
+		setSubject("Sie haben Geld von ihrem Kasino Konto abgehoben");
 	}
 }

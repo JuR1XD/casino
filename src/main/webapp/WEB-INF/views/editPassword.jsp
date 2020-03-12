@@ -15,7 +15,7 @@
     <form:form modelAttribute="passwordEdit" class="form-horizontal" method="post">
         <fieldset>
             <legend>Sign In</legend>
-            <form:errors path="*" cssClass="alert alert-danger" element="div"/>
+            <form:errors path="oldPassword" cssClass="alert alert-danger" element="div"/>
                 <%--<form:errors path="password" cssClass="alert alert-danger" element="div"/>
                             <form:errors path="matchingPassword" cssClass="alert alert-danger" element="div"/>--%>
             <c:if test="${not empty error}">
@@ -36,6 +36,7 @@
                         code="casino.signIn.password"/></label>
                 <div class="col-lg-10">
                     <form:input id="password" path="password" type="password" class="form-control"/>
+                    <form:errors path="password" cssClass="text-danger"/>
                 </div>
             </div>
 
@@ -45,6 +46,7 @@
                 <div class="col-lg-10">
                     <form:input id="matchingPassword" path="matchingPassword" type="password"
                                 class="form-control"/>
+                    <form:errors path="matchingPassword" cssClass="text-danger"/>
                 </div>
             </div>
 

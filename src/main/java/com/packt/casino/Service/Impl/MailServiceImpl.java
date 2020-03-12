@@ -36,9 +36,9 @@ public class MailServiceImpl implements MailService
 	private String fromMail;
 
 	@Override
-	public void sendMailWith(UserDataTransferEditCredit userData, User user, String subject, String template)
+	public void sendMailWith(UserDataTransferEditCredit userData, User user)
 	{
-		WithdrawMessageFactory withdraw = new WithdrawMessageFactory(subject, template);
+		WithdrawMessageFactory withdraw = new WithdrawMessageFactory();
 
 		SimpleMailMessage message = withdraw.generateEmail(userData, user);
 		message.setFrom(fromMail);
@@ -47,9 +47,9 @@ public class MailServiceImpl implements MailService
 	}
 
 	@Override
-	public void sendMailAdd(UserDataTransferEditCredit userData, User user, String subject, String template)
+	public void sendMailAdd(UserDataTransferEditCredit userData, User user)
 	{
-		DepositMessageFactory deposit = new DepositMessageFactory(subject, template);
+		DepositMessageFactory deposit = new DepositMessageFactory();
 
 		SimpleMailMessage message = deposit.generateEmail(userData, user);
 

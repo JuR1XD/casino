@@ -195,7 +195,7 @@ public class AccountController extends AbstractController
 
 		if (!result.hasErrors())
 		{
-			editUserCredit(accountUser, result, subject, template);
+			editUserCredit(accountUser, result);
 		}
 
 		if (result.hasErrors())
@@ -217,7 +217,7 @@ public class AccountController extends AbstractController
 		return "addCredit";
 	}
 
-	private User editUserCredit(UserDataTransferEditCredit account, BindingResult result, @Value("${casino.deposit.subject}") String subject, @Value("${casino.deposit.message}")String template)
+	private User editUserCredit(UserDataTransferEditCredit account, BindingResult result)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
@@ -226,7 +226,7 @@ public class AccountController extends AbstractController
 		try
 		{
 			registered = userService.addCredit(account);
-			mailService.sendMailAdd(account, user, subject, template);
+			mailService.sendMailAdd(account, user);
 		}
 		catch (Exception e)
 		{
@@ -239,7 +239,7 @@ public class AccountController extends AbstractController
 	@RequestMapping(path = "/withCredit", method = RequestMethod.POST)
 	public ModelAndView updateUserCreditWith(Model model,
 			@ModelAttribute("userWithCredit") @Valid UserDataTransferEditCredit accountUser,
-			BindingResult result, WebRequest request, Errors errors, @Value("${casino.withdraw.subject}") String subject, @Value("${casino.withdraw.message}") String template)
+			BindingResult result, WebRequest request, Errors errors)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
@@ -247,7 +247,7 @@ public class AccountController extends AbstractController
 
 		if (!result.hasErrors())
 		{
-			editUserCreditWith(accountUser, result, subject, template);
+			editUserCreditWith(accountUser, result);
 		}
 
 		if (result.hasErrors())
@@ -269,7 +269,7 @@ public class AccountController extends AbstractController
 		return "withCredit";
 	}
 
-	private User editUserCreditWith(UserDataTransferEditCredit account, BindingResult result, @Value("${casino.withdraw.subject}") String subject, @Value("${casino.withdraw.message}") String template)
+	private User editUserCreditWith(UserDataTransferEditCredit account, BindingResult result)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
@@ -278,7 +278,7 @@ public class AccountController extends AbstractController
 		try
 		{
 			registered = userService.withCredit(account);
-			mailService.sendMailWith(account, user, subject, template);
+			mailService.sendMailWith(account, user);
 		}
 		catch (Exception e)
 		{
