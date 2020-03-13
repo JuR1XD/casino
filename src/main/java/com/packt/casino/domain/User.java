@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -25,7 +26,7 @@ import java.util.Set;
 public class User
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(table = "user", name = "userId")
 	private Long userId;
 	@NotEmpty(message = "{casino.signIn.notNull}")
@@ -44,6 +45,7 @@ public class User
 	private String birthday;
 	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "user")
+	@Min(value = 0, message = "{casino.edit.min}")
 	private double credit;
 	@NotNull(message = "{casino.signIn.notNull}")
 	@Column(table = "user")

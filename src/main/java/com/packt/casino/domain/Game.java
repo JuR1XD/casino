@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 public class Game
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
 	@NotEmpty
 	@Column(name = "gameId", table = "game")

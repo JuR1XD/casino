@@ -1,21 +1,20 @@
 package com.packt.casino.Service.Impl;
 
 import com.packt.casino.Service.UserService;
-import com.packt.casino.domain.Authority;
-import com.packt.casino.domain.User;
-import com.packt.casino.domain.UserDataTransfer;
+import com.packt.casino.domain.*;
 import com.packt.casino.domain.repository.AuthorityRepository;
 import com.packt.casino.domain.repository.UserRepository;
 import com.packt.casino.exceptions.EmailExistsException;
+import com.packt.casino.validator.PasswordMatches;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service("UserService")
@@ -37,6 +36,7 @@ public class UserServiceImpl implements UserService
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 
+
 	@Override
 	public User findUserByEmail(String email)
 	{
@@ -56,12 +56,54 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
+	public User getUserById(Long id)
+	{
+		User user = userRepository.findById(id).get();
+		return user;
+	}
+
+	@Override
+	public boolean saveUser(User user)
+	{
+		try
+		{
+			userRepository.save(user);
+			return true;
+		}
+		catch (Exception ex)
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteUserById(Long id)
+	{
+		try
+		{
+			userRepository.deleteById(id);
+			return true;
+		}
+		catch (Exception ex)
+		{
+			return false;
+		}
+
+	}
+
+	@Override
 	public User findUserBySurname(String surname)
 	{
 		return userRepository.findBySurname(surname);
 	}
 
-
+	@Override
+	public List getAllUsers()
+	{
+		List list = new ArrayList();
+		userRepository.findAll().forEach(e -> list.add(e));
+		return list;
+	}
 
 	User user = new User();
 
@@ -79,7 +121,7 @@ public class UserServiceImpl implements UserService
 		user.setStreetNr(streetNr);
 		user.setPostalCode(postalCode);
 		user.setCity(city);
-		user.setCredit(0);
+		user.setCredit(0.00);
 		//user.setAdmin(false);
 		user.setIsActivated(true);
 		user.setPassword(password);
@@ -119,19 +161,20 @@ public class UserServiceImpl implements UserService
 		return userRepository.findById(userId);
 	}
 
-	@Override
+	/*@Override
 	public Iterable<User> findAll()
 	{
 		return userRepository.findAll();
 	}
-
+*/
 	@Transactional
 	@Override
 	public User registerNewUserAccount(UserDataTransfer accountUser) throws EmailExistsException
 	{
 		if (emailExist(accountUser.getEmail()))
 		{
-			throw new EmailExistsException("There is an Account with that email address:" + accountUser.getEmail());
+			throw new EmailExistsException(
+					"There is an Account with that email address:" + accountUser.getEmail());
 		}
 
 		User user = new User();
@@ -151,6 +194,52 @@ public class UserServiceImpl implements UserService
 		return userRepository.save(user);
 	}
 
+	@Transactional
+	@Override
+	public User editUserAccount(UserDataTransferEdit accountUser) throws EmailExistsException
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findUserByEmail(auth.getName());
+
+		if (emailExist(accountUser.getEmail()) && !user.getEmail().contains(accountUser.getEmail()))
+		{
+			throw new EmailExistsException(
+					"There is an Account with that email address:" + accountUser.getEmail());
+		}
+
+
+		user.setName(accountUser.getName());
+		user.setSurname(accountUser.getSurname());
+		user.setEmail(accountUser.getEmail());
+		user.setBirthday(accountUser.getBirthday());
+		user.setStreet(accountUser.getStreet());
+		user.setStreetNr(accountUser.getStreetNr());
+		user.setPostalCode(accountUser.getPostalCode());
+		user.setCity(accountUser.getCity());
+		return userRepository.save(user);
+
+	}
+
+	public User editPassword(UserDataTransferEditPw accountUser) throws Exception
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByEmail(auth.getName());
+
+		if(checkPassword(accountUser))
+		{
+			user.setPassword(bCryptPasswordEncoder.encode(accountUser.getPassword()));
+		}
+		else
+		{
+			throw new Exception(
+					"The Passwords don't match");
+		}
+		return userRepository.save(user);
+
+	}
+
+
+
 	private boolean emailExist(String email)
 	{
 		User user = userRepository.findByEmail(email);
@@ -159,6 +248,61 @@ public class UserServiceImpl implements UserService
 			return true;
 		}
 		return false;
+	}
+
+	public boolean checkPassword(UserDataTransferEditPw userDataTransferEditPw)
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByEmail(auth.getName());
+
+		if (bCryptPasswordEncoder.matches(userDataTransferEditPw.getOldPassword(), user.getPassword()))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+	@Override
+	public User addCredit(UserDataTransferEditCredit accountUser) throws Exception
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByEmail(auth.getName());
+
+		if(accountUser != null)
+		{
+			user.setCredit(accountUser.getCredit() + user.getCredit());
+		}
+		else
+		{
+			throw new Exception(
+					"Please enter some data"
+			);
+		}
+		return userRepository.save(user);
+
+	}
+
+	@Override
+	public User withCredit(UserDataTransferEditCredit accountUser) throws Exception
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByEmail(auth.getName());
+
+		if(accountUser != null && accountUser.getCredit() <= user.getCredit())
+		{
+			user.setCredit(user.getCredit() - accountUser.getCredit());
+		}
+		else
+		{
+			throw new Exception(
+					"Please enter some data"
+			);
+		}
+		return userRepository.save(user);
+
 	}
 
 }

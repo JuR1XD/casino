@@ -49,7 +49,7 @@ public class UserController
 	@GetMapping(path = "/getAllUsers")
 	public String getAllUsers(Model model)
 	{
-		model.addAttribute("findAllUsers", userService.findAll());
+		model.addAttribute("findAllUsers", userService.getAllUsers());
 		return "seeAllUsers";
 	}
 
@@ -57,7 +57,7 @@ public class UserController
 	public String getAll(@RequestParam Long userId, Model model, @RequestParam Long gameId)
 	{
 		model.addAttribute("findAllGames", gamesService.findAll());
-		model.addAttribute("findAllUsers", userService.findAll());
+		model.addAttribute("findAllUsers", userService.getAllUsers());
 		model.addAttribute("findUserById", userService.findById(userId));
 		model.addAttribute("findGameById", gamesService.findById(gameId));
 		return "seeAll";

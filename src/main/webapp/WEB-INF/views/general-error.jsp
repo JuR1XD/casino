@@ -13,7 +13,7 @@
 <section>
     <div class="jumbotron">
         <div class="container">
-            <h1><b>401</b> <spring:message code="casino.generalError.title.or"/> <b>404</b> <spring:message code="casino.generalError.title.or"/> <b>503</b><br><spring:message code="casino.generalError.title"/></h1>
+            <h1><b>401</b> <spring:message code="casino.generalError.title.or"/> <b>404</b> <spring:message code="casino.generalError.title.or"/> <b>503</b><br><%--<spring:message code="casino.generalError.title"/>--%></h1>
             <p><spring:message code="casino.generalError.line"/> </p>
             <p><spring:message code="casino.generalError.tagline"/> <b><a href="<spring:url value="/"/>" style="color: black;"><spring:message code="casino.generalError.tagline.link"/> </a></b></p>
         </div>

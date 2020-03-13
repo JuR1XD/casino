@@ -1,0 +1,41 @@
+Planung:
+
+Aufbauen einer stabilen myAccount seite für jeweils User und Admin
+
+
+
+Was muss auf der MyAccount seite möglich sein:
+
+- Daten ändern
+
+- E-Mail Adresse  ✔
+
+- Vorname / Nachname ✔
+
+- Straße/Hausnummer/PLZ/Ort ✔
+
+- Passwort ✔
+
+- mindestens 8 Zeichen ✔
+
+- mindestens 1 Sonderzeichen ✔
+
+- mindestens 1 Zahl ✔
+
+- Übersicht Konto ✔
+
+- Auszahlung + Aufladen des Kontos ✔
+
+- E-Mail an Benutzer: Ihr Konto wurde aufgeladen mit X € ODER Wir haben X € ausbezahlt ✔
+
+- Ein- und Auszahlung ✔
+
+- Mailtrap: https://mailtrap.io/ (Testing)
+
+
+Einfälle:
+
+- Mithilfe des CrudRepository (https://www.javaspringclub.com/spring-mvc-hibernate-mysql-example/)
+
+- Eine annotation für die message.properties finden und diese in den Java Klassen benutzen
+

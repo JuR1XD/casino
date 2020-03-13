@@ -41,8 +41,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 	{
 		String loginpage = "/login";
 		String logoutpage = "/logout";
-		String user = "ROLE_USER";
-		String admin = "ROLE_ADMIN";
 
 		http
 				.authorizeRequests()
@@ -52,11 +50,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
 				.antMatchers("/search").permitAll()
 				.antMatchers("/signIn").anonymous()
 				.antMatchers("/username").permitAll()
-				.antMatchers("/successfulSignIn").anonymous()
+				.antMatchers("/successfulSignIn").permitAll()
 				.antMatchers("/login").anonymous()
-				.antMatchers("/signIn").anonymous()
-				.antMatchers("/account/**").hasAnyAuthority(user, admin)
-				.antMatchers("/admin/account/**").hasAuthority(admin).anyRequest()
+				.antMatchers("/account/**").hasAuthority("ROLE_USER")
+				.antMatchers("/admin/account/**").hasAuthority("ROLE_ADMIN").anyRequest()
 				.authenticated().and().csrf().disable().formLogin()
 				.loginPage(loginpage).failureUrl("/login?error=true")
 				.defaultSuccessUrl("/account")
