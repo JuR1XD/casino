@@ -76,7 +76,9 @@ public class AccountController extends AbstractController
 
 		if (result.hasErrors())
 		{
-			return new ModelAndView("editUser", "userEdit", accountUser);
+			ModelAndView mav = new ModelAndView("editUser", "userEdit", accountUser);
+			mav.addObject("userGet", accountUser);
+			return mav;
 		}
 
 		if (accountUser.getEmail().contains(user.getEmail()))
