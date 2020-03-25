@@ -1,6 +1,5 @@
 package com.packt.casino.domain;
 
-import com.packt.casino.validator.PasswordMatches;
 import com.packt.casino.validator.ValidEmail;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -71,7 +69,7 @@ public class User
 
 
 
-	@ManyToMany(cascade = CascadeType.MERGE)
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
 	private Set<Authority> authorities = new LinkedHashSet<Authority>();
 
@@ -226,6 +224,11 @@ public class User
 	public Set<Authority> getAuthorities()
 	{
 		return authorities;
+	}
+
+	public Object[] getAuthority()
+	{
+		return authorities.toArray();
 	}
 
 	public void setAuthorities(Set<Authority> authorities)

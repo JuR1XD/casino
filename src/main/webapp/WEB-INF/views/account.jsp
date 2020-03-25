@@ -13,13 +13,9 @@
 <body>
 <div class="container">
     <h1>${userName}</h1>
-    <p class="pull-right"><a class="btn btn-default"
-                             href="<spring:url value="/account/withCredit"/>"><spring:message
-            code="casino.edit.credit.withdraw"/></a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default"
-                                                                               href="<spring:url value="/account/addCredit"/>"><spring:message
-            code="casino.edit.credit.add"/> </a>&nbsp;&nbsp;&nbsp;&nbsp;
-        <spring:message code="casino.account.data.credit"/>${currentMoney}&nbsp<spring:message
-                code="casino.currency.europe"/></p>
+    <p class="pull-right"><a class="btn btn-default" href="<spring:url value="/account/withCredit"/>"><spring:message code="casino.edit.credit.withdraw"/></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-default" href="<spring:url value="/account/addCredit"/>"><spring:message code="casino.edit.credit.add"/> </a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <spring:message code="casino.account.data.credit"/>${currentMoney}&nbsp<spring:message code="casino.currency.europe"/></p>
     <h2><spring:message code="casino.account.personalData"/></h2>
     <ul>
         <li><spring:message code="casino.account.data.name"/> ${userNamePt2}</li>
@@ -28,9 +24,12 @@
         <li><spring:message code="casino.account.data.address"/>${userAddress}</li>
         <li><spring:message code="casino.account.data.postalcode"/>${userAddressPt2}</li>
         <li><spring:message code="casino.account.data.city"/>${userAddressPt3}</li>
+        <%--<li><spring:message code="casino.account.data.authority"/>${authority}</li>--%>
     </ul>
     <p><a href="<spring:url value="/account/editUser"/>" class="btn btn-default">Edit User</a></p>
     <p><a href="<spring:url value="/account/editPassword"/>" class="btn btn-default">Edit Password</a></p>
+    <%--<c:if test="">--%><p><a href="<spring:url value="/admin/allUsers"/>" class="btn btn-default">Admin Control Panel</a></p><%--</c:if>--%>
+
 </div>
 </body>
 </html>

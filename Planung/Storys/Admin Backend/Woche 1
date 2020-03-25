@@ -1,0 +1,35 @@
+Planung:
+
+Aufbauen einer Admin Verwaltung
+
+Was muss da möglich sein:
+
+- Eigener Bereich, mit eigener URL (/admin) ✔
+
+- Benutzer Administration
+
+- Freischalten
+
+- Sperren
+
+- Passwort setzen
+
+- Rollen vergeben (admin ja/nein)
+
+- Konto Administration
+
+- Konto-Übersicht
+
+- Kontostand ändern
+
+- Spiele Administration
+
+- Testmodus siehe VC-10: Testmodus
+
+- Aktivierung / Deaktivierung
+
+- Wenn deaktiviert, darf Spiel nicht zugreifbar sein
+
+Einfälle:
+
+- Mithilfe des CrudRepository (https://www.javaspringclub.com/spring-mvc-hibernate-mysql-example/)

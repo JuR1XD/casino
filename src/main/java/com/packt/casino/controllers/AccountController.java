@@ -1,11 +1,9 @@
 package com.packt.casino.controllers;
 
+import com.packt.casino.Service.Impl.UserDetailsServiceImpl;
 import com.packt.casino.Service.MailService;
 import com.packt.casino.Service.UserService;
-import com.packt.casino.domain.User;
-import com.packt.casino.domain.UserDataTransferEdit;
-import com.packt.casino.domain.UserDataTransferEditCredit;
-import com.packt.casino.domain.UserDataTransferEditPw;
+import com.packt.casino.domain.*;
 import com.packt.casino.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,18 +11,18 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -289,5 +287,4 @@ public class AccountController extends AbstractController
 		}
 		return registered;
 	}
-
 }

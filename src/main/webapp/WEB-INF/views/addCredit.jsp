@@ -20,7 +20,7 @@
                 <label class="control-label col-lg-2" for="credit"><spring:message
                         code="casino.edit.credit.add"/></label>
                 <div class="col-lg-10">
-                    <form:input id="credit" path="credit" type="number" min="1" step="0.01" maxlength="10"
+                    <form:input id="credit" path="credit" type="number" min="0" step="0.01" maxlength="10"
                                 class="form:input-large" readonly="false"/>
                     <form:errors path="credit" cssClass="text-danger"/>
                 </div>

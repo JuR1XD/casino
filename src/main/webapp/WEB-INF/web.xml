@@ -35,10 +35,6 @@
 	</servlet-mapping>
 
 	<error-page>
-		<location>/WEB-INF/views/general-error.jsp</location>
-	</error-page>
-
-	<error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/views/general-error_500.jsp</location>
 	</error-page>

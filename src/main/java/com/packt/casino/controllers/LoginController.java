@@ -1,7 +1,5 @@
 package com.packt.casino.controllers;
 
-import com.packt.casino.Service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,15 +21,21 @@ public class LoginController extends AbstractController
 		}*/
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(Model model, @RequestParam(value = "error", required = false) String error,
-			@Value("${casino.login.wrongUserCredentials}") String message)
+			@Value("${casino.login.wrongUserCredentials}") String message,
+			@Value("${casino.login.lockedAcc}") String newMessage, @Value("${casino.login.successfulLogout}") String message1,
+			@RequestParam(value = "logout", required = false) String logout)
 	{
 		super.populateUser(model);
 
 		ModelAndView mav = new ModelAndView();
+		if(logout != null)
+		{
+			mav.addObject("logoutText", message1);
+		}
 		//Initially when you hit on login url then error and logout both null
 		if (error != null)
 		{
-			mav.addObject("error", message);
+				mav.addObject("error", message);
 		}
 		mav.setViewName("login");
 

@@ -14,7 +14,7 @@
 <section class="container">
     <form:form modelAttribute="passwordEdit" class="form-horizontal" method="post">
         <fieldset>
-            <legend>Sign In</legend>
+            <legend>Edit User</legend>
             <form:errors path="oldPassword" cssClass="alert alert-danger" element="div"/>
                 <%--<form:errors path="password" cssClass="alert alert-danger" element="div"/>
                             <form:errors path="matchingPassword" cssClass="alert alert-danger" element="div"/>--%>

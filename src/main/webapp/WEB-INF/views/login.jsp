@@ -26,6 +26,16 @@
                     <spring:message code="casino.login.wrongUserCredentials"/>
                 </div>
                 </c:if>
+<%--            <c:if test="${not empty isActivated}">
+                <div class="alert alert-danger">
+                    <spring:message code="casino.login.lockedAcc"/>
+                </div>
+            </c:if>--%>
+            <c:if test="${not empty logoutText}">
+            <div class="info">
+                <p><spring:message code="casino.login.successfulLogout"/></p>
+            </div>
+            </c:if>
             <form action="<c:url value="/login"/>" method="POST" class="form-signin">
                 <input type="text" id="email" name="email"
                        placeholder="<spring:message code="casino.signIn.email"/>"

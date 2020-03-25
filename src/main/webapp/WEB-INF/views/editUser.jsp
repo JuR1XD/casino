@@ -15,7 +15,7 @@
     <form:form modelAttribute="userEdit" action="editUser" class="form-horizontal" method="post">
         <form:form modelAttribute="userGet" action="editUser" class="form-horizontal" method="post">
         <fieldset>
-            <legend>Sign In</legend>
+            <legend>Edit User</legend>
 
             <form:errors path="email" cssClass="alert alert-danger" element="div"/>
             <form:errors path="birthday" cssClass="alert alert-danger" element="div"/>
