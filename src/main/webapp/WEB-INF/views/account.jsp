@@ -24,7 +24,7 @@
         <li><spring:message code="casino.account.data.address"/>${userAddress}</li>
         <li><spring:message code="casino.account.data.postalcode"/>${userAddressPt2}</li>
         <li><spring:message code="casino.account.data.city"/>${userAddressPt3}</li>
-        <%--<li><spring:message code="casino.account.data.authority"/>${authority}</li>--%>
+        <li><spring:message code="casino.account.data.authority"/>${authority}</li>
     </ul>
     <p><a href="<spring:url value="/account/editUser"/>" class="btn btn-default">Edit User</a></p>
     <p><a href="<spring:url value="/account/editPassword"/>" class="btn btn-default">Edit Password</a></p>

@@ -1,28 +1,26 @@
 package com.packt.casino.controllers;
 
-import com.packt.casino.Service.Impl.UserDetailsServiceImpl;
 import com.packt.casino.Service.MailService;
 import com.packt.casino.Service.UserService;
 import com.packt.casino.domain.*;
+import com.packt.casino.domain.repository.RoleUserRepository;
 import com.packt.casino.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Set;
 
 
 @Controller
@@ -36,7 +34,7 @@ public class AccountController extends AbstractController
 	MailService mailService;
 
 	@Autowired
-	private MessageSource messageSource;
+	private RoleUserRepository roleUserRepository;
 
 	@RequestMapping
 	public ModelAndView list(Model model)
@@ -45,6 +43,7 @@ public class AccountController extends AbstractController
 		ModelAndView mav = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
+		RoleUser role = roleUserRepository.findByUserId(user.getUserId());
 		mav.addObject("userName", user.getName() + " " + user.getSurname());
 		mav.addObject("userNamePt2", user.getName() + " " + user.getSurname());
 		mav.addObject("userEmail", user.getEmail());
@@ -53,6 +52,14 @@ public class AccountController extends AbstractController
 		mav.addObject("userAddressPt2", user.getPostalCode());
 		mav.addObject("userAddressPt3", user.getCity());
 		mav.addObject("currentMoney", user.getCredit());
+		if (role.getAuthorityId() == 1)
+		{
+			mav.addObject("authority", "Admin");
+		}
+		else if(role.getAuthorityId() == 2)
+		{
+			mav.addObject("authority", "User");
+		}
 		mav.setViewName("account");
 
 		return mav;
@@ -85,7 +92,7 @@ public class AccountController extends AbstractController
 		}
 		else
 		{
-			return new ModelAndView("redirect:/logout", "userEdit", accountUser);
+			return new ModelAndView("redirect:/logout?logout=true&userChange=true", "userEdit", accountUser);
 		}
 	}
 
@@ -165,7 +172,7 @@ public class AccountController extends AbstractController
 			return new ModelAndView("editPassword", "passwordEdit", accountUser);
 		}
 
-		return new ModelAndView("redirect:/logout", "passwordEdit", accountUser);
+		return new ModelAndView("redirect:/logout?logout=true&passwordChange=true", "passwordEdit", accountUser);
 	}
 
 	private User editUserAccountPassword(UserDataTransferEditPw account, BindingResult result)
@@ -187,7 +194,8 @@ public class AccountController extends AbstractController
 	@RequestMapping(path = "/addCredit", method = RequestMethod.POST)
 	public ModelAndView updateUserCredit(Model model,
 			@ModelAttribute("userCredit") @Valid UserDataTransferEditCredit accountUser, BindingResult result,
-			WebRequest request, Errors errors, @Value("${casino.deposit.subject}") String subject, @Value("${casino.deposit.message}")String template)
+			WebRequest request, Errors errors, @Value("${casino.deposit.subject}") String subject,
+			@Value("${casino.deposit.message}") String template)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());

@@ -26,15 +26,20 @@
                     <spring:message code="casino.login.wrongUserCredentials"/>
                 </div>
                 </c:if>
-<%--            <c:if test="${not empty isActivated}">
-                <div class="alert alert-danger">
-                    <spring:message code="casino.login.lockedAcc"/>
-                </div>
-            </c:if>--%>
             <c:if test="${not empty logoutText}">
             <div class="info">
                 <p><spring:message code="casino.login.successfulLogout"/></p>
             </div>
+            </c:if>
+            <c:if test="${not empty changedPass}">
+                <div class="info">
+                    <p><spring:message code="casino.login.successfulLogout.changedPass"/></p>
+                </div>
+            </c:if>
+            <c:if test="${not false == changedUser}">
+                <div class="info">
+                    <p><spring:message code="casino.login.successfulLogout.changedUser"/></p>
+                </div>
             </c:if>
             <form action="<c:url value="/login"/>" method="POST" class="form-signin">
                 <input type="text" id="email" name="email"

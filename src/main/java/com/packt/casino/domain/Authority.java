@@ -1,6 +1,7 @@
 package com.packt.casino.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -33,4 +34,5 @@ public class Authority
 	{
 		this.name = name;
 	}
+
 }

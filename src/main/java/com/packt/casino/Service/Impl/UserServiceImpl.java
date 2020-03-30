@@ -3,15 +3,15 @@ package com.packt.casino.Service.Impl;
 import com.packt.casino.Service.UserService;
 import com.packt.casino.domain.*;
 import com.packt.casino.domain.repository.AuthorityRepository;
+import com.packt.casino.domain.repository.RoleUserRepository;
 import com.packt.casino.domain.repository.UserRepository;
 import com.packt.casino.exceptions.EmailExistsException;
-import com.packt.casino.validator.PasswordMatches;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 import java.util.*;
@@ -225,14 +225,13 @@ public class UserServiceImpl implements UserService
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepository.findByEmail(auth.getName());
 
-		if(checkPassword(accountUser))
+		if (checkPassword(accountUser))
 		{
 			user.setPassword(bCryptPasswordEncoder.encode(accountUser.getPassword()));
 		}
 		else
 		{
-			throw new Exception(
-					"The Passwords don't match");
+			throw new Exception("The Passwords don't match");
 		}
 		return userRepository.save(user);
 
@@ -265,21 +264,20 @@ public class UserServiceImpl implements UserService
 		}
 
 	}
+
 	@Override
 	public User addCredit(UserDataTransferEditCredit accountUser) throws Exception
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepository.findByEmail(auth.getName());
 
-		if(accountUser != null)
+		if (accountUser != null)
 		{
 			user.setCredit(accountUser.getCredit() + user.getCredit());
 		}
 		else
 		{
-			throw new Exception(
-					"Please enter some data"
-			);
+			throw new Exception("Please enter some data");
 		}
 		return userRepository.save(user);
 
@@ -291,15 +289,44 @@ public class UserServiceImpl implements UserService
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepository.findByEmail(auth.getName());
 
-		if(accountUser != null && accountUser.getCredit() <= user.getCredit())
+		if (accountUser != null && accountUser.getCredit() <= user.getCredit())
 		{
 			user.setCredit(user.getCredit() - accountUser.getCredit());
 		}
 		else
 		{
-			throw new Exception(
-					"Please enter some data"
-			);
+			throw new Exception("Please enter some data");
+		}
+		return userRepository.save(user);
+
+	}
+
+	@Transactional
+	@Override
+	public User editUserAccountAdmin(AdminUserDataTransfer accountUser, @PathVariable Long id)
+			throws EmailExistsException
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findUserByUserId(id);
+		if (emailExist(accountUser.getEmail()) && !user.getEmail().contains(accountUser.getEmail()))
+		{
+			throw new EmailExistsException(
+					"There is an Account with that email address:" + accountUser.getEmail());
+		}
+
+
+		user.setName(accountUser.getName());
+		user.setSurname(accountUser.getSurname());
+		user.setEmail(accountUser.getEmail());
+		user.setBirthday(accountUser.getBirthday());
+		user.setStreet(accountUser.getStreet());
+		user.setStreetNr(accountUser.getStreetNr());
+		user.setPostalCode(accountUser.getPostalCode());
+		user.setCity(accountUser.getCity());
+		user.setIsActivated(accountUser.isActivated());
+		if (accountUser.getPassword() != null)
+		{
+			user.setPassword(bCryptPasswordEncoder.encode(accountUser.getPassword()));
 		}
 		return userRepository.save(user);
 

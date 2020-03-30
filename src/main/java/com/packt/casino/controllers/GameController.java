@@ -1,18 +1,19 @@
 package com.packt.casino.controllers;
 
 import com.packt.casino.Service.Impl.GamesServiceImpl;
+import com.packt.casino.domain.Game;
+import com.packt.casino.domain.repository.GamesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 @Controller
+@RequestMapping("/games")
 public class GameController extends AbstractController
 {
 
@@ -20,12 +21,30 @@ public class GameController extends AbstractController
 	@Resource(name = "GamesService")
 	private GamesServiceImpl gamesService;
 
-	@RequestMapping("/games")
-	public String list(Model model)
+	@Autowired
+	private GamesRepository gamesRepository;
+
+	@RequestMapping
+	public String list(Model model, Long id, @RequestParam(name = "error", required = false) String error)
 	{
 		super.populateUser(model);
-		//model.addAttribute()
+
+		List gameList = gamesService.getAllGames();
+		Game game = gamesRepository.findGameByGameId(id);
+
+		if (!game.isActivated())
+		{
+			model.addAttribute("error", error);
+			return "games";
+		}
+		model.addAttribute("games", gameList);
 		return "games";
+	}
+
+	@RequestMapping("/game?gameId=${id}")
+	public String game(Model model, @PathVariable Long gameId)
+	{
+		return "game";
 	}
 
 	@RequestMapping(path = "/addGame") // Map ONLY POST Requests

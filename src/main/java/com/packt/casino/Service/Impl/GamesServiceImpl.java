@@ -6,6 +6,8 @@ import com.packt.casino.domain.repository.GamesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -58,5 +60,13 @@ public class GamesServiceImpl implements GamesService
 	public Iterable<Game> findAll()
 	{
 		return gamesRepository.findAll();
+	}
+
+	@Override
+	public List getAllGames()
+	{
+		List list = new ArrayList();
+		gamesRepository.findAll().forEach(e -> list.add(e));
+		return list;
 	}
 }

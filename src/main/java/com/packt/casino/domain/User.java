@@ -226,11 +226,6 @@ public class User
 		return authorities;
 	}
 
-	public Object[] getAuthority()
-	{
-		return authorities.toArray();
-	}
-
 	public void setAuthorities(Set<Authority> authorities)
 	{
 		this.authorities = authorities;

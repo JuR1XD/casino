@@ -4,6 +4,7 @@ import com.packt.casino.domain.*;
 import com.packt.casino.domain.repository.UserRepository;
 import com.packt.casino.exceptions.EmailExistsException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,4 +29,5 @@ public interface UserService
 	public boolean checkPassword(UserDataTransferEditPw userDataTransferEditPw);
 	public User addCredit(UserDataTransferEditCredit accountUser) throws Exception;
 	public User withCredit(UserDataTransferEditCredit accountUser) throws Exception;
+	public User editUserAccountAdmin(AdminUserDataTransfer accountUser, @PathVariable Long id) throws EmailExistsException;
 }

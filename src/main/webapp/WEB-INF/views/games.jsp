@@ -16,13 +16,15 @@
         <c:forEach items="${games}" var="game">
             <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
                 <div class="thumbnail">
-                    <img src="<c:url value="/resource/images/${game.gameId}.jpg"/> " alt="image" style="width: 200px;height: 250px">
                     <div class="caption">
                         <h3>${game.name}</h3>
                         <p>${game.description}</p>
                         <p>
                             <a href=" <spring:url value="/games/game?id=${game.gameId}" />" class="btn btn-primary">
-                                <span class="glyphicon-info-sign glyphicon"></span> Details
+                                <span class="glyphicon-play-circle glyphicon"></span> Play
+                            </a>
+                            <a href="<spring:url value="/games/game?id=${game.gameId}/test"/>" class="btn btn-primary">
+                                <span class="glyphicon-play-circle glyphicon"></span> Test Game for free
                             </a>
                         </p>
                     </div>
