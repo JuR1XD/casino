@@ -60,6 +60,8 @@ public class AccountController extends AbstractController
 		{
 			mav.addObject("authority", "User");
 		}
+
+		mav.addObject("getAuthority", role.getAuthorityId());
 		mav.setViewName("account");
 
 		return mav;

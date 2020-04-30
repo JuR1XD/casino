@@ -1,12 +1,19 @@
 package com.packt.casino.controllers;
 
 import com.packt.casino.Service.Impl.GamesServiceImpl;
+import com.packt.casino.Service.UserService;
 import com.packt.casino.domain.Game;
+import com.packt.casino.domain.User;
 import com.packt.casino.domain.repository.GamesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,28 +31,58 @@ public class GameController extends AbstractController
 	@Autowired
 	private GamesRepository gamesRepository;
 
+	@Autowired
+	private UserService userService;
+
 	@RequestMapping
-	public String list(Model model, Long id, @RequestParam(name = "error", required = false) String error)
+	public String list(Model model, Long id)
 	{
 		super.populateUser(model);
 
 		List gameList = gamesService.getAllGames();
-		Game game = gamesRepository.findGameByGameId(id);
-
-		if (!game.isActivated())
-		{
-			model.addAttribute("error", error);
-			return "games";
-		}
 		model.addAttribute("games", gameList);
 		return "games";
 	}
-
-	@RequestMapping("/game?gameId=${id}")
-	public String game(Model model, @PathVariable Long gameId)
+	@RequestMapping(value = "/game/{id}")
+	public ModelAndView game(Model model, @PathVariable Long id)
 	{
-		return "game";
+		super.populateUser(model);
+
+		ModelAndView mav = new ModelAndView("game");
+
+		Game game = gamesRepository.findGameByGameId(id);
+		mav.addObject("isActivated", game.isActivated());
+		mav.addObject("game", game);
+		mav.addObject("error", !game.isActivated());
+
+		if(game.isActivated())
+		{
+			mav.addObject("isActivatedText", "Das Spiel ist Aktiviert!");
+			return mav;
+		}
+		else
+		{
+			mav.addObject("isActivatedText", "Das Spiel ist nicht aktiviert!");
+			return mav;
+		}
 	}
+
+	/*@RequestMapping(value = "/game/{id}/play", method = RequestMethod.GET)
+	public ModelAndView play(@PathVariable Long id, @PathVariable String name)
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByEmail(auth.getName());
+		ModelAndView mav = new ModelAndView();
+		Game game = gamesRepository.findGameByGameId(id);
+		mav.addObject("game", game);
+
+		if(user.getCredit() <= gamesRepository.findGameByGameId(id).getMin())
+		{
+			mav.addObject("");
+		}
+
+		return mav;
+	}*/
 
 	@RequestMapping(path = "/addGame") // Map ONLY POST Requests
 	public @ResponseBody

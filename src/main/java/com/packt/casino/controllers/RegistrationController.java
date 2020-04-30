@@ -20,15 +20,16 @@ import javax.validation.Valid;
 
 
 @Controller
-public class RegistrationController
+public class RegistrationController extends AbstractController
 {
 	@Autowired
 	private UserService userService;
 
 	@RequestMapping(path = "/signIn", method = RequestMethod.POST)
-	public ModelAndView registerUserAccount(Model model, @ModelAttribute("user") @Valid UserDataTransfer accountUser,
-			BindingResult result, WebRequest request, Errors errors)
+	public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDataTransfer accountUser,
+			BindingResult result, WebRequest request, Errors errors, Model model)
 	{
+		populateUser(model);
 
 		if (!accountUser.getPassword().equals(accountUser.getMatchingPassword()))
 		{
@@ -51,6 +52,7 @@ public class RegistrationController
 	@RequestMapping(value = "/signIn", method = RequestMethod.GET)
 	public String showRegistrationForm(Model model, WebRequest request)
 	{
+		populateUser(model);
 
 		final UserDataTransfer user = new UserDataTransfer();
 		model.addAttribute("user", new UserDataTransfer());

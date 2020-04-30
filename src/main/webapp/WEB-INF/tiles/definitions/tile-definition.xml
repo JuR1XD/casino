@@ -157,25 +157,39 @@
     </definition>
 
     <definition name="addCredit" extends="baseLayoutEdit">
-        <put-attribute name="heading" value="casino,account.login.title"/>
+        <put-attribute name="heading" value="casino.account.login.title"/>
         <put-attribute name="tagline" value="casino.account.login.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/addCredit.jsp"/>
     </definition>
 
     <definition name="withCredit" extends="baseLayoutEdit">
-        <put-attribute name="heading" value="casino,account.login.title"/>
+        <put-attribute name="heading" value="casino.account.login.title"/>
         <put-attribute name="tagline" value="casino.account.login.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/withCredit.jsp"/>
     </definition>
     <definition name="adminUserList" extends="baseLayoutEdit">
-        <put-attribute name="heading" value="casino,account.login.title"/>
+        <put-attribute name="heading" value="casino.account.login.title"/>
         <put-attribute name="tagline" value="casino.account.login.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/adminUserList.jsp"/>
     </definition>
     <definition name="editUserAdmin" extends="baseLayoutEdit">
-        <put-attribute name="heading" value="casino,account.login.title"/>
+        <put-attribute name="heading" value="casino.account.login.title"/>
         <put-attribute name="tagline" value="casino.account.login.tagline"/>
         <put-attribute name="content" value="/WEB-INF/views/editUserAdmin.jsp"/>
+    </definition>
+
+    <definition name="bandit" extends="baseLayoutGame">
+        <put-attribute name="heading" value="casino.account.login.title"/>
+        <put-attribute name="tagline" value="casino.account.login.tagline"/>
+        <put-attribute name="content" value="/WEB-INF/views/bandit.jsp"/>
+    </definition>
+
+    <definition name="roulette" extends="baseLayoutGame">
+        <put-attribute name="content" value="/WEB-INF/views/roulette.jsp"/>
+    </definition>
+
+    <definition name="blackjack" extends="baseLayoutGame">
+        <put-attribute name="content" value="/WEB-INF/views/blackjack.jsp"/>
     </definition>
 
 </tiles-definitions>

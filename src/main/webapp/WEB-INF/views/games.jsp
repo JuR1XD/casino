@@ -17,13 +17,17 @@
             <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
                 <div class="thumbnail">
                     <div class="caption">
+                        <%--<c:if test="${not empty error}">
+                            <div class="alert alert-danger">
+                                <spring:message code="casino.login.wrongUserCredentials"/>
+                            </div>
+                        </c:if>--%>
                         <h3>${game.name}</h3>
-                        <p>${game.description}</p>
                         <p>
-                            <a href=" <spring:url value="/games/game?id=${game.gameId}" />" class="btn btn-primary">
+                            <a href=" <spring:url value="/games/game/${game.gameId}" />" class="btn btn-primary">
                                 <span class="glyphicon-play-circle glyphicon"></span> Play
                             </a>
-                            <a href="<spring:url value="/games/game?id=${game.gameId}/test"/>" class="btn btn-primary">
+                            <a href="<spring:url value="/games/game/${game.gameId}/test"/>" class="btn btn-primary">
                                 <span class="glyphicon-play-circle glyphicon"></span> Test Game for free
                             </a>
                         </p>

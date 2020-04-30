@@ -7,6 +7,7 @@
 
 <html>
 <head>
+    <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
@@ -28,7 +29,7 @@
     </ul>
     <p><a href="<spring:url value="/account/editUser"/>" class="btn btn-default">Edit User</a></p>
     <p><a href="<spring:url value="/account/editPassword"/>" class="btn btn-default">Edit Password</a></p>
-    <%--<c:if test="">--%><p><a href="<spring:url value="/admin/allUsers"/>" class="btn btn-default">Admin Control Panel</a></p><%--</c:if>--%>
+    <c:if test="${getAuthority == 1}"><p><a href="<spring:url value="/admin/allUsers"/>" class="btn btn-default">Admin Control Panel</a></p></c:if>
 
 </div>
 </body>

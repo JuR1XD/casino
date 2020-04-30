@@ -12,5 +12,27 @@
     <title>Welcome</title>
 </head>
 <body>
+<section class="container">
+    <div class="col-md-5">
+        <h3>${game.name}</h3>
+        <p>${game.description}</p>
+        <p>
+            <strong>Mindesteinsatz:</strong> ${game.min} <spring:message code="casino.currency.europe"/>
+        </p>
+        <p>
+            <strong>Ist Aktiviert:</strong> ${isActivatedText}
+        </p>
+        <p>
+            <c:if test="${error}">
+        <div class="alert alert-danger">
+            <spring:message code="casino.game.isNotActivated"/>
+        </div>
+            </c:if>
+        <c:if test="${isActivated}">
+            <a href=" <spring:url value="/games/game/${game.gameId}/play" />" class="btn btn-primary">
+                <span class="glyphicon-play-circle glyphicon"></span> Play
+            </a></c:if>
+    </div>
+</section>
 </body>
 </html>

@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="span" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 
 <html>
@@ -53,9 +54,9 @@
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
                     <input type="submit" id="btnAdd" class="btn btn-primary" value="Add"/>
+                    <a class="btn btn-danger" href="<spring:url value="/account"/>"><span class="glyphicon glyphicon-info-sign"></span> Fuck go Back!!!!</a>
                 </div>
             </div>
-
         </fieldset>
     </form:form>
 
