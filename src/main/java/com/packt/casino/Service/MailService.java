@@ -1,8 +1,7 @@
 package com.packt.casino.Service;
 
 import com.packt.casino.domain.User;
-import com.packt.casino.domain.UserDataTransferEditCredit;
-import org.springframework.beans.factory.annotation.Value;
+import com.packt.casino.domain.UserDataTransferClasses.UserDataTransferEditCredit;
 
 
 public interface MailService

@@ -1,47 +1,48 @@
-package com.packt.casino.domain;
+package com.packt.casino.domain.UserDataTransferClasses;
 
 import com.packt.casino.validator.ValidEmail;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 
-public class UserDataTransferEdit
+public class AdminUserDataTransfer
 {
-
-	@NotEmpty(message = "{casino.signIn.notNull}")
+	@NotNull(message = "{casino.signIn.notNull}")
 	private String name;
 
-	@NotEmpty(message = "{casino.signIn.notNull}")
+	@NotNull(message = "{casino.signIn.notNull}")
 	private String surname;
+
+	@NotNull(message = "{casino.signIn.notNull}")
 	@ValidEmail
 	private String email;
 
 	@Pattern(regexp = "^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$", message = "{casino.signIn.birthday.error}")
 	private String birthday;
-	
+
 	@NotNull(message = "{casino.signIn.notNull}")
-	//@NotEmpty(message = "{casino.signIn.notNull}")
-	@Min(value = 0, message = "{casino.edit.min}")
-	//@Pattern(regexp = "[0-100]", message = "You can only deposit 100 Credits at a time")
 	private double credit;
-	
+
 	@NotNull(message = "{casino.signIn.notNull}")
 	private boolean admin;
 
 	@NotNull(message = "{casino.signIn.notNull}")
 	private boolean isActivated;
 
+	private String password;
+
 	@NotNull(message = "{casino.signIn.notNull}")
-	@NotEmpty(message = "{casino.signIn.notNull}")
+	@NotNull(message = "{casino.signIn.notNull}")
 	private String street;
 
-	@NotEmpty(message = "{casino.signIn.notNull}")
+	@NotNull(message = "{casino.signIn.notNull}")
 	private String streetNr;
 
-	@NotEmpty(message = "{casino.signIn.notNull}")
+	@NotNull(message = "{casino.signIn.notNull}")
 	private String postalCode;
 
-	@NotEmpty(message = "{casino.signIn.notNull}")
+	@NotNull(message = "{casino.signIn.notNull}")
 	private String city;
 
 
@@ -113,6 +114,16 @@ public class UserDataTransferEdit
 	public void setActivated(boolean activated)
 	{
 		isActivated = activated;
+	}
+
+	public String getPassword()
+	{
+		return password;
+	}
+
+	public void setPassword(String password)
+	{
+		this.password = password;
 	}
 
 	public String getStreet()

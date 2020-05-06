@@ -1,9 +1,8 @@
 package com.packt.casino.Service;
 
 import com.packt.casino.domain.*;
-import com.packt.casino.domain.repository.UserRepository;
+import com.packt.casino.domain.UserDataTransferClasses.*;
 import com.packt.casino.exceptions.EmailExistsException;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;

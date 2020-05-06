@@ -1,9 +1,7 @@
 package com.packt.casino.Service;
 
-import com.packt.casino.domain.Bandid;
-import com.packt.casino.domain.GamblingGame;
-import com.packt.casino.domain.PlayVariables;
-import com.packt.casino.domain.User;
+import com.packt.casino.domain.factories.GamblingGame;
+import com.packt.casino.domain.playVariables.PlayVariables;
 
 
 public interface GamePlayingService

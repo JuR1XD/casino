@@ -1,4 +1,4 @@
-package com.packt.casino.domain;
+package com.packt.casino.domain.factories;
 
 import java.util.Random;
 

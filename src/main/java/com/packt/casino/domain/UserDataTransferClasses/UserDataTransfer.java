@@ -1,48 +1,54 @@
-package com.packt.casino.domain;
+package com.packt.casino.domain.UserDataTransferClasses;
 
+import com.packt.casino.validator.PasswordMatches;
 import com.packt.casino.validator.ValidEmail;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-
-public class AdminUserDataTransfer
+@PasswordMatches
+public class UserDataTransfer
 {
-	@NotNull(message = "{casino.signIn.notNull}")
+
+	@NotEmpty(message = "{casino.signIn.notNull}")
 	private String name;
 
-	@NotNull(message = "{casino.signIn.notNull}")
+	@NotEmpty(message = "{casino.signIn.notNull}")
 	private String surname;
 
-	@NotNull(message = "{casino.signIn.notNull}")
 	@ValidEmail
 	private String email;
 
 	@Pattern(regexp = "^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$", message = "{casino.signIn.birthday.error}")
 	private String birthday;
-
+	
 	@NotNull(message = "{casino.signIn.notNull}")
 	private double credit;
-
+	
 	@NotNull(message = "{casino.signIn.notNull}")
 	private boolean admin;
 
 	@NotNull(message = "{casino.signIn.notNull}")
 	private boolean isActivated;
 
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "{casino.signIn.password.validPassword}")
+	@NotEmpty(message = "{casino.signIn.notNull}")
 	private String password;
-
+	@NotEmpty(message = "{casino.signIn.notNull}")
+	private String matchingPassword;
+	
 	@NotNull(message = "{casino.signIn.notNull}")
-	@NotNull(message = "{casino.signIn.notNull}")
+	@NotEmpty(message = "{casino.signIn.notNull}")
 	private String street;
 
-	@NotNull(message = "{casino.signIn.notNull}")
+	@NotEmpty(message = "{casino.signIn.notNull}")
 	private String streetNr;
 
-	@NotNull(message = "{casino.signIn.notNull}")
+	@NotEmpty(message = "{casino.signIn.notNull}")
 	private String postalCode;
 
-	@NotNull(message = "{casino.signIn.notNull}")
+	@NotEmpty(message = "{casino.signIn.notNull}")
 	private String city;
 
 
@@ -124,6 +130,16 @@ public class AdminUserDataTransfer
 	public void setPassword(String password)
 	{
 		this.password = password;
+	}
+
+	public String getMatchingPassword()
+	{
+		return matchingPassword;
+	}
+
+	public void setMatchingPassword(String matchingPassword)
+	{
+		this.matchingPassword = matchingPassword;
 	}
 
 	public String getStreet()

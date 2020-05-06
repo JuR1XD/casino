@@ -1,4 +1,7 @@
-package com.packt.casino.domain;
+package com.packt.casino.domain.factories;
+
+import java.util.Random;
+
 
 public class Blackjack extends GamblingGame
 {
@@ -6,10 +9,18 @@ public class Blackjack extends GamblingGame
 	int cardUserTwo;
 	int cardEnemyOne;
 	int cardEnemyTwo;
+	Random ran = new Random();
+
 
 	@Override
 	public boolean play()
 	{
+
+		cardUserOne = ran.nextInt(11)+1;
+		cardUserTwo = ran.nextInt(11)+1;
+		cardEnemyOne = ran.nextInt(11)+1;
+		cardEnemyTwo = ran.nextInt(11)+1;
+
 		setMultiplier(2);
 		if(cardUserOne + cardUserTwo == cardEnemyOne + cardEnemyTwo)
 		{

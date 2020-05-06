@@ -3,7 +3,7 @@ package com.packt.casino.controllers;
 
 import com.packt.casino.Service.UserService;
 import com.packt.casino.domain.User;
-import com.packt.casino.domain.UserDataTransfer;
+import com.packt.casino.domain.UserDataTransferClasses.UserDataTransfer;
 import com.packt.casino.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
 package com.packt.casino.Service.factories;
 
 import com.packt.casino.domain.User;
-import com.packt.casino.domain.UserDataTransferEditCredit;
+import com.packt.casino.domain.UserDataTransferClasses.UserDataTransferEditCredit;
 import org.springframework.mail.SimpleMailMessage;
 
 

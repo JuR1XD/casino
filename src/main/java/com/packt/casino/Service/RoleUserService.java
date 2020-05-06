@@ -1,6 +1,6 @@
 package com.packt.casino.Service;
 
-import com.packt.casino.domain.AdminUserDataTransferRole;
+import com.packt.casino.domain.UserDataTransferClasses.AdminUserDataTransferRole;
 import com.packt.casino.domain.RoleUser;
 import org.springframework.web.bind.annotation.PathVariable;
 

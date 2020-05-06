@@ -2,13 +2,17 @@ package com.packt.casino.Service.Impl;
 
 import com.packt.casino.Service.GamePlayingService;
 import com.packt.casino.domain.*;
+import com.packt.casino.domain.factories.GamblingGame;
 import com.packt.casino.domain.factories.GamblingGameFactory;
+import com.packt.casino.domain.playVariables.PlayVariables;
 import com.packt.casino.domain.repository.GamesRepository;
 import com.packt.casino.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 
 @Service
@@ -34,14 +38,16 @@ public class GamePlayingServiceImpl implements GamePlayingService
 		GamblingGame gamblingGame = factory.getGameById(gameId);
 		Game game = gamesRepository.findGameByGameId(gameId);
 
+		BigDecimal userCredit = BigDecimal.valueOf(user.getCredit());
+		BigDecimal stakeCredit = BigDecimal.valueOf(Double.parseDouble(playVariables.getStake()));
 
-		if (user.getCredit() > game.getMin() && playVariables.getStake() >= game.getMin())
+		if (user.getCredit() > game.getMin() && Double.parseDouble(playVariables.getStake()) >= game.getMin())
 		{
-			user.setCredit(user.getCredit() - playVariables.getStake());
+			BigDecimal setCredit = userCredit.subtract(stakeCredit);
 			boolean result = gamblingGame.play();
 			if(result)
 			{
-				gamblingGame.setStake(playVariables.getStake());
+				gamblingGame.setStake(Double.parseDouble(playVariables.getStake()));
 				playVariables.setMultiplier(gamblingGame.getMultiplier());
 				gamblingGame.setMultiplier(playVariables.getMultiplier());
 				double profit = gamblingGame.calcProfit();
@@ -54,5 +60,24 @@ public class GamePlayingServiceImpl implements GamePlayingService
 		return gamblingGame;
 	}
 
+	public GamblingGame playTestGame(Long gameId)
+	{
+		GamblingGame gamblingGame = factory.getGameById(gameId);
+		Game game = gamesRepository.findGameByGameId(gameId);
+		int random = 0;
+		boolean result = gamblingGame.play();
+		if(result)
+		{
+			random++;
+
+			if(random == 2)
+			{
+				result = true;
+				random = 0;
+			}
+		}
+
+		return gamblingGame;
+	}
 
 }

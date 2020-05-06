@@ -2,8 +2,8 @@ package com.packt.casino.controllers;
 
 import com.packt.casino.Service.RoleUserService;
 import com.packt.casino.Service.UserService;
-import com.packt.casino.domain.AdminUserDataTransfer;
-import com.packt.casino.domain.AdminUserDataTransferRole;
+import com.packt.casino.domain.UserDataTransferClasses.AdminUserDataTransfer;
+import com.packt.casino.domain.UserDataTransferClasses.AdminUserDataTransferRole;
 import com.packt.casino.domain.RoleUser;
 import com.packt.casino.domain.User;
 import com.packt.casino.domain.repository.RoleUserRepository;

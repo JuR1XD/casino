@@ -2,10 +2,11 @@ package com.packt.casino.Service.Impl;
 
 import com.packt.casino.Service.UserService;
 import com.packt.casino.domain.*;
+import com.packt.casino.domain.UserDataTransferClasses.*;
 import com.packt.casino.domain.repository.AuthorityRepository;
-import com.packt.casino.domain.repository.RoleUserRepository;
 import com.packt.casino.domain.repository.UserRepository;
 import com.packt.casino.exceptions.EmailExistsException;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -324,7 +325,7 @@ public class UserServiceImpl implements UserService
 		user.setPostalCode(accountUser.getPostalCode());
 		user.setCity(accountUser.getCity());
 		user.setIsActivated(accountUser.isActivated());
-		if (accountUser.getPassword() != null)
+		if (StringUtils.isNotBlank(user.getPassword()))
 		{
 			user.setPassword(bCryptPasswordEncoder.encode(accountUser.getPassword()));
 		}

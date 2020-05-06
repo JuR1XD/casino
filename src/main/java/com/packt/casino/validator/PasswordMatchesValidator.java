@@ -1,6 +1,6 @@
 package com.packt.casino.validator;
 
-import com.packt.casino.domain.UserDataTransfer;
+import com.packt.casino.domain.UserDataTransferClasses.UserDataTransfer;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

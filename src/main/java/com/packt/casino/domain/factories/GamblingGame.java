@@ -1,4 +1,4 @@
-package com.packt.casino.domain;
+package com.packt.casino.domain.factories;
 
 import com.packt.casino.Service.GamePlayingService;
 import org.springframework.beans.factory.annotation.Autowired;
