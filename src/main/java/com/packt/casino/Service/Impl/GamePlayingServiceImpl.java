@@ -40,16 +40,16 @@ public class GamePlayingServiceImpl implements GamePlayingService
 
 		BigDecimal userCredit = BigDecimal.valueOf(user.getCredit());
 		BigDecimal stakeCredit = BigDecimal.valueOf(Double.parseDouble(playVariables.getStake()));
+		boolean result = gamblingGame.play();
 
 		if (user.getCredit() > game.getMin() && Double.parseDouble(playVariables.getStake()) >= game.getMin())
 		{
-			BigDecimal setCredit = userCredit.subtract(stakeCredit);
-			boolean result = gamblingGame.play();
-			if(result)
+			user.setCredit(user.getCredit() - Double.parseDouble(playVariables.getStake()));
+
+			if (gamblingGame.play())
 			{
 				gamblingGame.setStake(Double.parseDouble(playVariables.getStake()));
 				playVariables.setMultiplier(gamblingGame.getMultiplier());
-				gamblingGame.setMultiplier(playVariables.getMultiplier());
 				double profit = gamblingGame.calcProfit();
 				user.setCredit(user.getCredit() + profit);
 			}
@@ -57,25 +57,16 @@ public class GamePlayingServiceImpl implements GamePlayingService
 		}
 		userRepository.save(user);
 
+
 		return gamblingGame;
 	}
 
+	@Override
 	public GamblingGame playTestGame(Long gameId)
 	{
 		GamblingGame gamblingGame = factory.getGameById(gameId);
-		Game game = gamesRepository.findGameByGameId(gameId);
-		int random = 0;
-		boolean result = gamblingGame.play();
-		if(result)
-		{
-			random++;
 
-			if(random == 2)
-			{
-				result = true;
-				random = 0;
-			}
-		}
+		gamblingGame.testPlay();
 
 		return gamblingGame;
 	}

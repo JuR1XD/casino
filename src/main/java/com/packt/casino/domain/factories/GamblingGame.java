@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class GamblingGame
 {
 
-	double stake;
-	double multiplier;
+	private double stake;
+	private double multiplier;
+	int counter;
 
 	public double calcProfit()
 	{
@@ -16,6 +17,22 @@ public abstract class GamblingGame
 	}
 
 	public abstract boolean play();
+
+	public boolean testPlay()
+	{
+		counter++;
+
+		if(counter % 3 == 0)
+		{
+			return this.forceWin();
+		}
+		else
+		{
+			return this.play();
+		}
+	}
+
+	public abstract boolean forceWin();
 
 	public double getStake()
 	{
@@ -32,7 +49,7 @@ public abstract class GamblingGame
 		return multiplier;
 	}
 
-	public void setMultiplier(double multiplier)
+	protected void setMultiplier(double multiplier)
 	{
 		this.multiplier = multiplier;
 	}

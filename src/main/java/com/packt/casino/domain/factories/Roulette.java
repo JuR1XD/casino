@@ -30,6 +30,14 @@ public class Roulette extends GamblingGame
 		}
 	}
 
+	@Override
+	public boolean forceWin()
+	{
+		gameInput = userInput;
+
+		return true;
+	}
+
 	public int getUserInput()
 	{
 		return userInput;

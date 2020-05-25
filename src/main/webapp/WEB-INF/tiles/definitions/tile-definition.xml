@@ -192,4 +192,18 @@
         <put-attribute name="content" value="/WEB-INF/views/blackjack.jsp"/>
     </definition>
 
+    <definition name="banditTest" extends="baseLayoutGame">
+        <put-attribute name="heading" value="casino.account.login.title"/>
+        <put-attribute name="tagline" value="casino.account.login.tagline"/>
+        <put-attribute name="content" value="/WEB-INF/views/banditTest.jsp"/>
+    </definition>
+
+    <definition name="rouletteTest" extends="baseLayoutGame">
+        <put-attribute name="content" value="/WEB-INF/views/rouletteTest.jsp"/>
+    </definition>
+
+    <definition name="blackjackTest" extends="baseLayoutGame">
+        <put-attribute name="content" value="/WEB-INF/views/blackjackTest.jsp"/>
+    </definition>
+
 </tiles-definitions>

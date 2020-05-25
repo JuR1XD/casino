@@ -34,6 +34,18 @@ public class Blackjack extends GamblingGame
 
 	}
 
+	@Override
+	public boolean forceWin()
+	{
+		cardUserOne = ran.nextInt(11)+1;
+		cardUserTwo = ran.nextInt(11)+1;
+		cardEnemyOne = cardUserOne -1;
+		cardEnemyTwo = cardUserTwo -1;
+
+		return true;
+
+	}
+
 	public int getCardUserOne()
 	{
 		return cardUserOne;

@@ -51,7 +51,7 @@ public class PlayingGameController extends AbstractController
 
 	@Autowired
 	GamePlayingService gamePlayingService;
-
+	@Autowired
 	GamblingGameFactory factory;
 
 	@RequestMapping(value = "/1/play", method = RequestMethod.GET)
@@ -93,13 +93,18 @@ public class PlayingGameController extends AbstractController
 		Game game = gamesRepository.findGameByGameId(2L);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		if (result.hasErrors())
+		if (result.hasErrors() || Double.parseDouble(playVariables.getStake()) > user.getCredit())
 		{
 			ModelAndView mav;
 
 			mav = new ModelAndView(idToViewName.get(1L), "gameVariablesBandit", playVariables);
 			mav.addObject("currentMoney", user.getCredit());
 			mav.addObject("getNumbers", idToGameNameNew.get(1L));
+
+			if(Double.parseDouble(playVariables.getStake()) > user.getCredit())
+			{
+				mav.addObject("toMuchCredit", "true");
+			}
 
 			if(game.getMin() > Double.parseDouble(playVariables.getStake()))
 			{
@@ -175,13 +180,18 @@ public class PlayingGameController extends AbstractController
 		Game game = gamesRepository.findGameByGameId(2L);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		if (result.hasErrors())
+		if (result.hasErrors() || Double.parseDouble(playVariablesRoulette.getStake()) > user.getCredit())
 		{
 			ModelAndView mav;
 
 			mav = new ModelAndView(idToViewName.get(2L), "gameVariablesRoulette", playVariablesRoulette);
 			mav.addObject("currentMoney", user.getCredit());
 			mav.addObject("getNumber", idToGameNameNew.get(2L));
+
+			if(Double.parseDouble(playVariablesRoulette.getStake()) > user.getCredit())
+			{
+				mav.addObject("toMuchCredit", "true");
+			}
 
 			if(game.getMin() > Double.parseDouble(playVariablesRoulette.getStake()))
 			{
@@ -256,7 +266,7 @@ public class PlayingGameController extends AbstractController
 		Game game = gamesRepository.findGameByGameId(3L);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		if (result.hasErrors())
+		if (result.hasErrors() || Double.parseDouble(playVariablesBlackjack.getStake()) > user.getCredit())
 		{
 			ModelAndView mav;
 
@@ -264,6 +274,11 @@ public class PlayingGameController extends AbstractController
 						playVariablesBlackjack);
 				mav.addObject("currentMoney", user.getCredit());
 				mav.addObject("getCards", idToGameNameNew.get(3L));
+
+			if(Double.parseDouble(playVariablesBlackjack.getStake()) > user.getCredit())
+			{
+				mav.addObject("toMuchCredit", "true");
+			}
 
 			if(game.getMin() > Double.parseDouble(playVariablesBlackjack.getStake()))
 			{

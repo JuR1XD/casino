@@ -15,8 +15,9 @@
     <p class="pull-right">
         <spring:message code="casino.account.data.credit"/>${currentMoney}&nbsp<spring:message
             code="casino.currency.europe"/></p>
-    <p><c:if test="${noCredit == true}"><spring:message code="casino.game.error.notEnoughStake"/></c:if></p>
-    <p><c:if test="${toLessCredit == true}"><spring:message code="casino.game.error.notEnoughMin"/></c:if></p>
+    <p class="text-danger"><c:if test="${noCredit == true}"><spring:message  code="casino.game.error.notEnoughStake"/></c:if></p>
+    <p class="text-danger"><c:if test="${toLessCredit == true}"><spring:message code="casino.game.error.notEnoughMin"/></c:if></p>
+    <p class="text-danger"><c:if test="${toMuchCredit == true}"><spring:message code="casino.game.error.tooMuchMin"/></c:if></p>
     <p><c:if test="${win == true}"><spring:message code="casino.game.win"/></c:if></p>
     <br><br>
 

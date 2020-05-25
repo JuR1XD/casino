@@ -12,8 +12,10 @@ public class Bandid extends GamblingGame
 	int numberThree;
 
 
-
-
+	public Bandid()
+	{
+		setMultiplier(3);
+	}
 
 	@Override
 	public boolean play()
@@ -22,15 +24,17 @@ public class Bandid extends GamblingGame
 		numberTwo = ran.nextInt(4) + 1;
 		numberThree = ran.nextInt(4) + 1;
 
-		setMultiplier(3);
-		if (numberOne == numberTwo)
-		{
-			return numberTwo == numberThree;
-		}
-		else
-		{
-			return false;
-		}
+		return numberOne == numberTwo && numberTwo == numberThree;
+	}
+
+	@Override
+	public boolean forceWin()
+	{
+		numberOne = ran.nextInt(4) + 1;
+		numberTwo = numberOne;
+		numberThree = numberTwo;
+
+		return true;
 	}
 
 	public int getNumberOne()

@@ -22,6 +22,7 @@ public class GamblingGameFactory
 		{
 			return new Roulette();
 		}
+		else
 		{
 			return new Blackjack();
 		}
