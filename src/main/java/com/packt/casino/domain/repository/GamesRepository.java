@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface GamesRepository extends CrudRepository<Game, Long> {
 
 	Game findGameByGameId(Long gameId);
+	Game findGameByName(String name);
 }

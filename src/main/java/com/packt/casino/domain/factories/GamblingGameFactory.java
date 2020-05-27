@@ -11,20 +11,36 @@ public class GamblingGameFactory
 	@Autowired
 	GamesRepository gamesRepository;
 
+	private Bandid bandid;
+	private Roulette roulette;
+	private Blackjack blackjack;
+
 	public GamblingGame getGameById(Long id)
 	{
 
 		if(id == 1)
 		{
-			return new Bandid();
+			if(bandid == null)
+			{
+				bandid = new Bandid();
+			}
+			return bandid;
 		}
 		else if(id == 2)
 		{
-			return new Roulette();
+			if(roulette == null)
+			{
+				roulette = new Roulette();
+			}
+			return roulette;
 		}
 		else
 		{
-			return new Blackjack();
+			if(blackjack == null)
+			{
+				blackjack = new Blackjack();
+			}
+			return blackjack;
 		}
 	}
 

@@ -10,5 +10,21 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
+<%--
+
+<p>Search for a Game:</p>
+<form:input path="${searchTerm}" cssClass="input-lg"/><input type="submit">
+
+<p><c:if test="${not empty searchTerm}">
+    Search Results:
+<div class="row">
+        <a href="<spring:url value="/games/game/${searchResult.gameId}"/>">${searchResult.name}</a>
+</div>
+</c:if>
+</p>
+
+
+--%>
+
 </body>
 </html>

@@ -11,7 +11,7 @@ public class Roulette extends GamblingGame
 
 	@NotNull(message = "{casino.signIn.notNull}")
 	@Pattern(regexp = "(^[1-9]$|^1[0-9]$|^2[0-9]|^3[0-5]$)", message = "Bitte geben sie eine korrekte Zahl ein")
-	int userInput;
+	//int userInput;
 	int gameInput;
 
 	@Override
@@ -20,14 +20,7 @@ public class Roulette extends GamblingGame
 
 		gameInput = ran.nextInt(35) + 1;
 		setMultiplier(35);
-		if (userInput == gameInput)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return userInput == gameInput;
 	}
 
 	@Override

@@ -16,31 +16,26 @@ public class Blackjack extends GamblingGame
 	public boolean play()
 	{
 
-		cardUserOne = ran.nextInt(11)+1;
-		cardUserTwo = ran.nextInt(11)+1;
-		cardEnemyOne = ran.nextInt(11)+1;
-		cardEnemyTwo = ran.nextInt(11)+1;
+		cardUserOne = ran.nextInt(11) + 1;
+		cardUserTwo = ran.nextInt(11) + 1;
+		cardEnemyOne = ran.nextInt(11) + 1;
+		cardEnemyTwo = ran.nextInt(11) + 1;
 
 		setMultiplier(2);
-		if(cardUserOne + cardUserTwo == cardEnemyOne + cardEnemyTwo)
-		{
-			return false;
-		}
-		if(cardUserOne + cardUserTwo > cardEnemyOne + cardEnemyTwo)
-		{
-			return false;
-		}
-		return cardUserOne + cardUserTwo < cardEnemyOne + cardEnemyTwo;
+
+		return cardUserOne + cardUserTwo != cardEnemyOne + cardEnemyTwo
+				&& cardUserOne + cardUserTwo > cardEnemyOne + cardEnemyTwo
+				&& cardUserOne + cardUserTwo != 22;
 
 	}
 
 	@Override
 	public boolean forceWin()
 	{
-		cardUserOne = ran.nextInt(11)+1;
-		cardUserTwo = ran.nextInt(11)+1;
-		cardEnemyOne = cardUserOne -1;
-		cardEnemyTwo = cardUserTwo -1;
+		cardUserOne = ran.nextInt(9) + 2;
+		cardUserTwo = ran.nextInt(10) + 2;
+		cardEnemyOne = cardUserOne - 1;
+		cardEnemyTwo = cardUserTwo - 1;
 
 		return true;
 

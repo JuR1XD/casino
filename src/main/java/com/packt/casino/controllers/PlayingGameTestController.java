@@ -80,15 +80,11 @@ public class PlayingGameTestController extends AbstractController
 
 		ModelAndView mav = new ModelAndView(idToViewName.get(id));
 
-		if (gamblingGame.forceWin())
-		{
-			mav.addObject("win", "true");
-		}
-		if (gamblingGame.play())
-		{
-			mav.addObject("win", "true");
-		}
 		mav.addObject("getNumbers", gamblingGame);
+		if (gamePlayingService.isWin())
+		{
+			mav.addObject("win", "true");
+		}
 
 		return mav;
 	}
@@ -109,8 +105,7 @@ public class PlayingGameTestController extends AbstractController
 
 	@RequestMapping(value = "/2/play", method = RequestMethod.POST)
 	public ModelAndView playGameTestRoulettePost(
-			@ModelAttribute("inputRoulette")
-					PlayVariablesRouletteTest playVariablesRouletteTest,
+			@ModelAttribute("inputRoulette") PlayVariablesRouletteTest playVariablesRouletteTest,
 			BindingResult result, Model model)
 	{
 		populateUser(model);
@@ -127,22 +122,19 @@ public class PlayingGameTestController extends AbstractController
 			return mav;
 		}
 
-		GamblingGame gamblingGame = gamePlayingService.playTestGame(2L);
+		GamblingGame gamblingGame = gamePlayingService.playTestGameRoulette(2L, playVariablesRouletteTest);
 
 		ModelAndView mav = new ModelAndView();
 
 		if (!result.hasErrors())
 		{
+
 			mav = new ModelAndView(idToViewName.get(2L), "inputRoulette", playVariablesRouletteTest);
-			if (gamblingGame.forceWin())
-			{
-				mav.addObject("win", "true");
-			}
-			if (gamblingGame.play())
-			{
-				mav.addObject("win", "true");
-			}
 			mav.addObject("getNumbers", gamblingGame);
+			if (gamePlayingService.isWin())
+			{
+				mav.addObject("win", "true");
+			}
 		}
 		return mav;
 	}

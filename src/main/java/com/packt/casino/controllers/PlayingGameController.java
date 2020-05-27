@@ -132,7 +132,7 @@ public class PlayingGameController extends AbstractController
 		{
 			mav.addObject("noCredit", "true");
 		}
-		if (gamblingGame.play())
+		if(gamePlayingService.isWin())
 		{
 			mav.addObject("win", "true");
 		}
@@ -203,7 +203,7 @@ public class PlayingGameController extends AbstractController
 			}
 			return mav;
 		}
-		GamblingGame gamblingGame = gamePlayingService.playGame(playVariablesRoulette, 2L);
+		GamblingGame gamblingGame = gamePlayingService.playGameRoulette(playVariablesRoulette, 2L);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("currentMoney", user.getCredit());
@@ -219,7 +219,7 @@ public class PlayingGameController extends AbstractController
 		{
 			mav.addObject("noCredit", "true");
 		}
-		if (gamblingGame.play())
+		if(gamePlayingService.isWin())
 		{
 			mav.addObject("win", "true");
 		}
@@ -309,7 +309,7 @@ public class PlayingGameController extends AbstractController
 		{
 			mav.addObject("noCredit", "true");
 		}
-		if (gamblingGame.play())
+		if(gamePlayingService.isWin())
 		{
 			mav.addObject("win", "true");
 		}

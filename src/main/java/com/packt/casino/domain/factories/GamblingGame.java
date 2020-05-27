@@ -10,6 +10,9 @@ public abstract class GamblingGame
 	private double stake;
 	private double multiplier;
 	int counter;
+	int userInput;
+
+
 
 	public double calcProfit()
 	{
@@ -52,5 +55,14 @@ public abstract class GamblingGame
 	protected void setMultiplier(double multiplier)
 	{
 		this.multiplier = multiplier;
+	}
+	public int getUserInput()
+{
+	return userInput;
+}
+
+	public void setUserInput(int userInput)
+	{
+		this.userInput = userInput;
 	}
 }
