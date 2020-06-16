@@ -25,11 +25,12 @@
     <br><br><br>
     <p><c:if test="${win == true}"><spring:message code="casino.game.win"/></c:if></p>
     <p class="text-danger"><c:if test="${toLessCredit == true}"><spring:message code="casino.game.error.notEnoughMin"/></c:if></p>
+    <p class="text-danger"><c:if test="${numberFormat == true}"><spring:message  code="casino.signIn.notNull"/></c:if></p>
     <p class="text-danger"><c:if test="${toMuchCredit == true}"><spring:message code="casino.game.error.tooMuchMin"/></c:if></p>
     <p class="text-danger"><c:if test="${noCredit == true}"><spring:message code="casino.game.error.notEnoughStake"/></c:if></p>
     <br>
     <form:form modelAttribute="playVariablesBlackjack" method="post">
-    <p><spring:message code="casino.game.setStake"/><form:input path="stake" step="0.01" type="number" min="${min}"/></p>
+    <p><spring:message code="casino.game.setStake"/><form:input path="stake" step="0.01" type="number"/></p>
     <p><form:errors path="stake" cssClass="text-danger"/></p>
     <br>
     <input type="submit" class="btn btn-default" value="<spring:message code="casino.game.play"/>">

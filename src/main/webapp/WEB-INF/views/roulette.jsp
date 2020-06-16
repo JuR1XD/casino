@@ -28,6 +28,7 @@
     <form:input path="stake" step="0.01" type="number"/>
     <form:errors path="stake" cssClass="text-danger"/>
     <p class="text-danger"><c:if test="${noCredit == true}"><spring:message code="casino.game.error.notEnoughStake"/></c:if></p>
+    <p class="text-danger"><c:if test="${numberFormat == true}"><spring:message  code="casino.signIn.notNull"/></c:if></p>
     <p class="text-danger"><c:if test="${toLessCredit == true}"><spring:message code="casino.game.error.notEnoughMin"/></c:if></p>
     <p class="text-danger"><c:if test="${toMuchCredit == true}"><spring:message code="casino.game.error.tooMuchMin"/></c:if></p>
     <p><c:if test="${win == true}"><spring:message code="casino.game.win"/></c:if></p>

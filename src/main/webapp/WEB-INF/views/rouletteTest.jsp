@@ -18,11 +18,11 @@
     <p><spring:message code="casino.game.roulette.enterANumber"/></p>
     <form:input path="userInput" min="0" max="35" type="number"/>
     <form:errors path="userInput" cssClass="text-danger"/>
+    <p class="text-danger"><c:if test="${numberFormat == true}"><spring:message  code="casino.signIn.notNull"/></c:if></p>
     <br><br>
     <p><spring:message code="casino.game.roulette.gameOutput"/></p>
     <form:form modelAttribute="getNumbers">
     <form:input path="gameInput" readonly="true"/>
-    <p><spring:message code="casino.game.setStake"/></p>
     <p><c:if test="${win == true}"><spring:message code="casino.game.win"/></c:if></p>
     <input type="submit" class="btn btn-default" value="<spring:message code="casino.game.play"/>">
 </div></form:form>

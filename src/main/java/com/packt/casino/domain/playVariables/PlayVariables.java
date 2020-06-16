@@ -9,7 +9,7 @@ import javax.validation.constraints.Pattern;
 public abstract  class PlayVariables
 {
 	@NotNull(message = "{casino.signIn.notNull}")
-	@Pattern(regexp = ("^[0-9]+[,.]+[0-9][0-9]$|^[0-9]+$"), message = "Bitte geben sie eine Zahl ein")
+	//@Pattern(regexp = ("^[0-9]+[,.]+[0-9][0-9]$|^[0-9]+$"), message = "Bitte geben sie eine Zahl ein")
 	@NotEmpty
 	private String stake;
 

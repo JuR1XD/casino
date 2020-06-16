@@ -3,6 +3,7 @@ package com.packt.casino.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 
 @Entity
@@ -31,12 +32,15 @@ public class Game
 	@NotEmpty
 	@Column(name = "isActivated", table = "game")
 	private boolean isActivated;
+	@NotNull
+	@Column(name = "release", table = "game")
+	private String release;
 
 	@Override
 	public String toString() {
 		return String.format(
-				"Game[gameid=%d, name='%s', min='%s', description='%s', isActivated=%s]",
-				gameId, name, min, description, isActivated);
+				"Game[gameid=%d, name='%s', min='%s', description='%s', isActivated='%s', release='%s']",
+				gameId, name, min, description, isActivated, release);
 	}
 
 
@@ -88,5 +92,15 @@ public class Game
 	public void setDescription(String description)
 	{
 		this.description = description;
+	}
+
+	public String getRelease()
+	{
+		return release;
+	}
+
+	public void setRelease(String release)
+	{
+		this.release = release;
 	}
 }

@@ -121,8 +121,20 @@ public class PlayingGameTestController extends AbstractController
 
 			return mav;
 		}
+		GamblingGame gamblingGame = null;
+		try
+		{
+			gamblingGame = gamePlayingService.playTestGameRoulette(2L, playVariablesRouletteTest);
+		}
+		catch (NumberFormatException e)
+		{
+			ModelAndView mav = new ModelAndView("rouletteTest");
+			mav.addObject("numberFormat", "true");
+			mav.addObject("getNumbers", idToGameNameNew.get(2L));
+			mav.addObject("inputRoulette", new PlayVariablesRouletteTest());
+			return mav;
+		}
 
-		GamblingGame gamblingGame = gamePlayingService.playTestGameRoulette(2L, playVariablesRouletteTest);
 
 		ModelAndView mav = new ModelAndView();
 
