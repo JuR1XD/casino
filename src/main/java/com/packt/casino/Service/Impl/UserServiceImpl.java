@@ -325,7 +325,7 @@ public class UserServiceImpl implements UserService
 		user.setPostalCode(accountUser.getPostalCode());
 		user.setCity(accountUser.getCity());
 		user.setIsActivated(accountUser.isActivated());
-		if (StringUtils.isNotBlank(user.getPassword()))
+		if (StringUtils.isNotBlank(accountUser.getPassword()))
 		{
 			user.setPassword(bCryptPasswordEncoder.encode(accountUser.getPassword()));
 		}

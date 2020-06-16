@@ -23,8 +23,8 @@
 
     <label><spring:message code="casino.search.decide"/>
         <select id="changeAppearance">
-            <option value="searchByName" id="firstOption"><spring:message code="casino.search.optionOne"/></option>
-            <option value="searchByRelease" id="secondOption"><spring:message code="casino.search.optionTwo"/></option>
+            <option value="searchByName" <c:if test="${name == true}">selected="selected"</c:if> id="firstOption"><spring:message code="casino.search.optionOne"/></option>
+            <option value="searchByRelease" <c:if test="${release == true}">selected="selected"</c:if> id="secondOption"><spring:message code="casino.search.optionTwo"/></option>
         </select>
     </label>
     <br><br>
@@ -74,7 +74,7 @@
 
 
 <script>
-    $("#searchReleaseInput").val("0000-01-01");
+    $("#searchReleaseInput").val("1600-01-01");
         $("#changeAppearance").change(function () {
             if ($(this).val() === "searchByName"
             ) {

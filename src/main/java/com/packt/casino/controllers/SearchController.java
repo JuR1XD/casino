@@ -44,6 +44,8 @@ public class SearchController extends AbstractController
 	public ModelAndView search(Model model, @ModelAttribute("searchTerm") @Valid SearchVariables searchVariables
 								,BindingResult result)
 	{
+		populateUser(model);
+
 		List<Game> gamesListName = searchService.searchName(searchVariables);
 		List<Game> gamesListRelease = searchService.searchRelease(searchVariables);
 
@@ -62,11 +64,15 @@ public class SearchController extends AbstractController
 		{
 			gamesListName.removeIf(game -> !game.isActivated());
 			mav.addObject("searchResult", gamesListName);
+			mav.addObject("name", "true");
+			mav.addObject("release", "false");
 		}
 		if(!result.hasErrors() && searchVariables.getSearchInput().equals("-"))
 		{
 			gamesListRelease.removeIf(game -> !game.isActivated());
 			mav.addObject("searchResultRelease", gamesListRelease);
+			mav.addObject("name", "false");
+			mav.addObject("release", "true");
 		}
 
 		return mav;
