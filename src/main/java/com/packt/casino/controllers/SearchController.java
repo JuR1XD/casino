@@ -29,6 +29,8 @@ public class SearchController extends AbstractController
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView search(Model model, SearchVariables searchVariables)
 	{
+		populateUser(model);
+
 		ModelAndView mav = new ModelAndView("search");
 		mav.addObject(model);
 		mav.addObject("searchTerm", new SearchVariables());
