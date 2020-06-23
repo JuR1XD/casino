@@ -90,41 +90,55 @@ public class PlayingGameController extends AbstractController
 	{
 		populateUser(model);
 
-		Game game = gamesRepository.findGameByGameId(2L);
+		Game game = gamesRepository.findGameByGameId(1L);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		if (result.hasErrors() || Double.parseDouble(playVariables.getStake()) > user.getCredit())
+		try
 		{
-			ModelAndView mav;
-
-			mav = new ModelAndView(idToViewName.get(1L), "playVariablesBandit", playVariables);
-			mav.addObject("currentMoney", user.getCredit());
-			mav.addObject("getNumbers", idToGameNameNew.get(1L));
-
-			try
+			if (result.hasErrors() || Double.parseDouble(playVariables.getStake()) > user.getCredit())
 			{
-				if (Double.parseDouble(playVariables.getStake()) > user.getCredit())
+				ModelAndView mav;
+
+				mav = new ModelAndView(idToViewName.get(1L), "playVariablesBandit", playVariables);
+				mav.addObject("currentMoney", user.getCredit());
+				mav.addObject("getNumbers", idToGameNameNew.get(1L));
+
+				try
 				{
-					mav.addObject("toMuchCredit", "true");
-				}
+					if (Double.parseDouble(playVariables.getStake()) > user.getCredit())
+					{
+						mav.addObject("toMuchCredit", "true");
+					}
 
 
 
-				if (game.getMin() > Double.parseDouble(playVariables.getStake()))
-				{
-					mav.addObject("toLessCredit", "true");
+					if (game.getMin() > Double.parseDouble(playVariables.getStake()))
+					{
+						mav.addObject("toLessCredit", "true");
+					}
+					if (game.getMin() > user.getCredit())
+					{
+						mav.addObject("noCredit", "true");
+					}
 				}
-				if (game.getMin() > user.getCredit())
+				catch (NumberFormatException e)
 				{
-					mav.addObject("noCredit", "true");
+					mav.addObject("numberFormat", "true");
 				}
+				return mav;
 			}
-			catch (NumberFormatException e)
-			{
-				mav.addObject("numberFormat", "true");
-			}
-			return mav;
 		}
+		catch (NumberFormatException e)
+		{
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("bandit");
+			modelAndView.addObject("playVariablesBandit", new PlayVariablesBandit());
+			modelAndView.addObject("getNumbers", idToGameNameNew.get(1L));
+			modelAndView.addObject("numberFormat", "true");
+			modelAndView.addObject("currentMoney", user.getCredit());
+			return modelAndView;
+		}
+
 		if(game.getMin() > Double.parseDouble(playVariables.getStake()))
 		{
 			ModelAndView modelAndView = new ModelAndView();
@@ -132,6 +146,7 @@ public class PlayingGameController extends AbstractController
 			modelAndView.addObject("playVariablesBandit", new PlayVariablesBandit());
 			modelAndView.addObject("getNumbers", idToGameNameNew.get(1L));
 			modelAndView.addObject("toLessCredit", "true");
+			modelAndView.addObject("currentMoney", user.getCredit());
 			return modelAndView;
 		}
 		GamblingGame gamblingGame = gamePlayingService.playGame(playVariables, 1L);
@@ -198,31 +213,45 @@ public class PlayingGameController extends AbstractController
 		Game game = gamesRepository.findGameByGameId(2L);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		if (result.hasErrors() || Double.parseDouble(playVariablesRoulette.getStake()) > user.getCredit())
+		try
 		{
-			ModelAndView mav;
+			if (result.hasErrors() || Double.parseDouble(playVariablesRoulette.getStake()) > user.getCredit())
+			{
+				ModelAndView mav;
 
-			mav = new ModelAndView(idToViewName.get(2L), "gameVariablesRoulette", playVariablesRoulette);
-			mav.addObject("currentMoney", user.getCredit());
-			mav.addObject("getNumber", idToGameNameNew.get(2L));
+				mav = new ModelAndView(idToViewName.get(2L), "gameVariablesRoulette", playVariablesRoulette);
+				mav.addObject("currentMoney", user.getCredit());
+				mav.addObject("getNumber", idToGameNameNew.get(2L));
 
-			try
-			{
-			if (Double.parseDouble(playVariablesRoulette.getStake()) > user.getCredit())
-			{
-				mav.addObject("toMuchCredit", "true");
+				try
+				{
+					if (Double.parseDouble(playVariablesRoulette.getStake()) > user.getCredit())
+					{
+						mav.addObject("toMuchCredit", "true");
+					}
+					if (game.getMin() > user.getCredit())
+					{
+						mav.addObject("noCredit", "true");
+					}
+				}
+				catch (NumberFormatException e)
+				{
+					mav.addObject("numberFormat", "true");
+				}
+				return mav;
 			}
-			if (game.getMin() > user.getCredit())
-			{
-				mav.addObject("noCredit", "true");
-			}
-			}
-			catch (NumberFormatException e)
-			{
-				mav.addObject("numberFormat", "true");
-			}
-			return mav;
 		}
+		catch (NumberFormatException e)
+		{
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("roulette");
+			modelAndView.addObject("playVariablesRoulette", new PlayVariablesRoulette());
+			modelAndView.addObject("getNumber", idToGameNameNew.get(2L));
+			modelAndView.addObject("numberFormat", "true");
+			modelAndView.addObject("currentMoney", user.getCredit());
+			return modelAndView;
+		}
+
 
 		if(game.getMin() > Double.parseDouble(playVariablesRoulette.getStake()))
 		{
@@ -231,6 +260,7 @@ public class PlayingGameController extends AbstractController
 			modelAndView.addObject("playVariablesRoulette", new PlayVariablesRoulette());
 			modelAndView.addObject("getNumber", idToGameNameNew.get(2L));
 			modelAndView.addObject("toLessCredit", "true");
+			modelAndView.addObject("currentMoney", user.getCredit());
 			return modelAndView;
 		}
 
@@ -297,36 +327,50 @@ public class PlayingGameController extends AbstractController
 		Game game = gamesRepository.findGameByGameId(3L);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		if (result.hasErrors() || Double.parseDouble(playVariablesBlackjack.getStake()) > user.getCredit())
+		try
 		{
-			ModelAndView mav;
+			if (result.hasErrors() || Double.parseDouble(playVariablesBlackjack.getStake()) > user.getCredit())
+			{
+				ModelAndView mav;
 
-			mav = new ModelAndView(idToViewName.get(3L), "gameVariablesBlackjack", playVariablesBlackjack);
-			mav.addObject("currentMoney", user.getCredit());
-			mav.addObject("getCards", idToGameNameNew.get(3L));
+				mav = new ModelAndView(idToViewName.get(3L), "gameVariablesBlackjack", playVariablesBlackjack);
+				mav.addObject("currentMoney", user.getCredit());
+				mav.addObject("getCards", idToGameNameNew.get(3L));
 
-			try
-			{
-			if (Double.parseDouble(playVariablesBlackjack.getStake()) > user.getCredit())
-			{
-				mav.addObject("toMuchCredit", "true");
-			}
+				try
+				{
+					if (Double.parseDouble(playVariablesBlackjack.getStake()) > user.getCredit())
+					{
+						mav.addObject("toMuchCredit", "true");
+					}
 
-			if (game.getMin() > Double.parseDouble(playVariablesBlackjack.getStake()))
-			{
-				mav.addObject("toLessCredit", "true");
+					if (game.getMin() > Double.parseDouble(playVariablesBlackjack.getStake()))
+					{
+						mav.addObject("toLessCredit", "true");
+					}
+					if (game.getMin() > user.getCredit())
+					{
+						mav.addObject("noCredit", "true");
+					}
+				}
+				catch (NumberFormatException e)
+				{
+					mav.addObject("numberFormat", "true");
+				}
+				return mav;
 			}
-			if (game.getMin() > user.getCredit())
-			{
-				mav.addObject("noCredit", "true");
-			}
-			}
-			catch (NumberFormatException e)
-			{
-				mav.addObject("numberFormat", "true");
-			}
-			return mav;
 		}
+		catch (NumberFormatException e)
+		{
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName("blackjack");
+			modelAndView.addObject("playVariablesBlackjack", new PlayVariablesBlackjack());
+			modelAndView.addObject("getCards", idToGameNameNew.get(3L));
+			modelAndView.addObject("numberFormat", "true");
+			modelAndView.addObject("currentMoney", user.getCredit());
+			return modelAndView;
+		}
+
 		if(game.getMin() > Double.parseDouble(playVariablesBlackjack.getStake()))
 		{
 			ModelAndView modelAndView = new ModelAndView();
@@ -334,6 +378,7 @@ public class PlayingGameController extends AbstractController
 			modelAndView.addObject("playVariablesBlackjack", new PlayVariablesBlackjack());
 			modelAndView.addObject("getCards", idToGameNameNew.get(3L));
 			modelAndView.addObject("toLessCredit", "true");
+			modelAndView.addObject("currentMoney", user.getCredit());
 			return modelAndView;
 		}
 		GamblingGame gamblingGame = gamePlayingService.playGame(playVariablesBlackjack, 3L);

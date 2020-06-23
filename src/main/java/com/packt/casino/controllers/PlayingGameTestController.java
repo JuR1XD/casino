@@ -116,7 +116,7 @@ public class PlayingGameTestController extends AbstractController
 		{
 			ModelAndView mav;
 
-			mav = new ModelAndView(idToViewName.get(2L), "inputRoulette", playVariablesRouletteTest);
+			mav = new ModelAndView(idToViewName.get(2L), "inputRoulette",  playVariablesRouletteTest);
 			mav.addObject("getNumber", idToGameNameNew.get(2L));
 
 			return mav;

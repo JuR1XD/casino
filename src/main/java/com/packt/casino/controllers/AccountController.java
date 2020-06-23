@@ -199,8 +199,7 @@ public class AccountController extends AbstractController
 	@RequestMapping(path = "/addCredit", method = RequestMethod.POST)
 	public ModelAndView updateUserCredit(Model model,
 			@ModelAttribute("userCredit") @Valid UserDataTransferEditCredit accountUser, BindingResult result,
-			WebRequest request, Errors errors, @Value("${casino.deposit.subject}") String subject,
-			@Value("${casino.deposit.message}") String template)
+			WebRequest request, Errors errors)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());

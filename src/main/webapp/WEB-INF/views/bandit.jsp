@@ -16,7 +16,6 @@
         <spring:message code="casino.account.data.credit"/>${currentMoney}&nbsp<spring:message
             code="casino.currency.europe"/></p>
     <p class="text-danger"><c:if test="${noCredit == true}"><spring:message  code="casino.game.error.notEnoughStake"/></c:if></p>
-    <p class="text-danger"><c:if test="${numberFormat == true}"><spring:message  code="casino.signIn.notNull"/></c:if></p>
     <p class="text-danger"><c:if test="${toLessCredit == true}"><spring:message code="casino.game.error.notEnoughMin"/></c:if></p>
     <p class="text-danger"><c:if test="${toMuchCredit == true}"><spring:message code="casino.game.error.tooMuchMin"/></c:if></p>
     <p><c:if test="${win == true}"><spring:message code="casino.game.win"/></c:if></p>
@@ -34,6 +33,7 @@
                 code="casino.game.setStake"/></label>
         <div class="col-lg-10">
             <form:input id="stake" type="number" step="0.01" path="stake"/>
+            <p class="text-danger"><c:if test="${numberFormat == true}"><spring:message  code="casino.signIn.notNull"/></c:if></p>
             <form:errors path="stake" cssClass="text-danger"/>
         </div>
     </div>
@@ -42,6 +42,7 @@
     <div class="form-group">
         <div class="col-lg-offset-2 col-lg-10">
             <input type="submit" id="btnAdd" class="btn btn-primary" value="<spring:message code="casino.game.play"/>"/>
+
         </div>
     </div>
 </div>

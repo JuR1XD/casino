@@ -1,4 +1,4 @@
-package com.packt.casino.Service.factories;
+package com.packt.casino.factories;
 
 import com.packt.casino.domain.User;
 import com.packt.casino.domain.UserDataTransferClasses.UserDataTransferEditCredit;

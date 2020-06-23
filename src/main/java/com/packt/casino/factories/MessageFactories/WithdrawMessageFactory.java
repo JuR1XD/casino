@@ -1,6 +1,6 @@
-package com.packt.casino.Service.factories.MessageFactories;
+package com.packt.casino.factories.MessageFactories;
 
-import com.packt.casino.Service.factories.EmailMessageFactory;
+import com.packt.casino.factories.EmailMessageFactory;
 
 public class WithdrawMessageFactory extends EmailMessageFactory
 {

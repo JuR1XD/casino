@@ -2,29 +2,22 @@ package com.packt.casino.Service.Impl;
 
 import com.packt.casino.Service.MailService;
 import com.packt.casino.Service.UserService;
-import com.packt.casino.Service.factories.MessageFactories.DepositMessageFactory;
-import com.packt.casino.Service.factories.MessageFactories.WithdrawMessageFactory;
+import com.packt.casino.factories.MessageFactories.DepositMessageFactory;
+import com.packt.casino.factories.MessageFactories.WithdrawMessageFactory;
 import com.packt.casino.domain.User;
 import com.packt.casino.domain.UserDataTransferClasses.UserDataTransferEditCredit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-
-import java.util.Locale;
 
 
 @Service
 @PropertySource("classpath:application.properties")
 public class MailServiceImpl implements MailService
 {
-	Locale locale = LocaleContextHolder.getLocale();
-
-	String getLocale = locale.getCountry();
-
 	@Autowired
 	UserService userService;
 
