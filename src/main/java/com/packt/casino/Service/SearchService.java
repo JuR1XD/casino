@@ -10,4 +10,9 @@ public interface SearchService
 {
 	List<Game> searchName(SearchVariables variables);
 	List<Game> searchRelease(SearchVariables variables);
+	List<Game> searchReleaseBefore(SearchVariables variables);
+	List<Game> searchReleaseAfter(SearchVariables variables);
+	List<Game> searchReleaseAfterAndNow(SearchVariables variables);
+	List<Game> searchReleaseBeforeAndNow(SearchVariables variables);
+	List<Game> searchReleaseBetween(SearchVariables variables);
 }

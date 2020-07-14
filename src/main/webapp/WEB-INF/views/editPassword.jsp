@@ -54,7 +54,7 @@
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
                     <input type="submit" id="btnAdd" class="btn btn-primary" value="Add"/>
-                    <a class="btn btn-danger" href="<spring:url value="/account"/>"><span class="glyphicon glyphicon-info-sign"></span> Fuck go Back!!!!</a>
+                    <a class="btn btn-danger" href="<spring:url value="/account"/>"><span class="glyphicon glyphicon-info-sign"></span> <spring:message code="casino.edit.credit.back"/></a>
                 </div>
             </div>
         </fieldset>

@@ -28,4 +28,34 @@ public class SearchServiceImpl implements SearchService
 	{
 		return gamesRepository.findGamesByRelease(variables.getRelease());
 	}
+
+	@Override
+	public List<Game> searchReleaseBefore(SearchVariables variables)
+	{
+		return gamesRepository.findGamesByReleaseBefore(variables.getRelease());
+	}
+
+	@Override
+	public List<Game> searchReleaseAfter(SearchVariables variables)
+	{
+		return gamesRepository.findGamesByReleaseAfter(variables.getRelease());
+	}
+
+	@Override
+	public List<Game> searchReleaseAfterAndNow(SearchVariables variables)
+	{
+		return gamesRepository.findGamesByReleaseAfterOrRelease(variables.getRelease(), variables.getRelease());
+	}
+
+	@Override
+	public List<Game> searchReleaseBeforeAndNow(SearchVariables variables)
+	{
+		return gamesRepository.findGamesByReleaseBeforeOrRelease(variables.getRelease(), variables.getRelease());
+	}
+
+	@Override
+	public List<Game> searchReleaseBetween(SearchVariables variables)
+	{
+		return gamesRepository.findGamesByReleaseIsBetween(variables.getRelease(), variables.getSecondDate());
+	}
 }

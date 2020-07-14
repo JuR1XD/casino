@@ -23,6 +23,11 @@ public interface GamesRepository extends CrudRepository<Game, Long> {
 
 	List<Game> findGamesByReleaseBefore(String date);
 
+	List<Game> findGamesByReleaseAfterOrRelease(String date, String date1);
+	List<Game> findGamesByReleaseBeforeOrRelease(String date, String date1);
+
+	List<Game> findGamesByReleaseIsBetween(String firstDate, String secondDate);
+
 	List<Game> findGamesByRelease(String release);
 
 	Game findGameByName(String name);

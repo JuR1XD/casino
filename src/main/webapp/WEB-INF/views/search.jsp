@@ -21,18 +21,46 @@
 <a class="btn btn-default" href="<spring:url value="/search/byRelease"/>">Search By Release</a>--%>
 
 
-    <label><spring:message code="casino.search.decide"/>
-        <select id="changeAppearance">
-            <option value="searchByName" <c:if test="${name == true}">selected="selected"</c:if> id="firstOption"><spring:message code="casino.search.optionOne"/></option>
-            <option value="searchByRelease" <c:if test="${release == true}">selected="selected"</c:if> id="secondOption"><spring:message code="casino.search.optionTwo"/></option>
-        </select>
-    </label>
-    <br><br>
+<label><spring:message code="casino.search.decide"/>
+    <select id="changeAppearance">
+        <option value="searchByName"
+                <c:if test="${name == true}">selected="selected"</c:if> id="firstOption"><spring:message
+                code="casino.search.optionOne"/></option>
+        <option value="searchByRelease"
+                <c:if test="${release == true}">selected="selected"</c:if> id="secondOption"><spring:message
+                code="casino.search.optionTwo"/></option>
+    </select>
+</label>
+<label id="releaseLabel">
+    &nbsp;&nbsp;<spring:message code="casino.search.searchTypeSelect"/>
+    <select id="releaseAppearance">
+        <option value="single"
+                <c:if test="${single == true}">selected="selected"</c:if> id="singleRelease"><spring:message code="casino.search.single"/>
+        </option>
+        <option value="after"
+                <c:if test="${after == true}">selected="selected"</c:if> id="releaseAfter"><spring:message code="casino.search.after"/>
+        </option>
+        <option value="before"
+                <c:if test="${before == true}">selected="selected"</c:if> id="releaseBefore"><spring:message code="casino.search.before"/>
+        </option>
+        <option value="afterNow"
+                <c:if test="${afterNow == true}">selected="selected"</c:if> id="releaseAfterNow"><spring:message code="casino.search.afterNow"/>
+        </option>
+        <option value="beforeNow"
+                <c:if test="${beforeNow == true}">selected="selected"</c:if> id="releaseBeforeNow"><spring:message code="casino.search.beforeNow"/>
+        </option>
+        <option value="between"
+                <c:if test="${between == true}">selected="selected"</c:if> id="releaseBetween"><spring:message code="casino.search.between"/>
+        </option>
+    </select>
+</label>
+<br><br>
 
 <form:form modelAttribute="searchTerm" method="post">
     <div class="container" id="nameDiv">
     <form:input id="searchName" cssClass="input-lg" path="searchInput"/>
     <form:errors path="searchInput" cssClass="text-danger"/>
+    <p class="text text-danger"><c:if test="${errorsName == true}"><spring:message code="casino.signIn.notNull"/></c:if></p>
     <button class="btn btn-default" id="submitBtn" type="submit">Search&nbsp;<span
             class="glyphicon glyphicon-search"></span>
     </button>
@@ -51,8 +79,13 @@
 </c:if>
 
     <div class="container" id="releaseDiv">
+
+
     <form:input id="searchReleaseInput" type="date" path="release"/>
-    <form:errors path="release"/>
+    <form:errors path="release"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <form:input id="secondDateInput" path="secondDate" type="date"/>
+    <form:errors path="secondDate"/>
+    <p class="text text-danger"><c:if test="${errorsRelease == true}"><spring:message code="casino.signIn.notNull"/></c:if></p>
     <button class="btn btn-default" type="submit" id="releaseBtn">Search&nbsp;<span
             class="glyphicon glyphicon-search"></span>
     </button>
@@ -72,31 +105,174 @@
 </form:form>
 
 
-
 <script>
-    $("#searchReleaseInput").val("1600-01-01");
-        $("#changeAppearance").change(function () {
-            if ($(this).val() === "searchByName"
-            ) {
-                $("#releaseDiv").hide();
-                $("#nameDiv").show();
-                $("#notFoundRelease").hide();
-                $("#notFoundName").show();
-                $("#searchReleaseInput").val("1600-01-01");
-                $("#searchName").val("");
+    const searchName = $("#searchName");
+    const searchRelease = $("#searchReleaseInput");
+    const searchSecondRelease = $("#secondDateInput");
+    const firstSelect = $("#changeAppearance");
+    const secondSelect = $("#releaseAppearance");
+    console.log(searchName, searchRelease, searchSecondRelease, firstSelect, secondSelect);
 
-            } else {
-                $("#releaseDiv").show();
-                $("#nameDiv").hide();
-                $("#notFoundRelease").show();
-                $("#notFoundName").hide();
-                $("#searchReleaseInput").val("");
-                $("#searchName").val("-");
+
+    $(secondSelect).change(function () {
+        if($(this).val() === "single")
+        {
+            $(searchName).val("-");
+            $(searchSecondRelease).hide().val("1600-01-01");
+        }
+        else if($(this).val() === "after")
+        {
+            $(searchName).val("-.");
+            $(searchSecondRelease).hide().val("1600-01-01");
+        }
+        else if($(this).val() === "before")
+        {
+            console.log(searchName, searchRelease, searchSecondRelease, firstSelect, secondSelect);
+            $(searchName).val(".-");
+            $(searchSecondRelease).hide().val("1600-01-01");
+        }
+        else if($(this).val() === "afterNow")
+        {
+            $(searchName).val("--");
+            $(searchSecondRelease).hide().val("1600-01-01");
+        }
+        else if($(this).val() === "beforeNow")
+        {
+            $(searchName).val("--.");
+            $(searchSecondRelease).hide().val("1600-01-01");
+        }
+        else
+        {
+            console.log(searchName, searchRelease, searchSecondRelease, firstSelect, secondSelect);
+            $(searchName).val("--.-");
+            $(searchSecondRelease).show().val("");
+        }
+
+        console.log(searchName, searchRelease, searchSecondRelease, firstSelect, secondSelect);
+
+    }).trigger("change");
+
+    $(firstSelect).change(function () {
+        if ($(this).val() === "searchByName"
+        ) {
+            $("#releaseDiv").hide();
+            $("#nameDiv").show();
+            $("#notFoundRelease").hide();
+            $(secondSelect).hide().val("searchBySingleRelease");
+            $("#notFoundName").show();
+            $(searchRelease).val("1600-01-01");
+            $("#secondDateInput").val("1600-01-01");
+            $(searchName).val("");
+            $("#releaseLabel").hide();
+
+        } else if($(this).val() === "searchByRelease"){
+
+            $("#releaseDiv").show();
+            $("#nameDiv").hide();
+            $("#notFoundRelease").show();
+            $("#notFoundName").hide();
+            $(searchRelease).val("");
+            $(searchSecondRelease).hide();
+            $("#releaseAppearance").show();
+            $("#releaseLabel").show();
+        }
+        /*switch ($(secondSelect)) {
+            case "single":
+                $(searchName).val("-");
+                $(searchSecondRelease).hide().val("1600-01-02");
+                break;
+            case "after":
+                $(searchName).val("-.");
+                $(searchSecondRelease).hide().val("1600-01-03");
+                break;
+            case "before":
+                console.log(searchName, searchRelease, searchSecondRelease, firstSelect, secondSelect);
+                $(searchName).val(".-");
+                $(searchSecondRelease).hide().val("1600-01-04");
+                break;
+            case "afterNow":
+                $(searchName).val("--");
+                $(searchSecondRelease).hide().val("1600-01-01");
+                break;
+            case "beforeNow":
+                $(searchName).val("--.");
+                $(searchSecondRelease).hide().val("1600-01-01");
+                break;
+            case "between":
+                console.log(searchName, searchRelease, searchSecondRelease, firstSelect, secondSelect);
+                $(searchName).val("--.-");
+                $(searchSecondRelease).show().val("");
+                break;
+        }*/
+/*        if($(secondSelect) === "single")
+        {
+            $(searchName).val("-");
+            $(searchSecondRelease).hide().val("1600-01-02");
+        }
+        else if($(secondSelect) === "after")
+        {
+            $(searchName).val("-.");
+            $(searchSecondRelease).hide().val("1600-01-03");
+        }
+        else if($(secondSelect) === "before")
+        {
+            console.log(searchName, searchRelease, searchSecondRelease, firstSelect, secondSelect);
+            $(searchName).val(".-");
+            $(searchSecondRelease).hide().val("1600-01-04");
+        }
+        else if($(secondSelect) === "afterNow")
+        {
+            $(searchName).val("--");
+            $(searchSecondRelease).hide().val("1600-01-01");
+        }
+        else if($(secondSelect) === "beforeNow")
+        {
+            $(searchName).val("--.");
+            $(searchSecondRelease).hide().val("1600-01-01");
+        }
+        else if($(secondSelect) === "between")
+        {
+            console.log(searchName, searchRelease, searchSecondRelease, firstSelect, secondSelect);
+            $(searchName).val("--.-");
+            $(searchSecondRelease).show().val("");
+        }*/
+
+        console.log(searchName, searchRelease, searchSecondRelease, firstSelect, secondSelect);
+    })
+        .trigger("change");
+
+        /*$(secondSelect).change(function () {
+            switch ($(this)) {
+                case "single":
+                    $(searchName).val("-");
+                    $(searchSecondRelease).hide().val("1600-01-02");
+                    break;
+                case "after":
+                    $(searchName).val("-.");
+                    $(searchSecondRelease).hide().val("1600-01-03");
+                    break;
+                case "before":
+                    $(searchName).val(".-");
+                    $(searchSecondRelease).hide().val("1600-01-04");
+                    break;
+                case "afterNow":
+                    $(searchName).val("--");
+                    $(searchSecondRelease).hide().val("1600-01-01");
+                    break;
+                case "beforeNow":
+                    $(searchName).val("--.");
+                    $(searchSecondRelease).hide().val("1600-01-01");
+                    break;
+                case "between":
+                    $(searchName).val("--.-");
+                    $(searchSecondRelease).show().val("");
+                    break;
             }
-        })
-            .trigger("change");
+            console.log(searchName, searchRelease, searchSecondRelease, firstSelect, secondSelect);
+        }).trigger("change");*/
 
-    </script>
+
+</script>
 
 </body>
 </html>
